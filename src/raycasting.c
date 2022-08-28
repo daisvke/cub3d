@@ -88,7 +88,6 @@ void	c3d_execute_raycasting(t_c3d *env)
 	x = 0;
 //	ft_memset(&env->zbuffer, 0, sizeof(env->zbuffer));
 	ft_memset(&ray, 0, sizeof(ray));
-//	printf("==========++> BUF %d\n", env->buffer[20][639]);
 	while (x < env->mlx.screenw)
 	{
 		c3d_set_ray(&env->mlx, &ray, env->player, x);
@@ -99,5 +98,4 @@ void	c3d_execute_raycasting(t_c3d *env)
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}
-	printf("END\n");
 }

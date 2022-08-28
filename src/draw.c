@@ -28,7 +28,7 @@ void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
 	while (y <= line.draw_end)
 	{
 	//	printf("=============+> end:%d, y: %d, x : %d\n", line.draw_end, y, x);
-		env->buffer[y][x] = color & 0x00FF0000; 
+		env->buffer[y][x] = 0x00FF0000; 
 		++y;
 	}
 }

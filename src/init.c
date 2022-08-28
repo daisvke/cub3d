@@ -67,7 +67,7 @@ void	c3d_init_buffers(t_c3d *env, t_mlx mlx)
 		env->buffer[i] = malloc(sizeof(**env->buffer) * (mlx.screenw + 1));
 		env->buffer[i][mlx.screenw] = 0;
 	}
-//	ft_memset(env->buffer, 0, sizeof(env->buffer));
+//	ft_memset(&env->buffer, 0, sizeof(env->buffer));
 }
 
 void	c3d_init(t_c3d *env, char *argv[])

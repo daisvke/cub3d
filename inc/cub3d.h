@@ -90,8 +90,9 @@ typedef struct	s_line
 void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx);
 void	c3d_execute_raycasting(t_c3d *env);
 void	*ft_memset(void *s, int c, size_t n);
+void	c3d_handle_keyhooks(t_c3d *env);
 void	c3d_init(t_c3d *env, char *argv[]);
-void	c3d_exit(t_c3d *env, int errno);
+int		c3d_exit(t_c3d *env, int errno);
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x);
 
 #endif

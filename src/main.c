@@ -9,6 +9,7 @@ int	main(int argc, char *argv[])
 	{
 		c3d_execute_raycasting(&env);
 		c3d_draw_on_screen(&env, &env.mlx);
+		c3d_handle_keyhooks(&env);
 	}
 	return (0);
 }

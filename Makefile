@@ -21,6 +21,7 @@ SRC_DIR				=	src/
 SRC_FILES			=	draw.c \
 						exit.c \
 						init.c \
+						keyhooks.c \
 						main.c \
 						raycasting.c \
 						system_calls.c
