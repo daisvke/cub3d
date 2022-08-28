@@ -39,8 +39,7 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 		"100000000000000000001",
 		"1000000000N0000000001",
 		"111111111111111111111"
-	};//coucou
-	//coucou2
+	};
 	env->map = malloc(sizeof(*env->map) * 8);
 	env->map[7] = 0;
 	for (int i=0; i < 7; ++i)
