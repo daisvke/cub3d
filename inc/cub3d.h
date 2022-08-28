@@ -21,15 +21,9 @@
 
 typedef struct	s_coord
 {
-	int	x;
-	int	y;
-}				t_coord;
-
-typedef struct	s_dcoord
-{
 	double	x;
 	double	y;
-}				t_dcoord;
+}				t_coord;
 
 typedef struct	s_img
 {
@@ -63,10 +57,10 @@ enum	e_move
 
 typedef struct	s_player
 {
-	t_coord		dir;
+	t_coord	dir;
 	int			move;
-	t_dcoord	pos;
-	t_dcoord	cam_plane;
+	t_coord	pos;
+	t_coord	cam_plane;
 }				t_player;
 
 typedef struct	s_c3d

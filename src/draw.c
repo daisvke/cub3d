@@ -30,7 +30,6 @@ void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
 	y = line.draw_start;
 	while (y <= line.draw_end)
 	{
-	//	printf("=============+> end:%d, y: %d, x : %d\n", line.draw_end, y, x);
 		if (ray.side == _YSIDE)
 			env->buffer[y][x] = 0x00FF0000; 
 		else

@@ -4,6 +4,10 @@ int	c3d_handle_keypress(int keycode, t_c3d *env)
 {
 	if (keycode == XK_Escape)
 		c3d_exit(env, 0);
+	if (keycode == XK_Left)
+		env->player.move |= _CAM_LEFT;
+	if (keycode == XK_Right)
+		env->player.move |= _CAM_RIGHT;
 	if (keycode == XK_z || keycode == XK_w)
 		env->player.move |= _P1_UP;
 	if (keycode == XK_s)
@@ -17,6 +21,10 @@ int	c3d_handle_keypress(int keycode, t_c3d *env)
 
 int	c3d_handle_keyrelease(int keycode, t_c3d *env)
 {
+	if (keycode == XK_Left)
+		env->player.move &= ~_CAM_LEFT;
+	if (keycode == XK_Right)
+		env->player.move &= ~_CAM_RIGHT;
 	if (keycode == XK_z || keycode == XK_w)
 		env->player.move &= ~_P1_UP;
 	if (keycode == XK_s)
@@ -34,48 +42,32 @@ void	c3d_render_and_put_img_to_window(t_c3d *env)
 	c3d_draw_on_screen(env, &env->mlx);
 }
 
-void	c3d_check_obstacles_and_move_up(char **map, t_player *player)
+void	c3d_look_left(t_player *p)
 {
-	int	x;
-	int	y;
+	double old_dirx;
+	double old_planex;
 
-	x = player->pos.x;
-	y = player->pos.y + player->dir.y * _SPEED;
-	if (map[y][x] == '0')
-		player->pos.y += player->dir.y * _SPEED;
+	old_dirx = p->dir.x;
+	p->dir.x = p->dir.x * cos(-_SPEED) - p->dir.y * sin(-_SPEED);
+	p->dir.y = old_dirx * sin(-_SPEED) + p->dir.y * cos(-_SPEED);
+	old_planex = p->cam_plane.x;
+	p->cam_plane.x = p->cam_plane.x * cos(-_SPEED) \
+		- p->cam_plane.y * sin(-_SPEED);
+	p->cam_plane.y = old_planex * sin(-_SPEED) + p->cam_plane.y * cos(-_SPEED);
 }
 
-void	c3d_check_obstacles_and_move_down(char **map, t_player *player)
+void	c3d_look_right(t_player *p)
 {
-	int	x;
-	int	y;
+	double old_dirx;
+	double old_planex;
 
-	x = player->pos.x;
-	y = player->pos.y - player->dir.y * _SPEED;
-	if (map[y][x] == '0')
-		player->pos.y -= player->dir.y * _SPEED;
-}
-
-void	c3d_check_obstacles_and_move_left(char **map, t_player *player)
-{
-	int	x;
-	int	y;
-
-	x = player->pos.x - _SPEED;
-	y = player->pos.y;
-	if (map[y][x] == '0')
-		player->pos.x -= _SPEED;
-}
-
-void	c3d_check_obstacles_and_move_right(char **map, t_player *player)
-{
-	int	x;
-	int	y;
-
-	x = player->pos.x + _SPEED;
-	y = player->pos.y;
-	if (map[y][x] == '0')
-		player->pos.x += _SPEED;
+	old_dirx = p->dir.x;
+	p->dir.x = p->dir.x * cos(_SPEED) - p->dir.y * sin(_SPEED);
+	p->dir.y = old_dirx * sin(_SPEED) + p->dir.y * cos(_SPEED);
+	old_planex = p->cam_plane.x;
+	p->cam_plane.x = p->cam_plane.x * cos(_SPEED) \
+		- p->cam_plane.y * sin(_SPEED);
+	p->cam_plane.y = old_planex * sin(_SPEED) + p->cam_plane.y * cos(_SPEED);
 }
 
 int	c3d_move_and_render(t_c3d *env)
@@ -88,6 +80,10 @@ int	c3d_move_and_render(t_c3d *env)
 		c3d_check_obstacles_and_move_left(env->map, &env->player);
 	if (env->player.move & _P1_RIGHT)
 		c3d_check_obstacles_and_move_right(env->map, &env->player);
+	if (env->player.move & _CAM_LEFT)
+		c3d_look_left(&env->player);
+	if (env->player.move & _CAM_RIGHT)
+		c3d_look_right(&env->player);
 	c3d_render_and_put_img_to_window(env);
 	return (0);
 }

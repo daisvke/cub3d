@@ -13,7 +13,7 @@ void	c3d_set_ray(t_mlx *mlx, t_ray *ray, t_player player, int x)
 	ray->delta_disty = fabs(1 / ray->diry);
 }
 
-void	c3d_prepare_dda(t_ray *ray, t_dcoord pos)
+void	c3d_prepare_dda(t_ray *ray, t_coord pos)
 {
 	if (ray->dirx < 0)
 	{
