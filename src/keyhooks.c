@@ -42,34 +42,6 @@ void	c3d_render_and_put_img_to_window(t_c3d *env)
 	c3d_draw_on_screen(env, &env->mlx);
 }
 
-void	c3d_look_left(t_player *p)
-{
-	double old_dirx;
-	double old_planex;
-
-	old_dirx = p->dir.x;
-	p->dir.x = p->dir.x * cos(-_SPEED) - p->dir.y * sin(-_SPEED);
-	p->dir.y = old_dirx * sin(-_SPEED) + p->dir.y * cos(-_SPEED);
-	old_planex = p->cam_plane.x;
-	p->cam_plane.x = p->cam_plane.x * cos(-_SPEED) \
-		- p->cam_plane.y * sin(-_SPEED);
-	p->cam_plane.y = old_planex * sin(-_SPEED) + p->cam_plane.y * cos(-_SPEED);
-}
-
-void	c3d_look_right(t_player *p)
-{
-	double old_dirx;
-	double old_planex;
-
-	old_dirx = p->dir.x;
-	p->dir.x = p->dir.x * cos(_SPEED) - p->dir.y * sin(_SPEED);
-	p->dir.y = old_dirx * sin(_SPEED) + p->dir.y * cos(_SPEED);
-	old_planex = p->cam_plane.x;
-	p->cam_plane.x = p->cam_plane.x * cos(_SPEED) \
-		- p->cam_plane.y * sin(_SPEED);
-	p->cam_plane.y = old_planex * sin(_SPEED) + p->cam_plane.y * cos(_SPEED);
-}
-
 int	c3d_move_and_render(t_c3d *env)
 {
 	if (env->player.move & _P1_UP)

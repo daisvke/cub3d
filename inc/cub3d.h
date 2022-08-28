@@ -90,8 +90,6 @@ typedef struct	s_ray
 
 typedef struct	s_line
 {
-//	double	pos;
-//	t_coord	dir;
 	int		lineheight;
 	int		draw_start;
 	int		draw_end;
@@ -103,6 +101,14 @@ void	*ft_memset(void *s, int c, size_t n);
 void	c3d_handle_keyhooks(t_c3d *env);
 void	c3d_init(t_c3d *env, char *argv[]);
 int		c3d_exit(t_c3d *env, int errno);
+
+void	c3d_check_obstacles_and_move_up(char **map, t_player *player);
+void	c3d_check_obstacles_and_move_down(char **map, t_player *player);
+void	c3d_check_obstacles_and_move_left(char **map, t_player *player);
+void	c3d_check_obstacles_and_move_right(char **map, t_player *player);
+void	c3d_look_left(t_player *p);
+void	c3d_look_right(t_player *p);
+
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x);
 
 #endif

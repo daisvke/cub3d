@@ -23,6 +23,9 @@ SRC_FILES			=	draw.c \
 						init.c \
 						keyhooks.c \
 						main.c \
+						parsing.c \
+						camera_movement.c \
+						player_movement.c \
 						raycasting.c \
 						system_calls.c
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_FILES))

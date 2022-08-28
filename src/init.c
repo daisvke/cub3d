@@ -25,7 +25,7 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
-	player->pos.x = 2;
+	player->pos.x = 10;
 	player->pos.y = 5;
 	player->cam_plane.x = 0.66;
 	player->cam_plane.y = 0.0;
