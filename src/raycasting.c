@@ -88,6 +88,7 @@ void	c3d_execute_raycasting(t_c3d *env)
 	x = 0;
 //	ft_memset(&env->zbuffer, 0, sizeof(env->zbuffer));
 	ft_memset(&ray, 0, sizeof(ray));
+	ft_memset(&line, 0, sizeof(line));
 	while (x < env->mlx.screenw)
 	{
 		c3d_set_ray(&env->mlx, &ray, env->player, x);
@@ -95,6 +96,7 @@ void	c3d_execute_raycasting(t_c3d *env)
 		c3d_execute_dda(&ray, env->map);
 		c3d_set_line(&env->mlx, &ray, &line);
 		env->zbuffer[x] = ray.perp_walldist;
+	printf("P: %d  \n",env->player.pos.y );
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}

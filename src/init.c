@@ -17,12 +17,6 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 		mlx->screenh = h;
 	if (mlx->screenw <= 0 || mlx->screenh <= 0)
 		c3d_exit(env, 2);
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, w, h, _TITLE);
-	if (!mlx->win_ptr)
-	{
-		free(mlx->win_ptr);
-		exit(EXIT_FAILURE);
-	}
 	mlx->canvas.mlx_img = mlx_new_image(mlx->mlx_ptr, mlx->screenw, \
 		mlx->screenh);
 	mlx->canvas.addr = (int *)mlx_get_data_addr(mlx->canvas.mlx_img, \
@@ -31,13 +25,13 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
-	player->pos.x = 3;
-	player->pos.y = 3;
+	player->pos.x = 10;
+	player->pos.y = 1;
 	char map[7][21] = {
 		"111111111111111111111",
 		"100000000000000000001",
-		"100000011100000000001",
-		"100000111110000000001",
+		"100000000000000000001",
+		"100000000000000000001",
 		"100000000000000000001",
 		"10000000N000000000001",
 		"111111111111111111111"
@@ -76,4 +70,6 @@ void	c3d_init(t_c3d *env, char *argv[])
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
 	c3d_init_buffers(env, env->mlx);
+	env->player.dir.x = 0;
+	env->player.dir.y = 1;
 }
