@@ -26,11 +26,13 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
 	player->pos.x = 10;
-	player->pos.y = 1;
+	player->pos.y = 3;
+	player->cam_plane.x = 0.0;
+	player->cam_plane.y = 0.66;
 	char map[7][21] = {
 		"111111111111111111111",
 		"100000000000000000001",
-		"100000000000000000001",
+		"100001000000000000001",
 		"100000000000000000001",
 		"100000000000000000001",
 		"10000000N000000000001",
@@ -70,6 +72,6 @@ void	c3d_init(t_c3d *env, char *argv[])
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
 	c3d_init_buffers(env, env->mlx);
-	env->player.dir.x = 0;
-	env->player.dir.y = 1;
+	env->player.dir.x = -1;
+	env->player.dir.y = 0;
 }

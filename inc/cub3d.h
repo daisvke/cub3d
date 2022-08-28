@@ -15,9 +15,6 @@
 # define _SCREENW	640
 # define _SCREENH	480
 
-# define _CAM_PLANE_X	0
-# define _CAM_PLANE_Y	0.66
-
 # define _XSIDE	0
 # define _YSIDE	1
 
@@ -26,6 +23,12 @@ typedef struct	s_coord
 	int	x;
 	int	y;
 }				t_coord;
+
+typedef struct	s_dcoord
+{
+	double	x;
+	double	y;
+}				t_dcoord;
 
 typedef struct	s_img
 {
@@ -49,8 +52,9 @@ typedef struct	s_mlx
 
 typedef struct	s_player
 {
-	t_coord	dir;
-	t_coord	pos;
+	t_coord		dir;
+	t_dcoord	pos;
+	t_dcoord	cam_plane;
 }				t_player;
 
 typedef struct	s_c3d
@@ -80,8 +84,8 @@ typedef struct	s_ray
 
 typedef struct	s_line
 {
-	double	pos;
-	t_coord	dir;
+//	double	pos;
+//	t_coord	dir;
 	int		lineheight;
 	int		draw_start;
 	int		draw_end;

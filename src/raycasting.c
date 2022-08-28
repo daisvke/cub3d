@@ -5,35 +5,35 @@ void	c3d_set_ray(t_mlx *mlx, t_ray *ray, t_player player, int x)
 	double	camx;
 
 	camx = 2 * x / (double)mlx->screenw - 1;
-	ray->dirx = player.dir.x + _CAM_PLANE_X * camx;
-	ray->diry = player.dir.y + _CAM_PLANE_Y * camx;
+	ray->dirx = player.dir.x + player.cam_plane.x * camx;
+	ray->diry = player.dir.y + player.cam_plane.y * camx;
 	ray->mapx = (int)player.pos.x;
 	ray->mapy = (int)player.pos.y;
 	ray->delta_distx = fabs(1 / ray->dirx);
 	ray->delta_disty = fabs(1 / ray->diry);
 }
 
-void	c3d_prepare_dda(t_ray *ray, t_coord *pos)
+void	c3d_prepare_dda(t_ray *ray, t_dcoord pos)
 {
 	if (ray->dirx < 0)
 	{
 		ray->stepx = -1;
-		ray->side_distx = (pos->x - ray->mapx) * ray->delta_distx;
+		ray->side_distx = (pos.x - ray->mapx) * ray->delta_distx;
 	}
 	else
 	{
 		ray->stepx = 1;
-		ray->side_distx = (ray->mapx + 1 - pos->x) * ray->delta_distx;
+		ray->side_distx = (ray->mapx + 1 - pos.x) * ray->delta_distx;
 	}
 	if (ray->diry < 0)
 	{
 		ray->stepy = -1;
-		ray->side_disty = (pos->y - ray->mapy) * ray->delta_disty;
+		ray->side_disty = (pos.y - ray->mapy) * ray->delta_disty;
 	}
 	else
 	{
 		ray->stepy = 1;
-		ray->side_disty = (ray->mapy + 1 - pos->y) * ray->delta_disty;
+		ray->side_disty = (ray->mapy + 1 - pos.y) * ray->delta_disty;
 	}
 }
 
@@ -65,18 +65,18 @@ void	c3d_execute_dda(t_ray *ray, char **map)
 		ray->perp_walldist = ray->side_disty - ray->delta_disty;
 }
 
-void	c3d_set_line(t_mlx *mlx, t_ray *ray, t_line *t)
+void	c3d_set_line(t_mlx *mlx, t_ray ray, t_line *line)
 {
 	int	h;
 
 	h = mlx->screenh;
-	t->lineheight = (int)(mlx->screenh / ray->perp_walldist);
-	t->draw_start = -t->lineheight / 2 + h / 2;
-	if (t->draw_start < 0)
-		t->draw_start = 0;
-	t->draw_end = t->lineheight / 2 + h / 2;
-	if (t->draw_end >= h)
-		t->draw_end = h - 1;
+	line->lineheight = (int)(mlx->screenh / ray.perp_walldist);
+	line->draw_start = -line->lineheight / 2 + h / 2;
+	if (line->draw_start < 0)
+		line->draw_start = 0;
+	line->draw_end = line->lineheight / 2 + h / 2;
+	if (line->draw_end >= h)
+		line->draw_end = h - 1;
 }
 
 void	c3d_execute_raycasting(t_c3d *env)
@@ -88,15 +88,15 @@ void	c3d_execute_raycasting(t_c3d *env)
 	x = 0;
 //	ft_memset(&env->zbuffer, 0, sizeof(env->zbuffer));
 	ft_memset(&ray, 0, sizeof(ray));
-	ft_memset(&line, 0, sizeof(line));
 	while (x < env->mlx.screenw)
 	{
 		c3d_set_ray(&env->mlx, &ray, env->player, x);
-		c3d_prepare_dda(&ray, &env->player.pos);
+		c3d_prepare_dda(&ray, env->player.pos);
 		c3d_execute_dda(&ray, env->map);
-		c3d_set_line(&env->mlx, &ray, &line);
+		c3d_set_line(&env->mlx, ray, &line);
 		env->zbuffer[x] = ray.perp_walldist;
-	printf("P: %d  \n",env->player.pos.y );
+	printf("P: %f  \n",env->player.pos.y );
+	printf("dirx: %d, diry: %d\n", env->player.dir.x, env->player.dir.y);
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}
