@@ -95,8 +95,8 @@ void	c3d_execute_raycasting(t_c3d *env)
 		c3d_execute_dda(&ray, env->map);
 		c3d_set_line(&env->mlx, ray, &line);
 		env->zbuffer[x] = ray.perp_walldist;
-	printf("Px: %f py: %f \n",env->player.pos.x, env->player.pos.y );
-	printf("dirx: %d, diry: %d\n", env->player.dir.x, env->player.dir.y);
+//	printf("Px: %f py: %f \n",env->player.pos.x, env->player.pos.y );
+//	printf("dirx: %d, diry: %d\n", env->player.dir.x, env->player.dir.y);
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}

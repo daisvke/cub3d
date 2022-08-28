@@ -17,7 +17,7 @@
 
 # define _XSIDE	0
 # define _YSIDE	1
-# define _SPEED	0.04
+# define _SPEED	0.009
 
 typedef struct	s_coord
 {
@@ -51,12 +51,20 @@ typedef struct	s_mlx
 	int		screenh;
 }				t_mlx;
 
-//typedef enum	e_
+enum	e_move
+{
+	_P1_UP = 1,
+	_P1_DOWN = 2,
+	_P1_LEFT = 4,
+	_P1_RIGHT = 8,
+	_CAM_LEFT = 16,
+	_CAM_RIGHT = 32
+};
 
 typedef struct	s_player
 {
 	t_coord		dir;
-//	int			mdir;
+	int			move;
 	t_dcoord	pos;
 	t_dcoord	cam_plane;
 }				t_player;
