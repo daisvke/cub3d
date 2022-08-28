@@ -5,8 +5,8 @@ void	c3d_set_ray(t_mlx *mlx, t_ray *ray, t_player player, int x)
 	double	camx;
 
 	camx = 2 * x / (double)mlx->screenw - 1;
-	ray->dirx = player.dir.x + CAM_PLANE_X * camx;
-	ray->diry = player.dir.y + CAM_PLANE_Y * camx;
+	ray->dirx = player.dir.x + _CAM_PLANE_X * camx;
+	ray->diry = player.dir.y + _CAM_PLANE_Y * camx;
 	ray->mapx = (int)player.pos.x;
 	ray->mapy = (int)player.pos.y;
 	ray->delta_distx = fabs(1 / ray->dirx);
@@ -48,20 +48,20 @@ void	c3d_execute_dda(t_ray *ray, char **map)
 		{
 			ray->side_distx += ray->delta_distx;
 			ray->mapx += ray->stepx;
-			ray->side = XSIDE;
+			ray->side = _XSIDE;
 		}
 		else
 		{
 			ray->side_disty += ray->delta_disty;
 			ray->mapy += ray->stepy;
-			ray->side = YSIDE;
+			ray->side = _YSIDE;
 		}
 		if (map[ray->mapy][ray->mapx] == '1')
 			hit = 1;
 	}
-	if (ray->side == XSIDE)
+	if (ray->side == _XSIDE)
 		ray->perp_walldist = ray->side_distx - ray->delta_distx;
-	else if (ray->side == YSIDE)
+	else if (ray->side == _YSIDE)
 		ray->perp_walldist = ray->side_disty - ray->delta_disty;
 }
 
@@ -86,8 +86,9 @@ void	c3d_execute_raycasting(t_c3d *env)
 	t_line		line;
 
 	x = 0;
-	ft_memset(&env->zbuffer, 0, sizeof(env->zbuffer));
+//	ft_memset(&env->zbuffer, 0, sizeof(env->zbuffer));
 	ft_memset(&ray, 0, sizeof(ray));
+//	printf("==========++> BUF %d\n", env->buffer[20][639]);
 	while (x < env->mlx.screenw)
 	{
 		c3d_set_ray(&env->mlx, &ray, env->player, x);
@@ -98,4 +99,5 @@ void	c3d_execute_raycasting(t_c3d *env)
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}
+	printf("END\n");
 }

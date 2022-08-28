@@ -5,6 +5,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdbool.h>
+# include <fcntl.h>
+# include <X11/keysym.h>
+# include <mlx.h>
+# include <X11/X.h>
 
 # define _TITLE		"cub3d"
 # define _SCREENW	640

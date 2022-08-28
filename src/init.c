@@ -5,8 +5,8 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 	int	w;
 	int	h;
 
-	mlx->screenw = SCREENW;
-	mlx->screenh = SCREENH;
+	mlx->screenw = _SCREENW;
+	mlx->screenh = _SCREENH;
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		c3d_exit(env, 1);
@@ -17,7 +17,7 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 		mlx->screenh = h;
 	if (mlx->screenw <= 0 || mlx->screenh <= 0)
 		c3d_exit(env, 2);
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, w, h, TITLE);
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, w, h, _TITLE);
 	if (!mlx->win_ptr)
 	{
 		free(mlx->win_ptr);
@@ -42,23 +42,32 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 		"10000000N000000000001",
 		"111111111111111111111"
 	};
-	env->map = malloc(sizeof(char) * 7);
+	env->map = malloc(sizeof(*env->map) * 8);
+	env->map[7] = 0;
 	for (int i=0; i < 7; ++i)
-		env->map[i] = malloc(sizeof(char) * 21);
+	{
+		env->map[i] = malloc(sizeof(char) * 22);
+		env->map[i][21] = 0;
+	}
 	for (int i=0; i < 7; ++i)
 		for (int j=0; j < 21; ++j)
 			env->map[i][j] = map[i][j];
 }
 
-void	c3d_init_buffers(t_c3d *env, t_mlx *mlx)
+void	c3d_init_buffers(t_c3d *env, t_mlx mlx)
 {
-	int	w;
-	int	h;
-	int	y;
+	double	w;
 
-	w = mlx->screenw;
-	h = mlx->screenh;
+	w = mlx.screenw;
 	env->zbuffer = malloc(sizeof(double) * w);
+	env->buffer = malloc(sizeof(*env->buffer) * (mlx.screenh + 1));
+	env->buffer[mlx.screenh] = 0;
+	for (int i=0; i < mlx.screenh; ++i)
+	{
+		env->buffer[i] = malloc(sizeof(**env->buffer) * (mlx.screenw + 1));
+		env->buffer[i][mlx.screenw] = 0;
+	}
+//	ft_memset(env->buffer, 0, sizeof(env->buffer));
 }
 
 void	c3d_init(t_c3d *env, char *argv[])
@@ -66,5 +75,5 @@ void	c3d_init(t_c3d *env, char *argv[])
 	ft_memset(env, 0, sizeof(t_c3d));
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
-	c3d_init_buffers(env, &env->mlx);
+	c3d_init_buffers(env, env->mlx);
 }
