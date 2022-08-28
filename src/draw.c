@@ -17,6 +17,9 @@ void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx)
 		++y;
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->canvas.mlx_img, 0, 0);
+	for (int i=0; i < mlx->screenh; ++i)
+		for (int j=0; j < mlx->screenw; ++j)
+			env->buffer[i][j] = 0;
 }
 
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
