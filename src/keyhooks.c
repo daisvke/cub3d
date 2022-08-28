@@ -6,18 +6,21 @@ int	c3d_handle_keypress(int keycode, t_c3d *env)
 		c3d_exit(env, 0);
 	if (keycode == XK_z)
 	{
-		env->player.pos.y += env->player.dir.y;
-		env->player.pos.x += env->player.dir.x;
+		env->player.
+		env->player.pos.y -= _SPEED;
+	//	env->player.pos.y += env->player.dir.y * _SPEED;
+	//	env->player.pos.x += env->player.dir.x;
 	}
 	if (keycode == XK_s)
 	{
-		env->player.pos.y -= env->player.dir.y;
-		env->player.pos.x -= env->player.dir.x;
+		env->player.pos.y += _SPEED;
+	//	env->player.pos.y -= env->player.dir.y * _SPEED;
+	//	env->player.pos.x -= env->player.dir.x;
 	}
 	if (keycode == XK_q)
-		env->player.pos.x -= 1;
+		env->player.pos.x -= _SPEED;
 	if (keycode == XK_d)
-		env->player.pos.x += 1;
+		env->player.pos.x += _SPEED;
 	return (0);
 } 
 
