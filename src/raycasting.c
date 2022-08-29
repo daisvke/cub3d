@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 03:43:35 by dtanigaw          #+#    #+#             */
+/*   Updated: 2022/08/29 03:43:54 by dtanigaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	c3d_set_ray(t_mlx *mlx, t_ray *ray, t_player player, int x)
@@ -86,7 +98,6 @@ void	c3d_execute_raycasting(t_c3d *env)
 	t_line		line;
 
 	x = 0;
-//	ft_memset(&env->zbuffer, 0, sizeof(env->zbuffer));
 	ft_memset(&ray, 0, sizeof(ray));
 	while (x < env->mlx.screenw)
 	{
@@ -94,9 +105,7 @@ void	c3d_execute_raycasting(t_c3d *env)
 		c3d_prepare_dda(&ray, env->player.pos);
 		c3d_execute_dda(&ray, env->map);
 		c3d_set_line(&env->mlx, ray, &line);
-		env->zbuffer[x] = ray.perp_walldist;
-//	printf("Px: %f py: %f \n",env->player.pos.x, env->player.pos.y );
-//	printf("dirx: %d, diry: %d\n", env->player.dir.x, env->player.dir.y);
+	//	env->zbuffer[x] = ray.perp_walldist;
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 03:43:27 by dtanigaw          #+#    #+#             */
+/*   Updated: 2022/08/29 03:43:53 by dtanigaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx)
@@ -25,8 +37,13 @@ void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx)
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
 {
 	int	y;
-	int	color;
 
+	y = 0;
+	while (y < line.draw_start)
+	{
+		env->buffer[y][x] = env->floor.color; 
+		++y;
+	}
 	y = line.draw_start;
 	while (y <= line.draw_end)
 	{
@@ -34,6 +51,11 @@ void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
 			env->buffer[y][x] = 0x00FF0000; 
 		else
 			env->buffer[y][x] = 0x0000FF00; 
+		++y;
+	}
+	while (y < env->mlx.screenh)
+	{
+		env->buffer[y][x] = env->ceiling.color; 
 		++y;
 	}
 }

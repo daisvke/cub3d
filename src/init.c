@@ -1,4 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
+/*   Updated: 2022/08/29 03:43:54 by dtanigaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
+
+int	c3d_convert_rgb_to_int(t_color color)
+{
+	int	val;
+
+	val = color.r;
+	val = (val << 8) + color.g;
+	val = (val << 8) + color.b;
+	return (val);
+}
 
 void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 {
@@ -25,12 +47,23 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
+	// F and C from map
+	env->floor.r = 2; 
+	env->floor.g = 2;
+	env->floor.b = 252;
+	env->floor.color = c3d_convert_rgb_to_int(env->floor);
+	env->ceiling.r = 200; 
+	env->ceiling.g = 20; 
+	env->ceiling.b = 200; 
+	env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
+	// initial pos of the player, depends on where NSEW is set on the map
 	player->pos.x = 10;
 	player->pos.y = 5;
-	player->cam_plane.x = 0.66;
-	player->cam_plane.y = 0.0;
+	// initial direction where player is looking at
+	// below corresponds to north (N)
 	player->dir.x = 0;
 	player->dir.y = -1;
+	
 	char map[7][21] = {
 		"111111111111111111111",
 		"100000000110000000011",
@@ -70,6 +103,8 @@ void	c3d_init_buffers(t_c3d *env, t_mlx mlx)
 void	c3d_init(t_c3d *env, char *argv[])
 {
 	ft_memset(env, 0, sizeof(t_c3d));
+	env->player.cam_plane.x = 0.66;
+	env->player.cam_plane.y = 0.0;
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
 	c3d_init_buffers(env, env->mlx);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
+/*   Updated: 2022/08/29 03:43:54 by dtanigaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -18,6 +30,14 @@
 # define _XSIDE	0
 # define _YSIDE	1
 # define _SPEED	0.009
+
+typedef struct	s_color
+{
+	int	r;
+	int	g;
+	int	b;
+	int	color;
+}				t_color;
 
 typedef struct	s_coord
 {
@@ -70,6 +90,8 @@ typedef struct	s_c3d
 	double		*zbuffer;
 	t_mlx		mlx;	
 	t_player	player;
+	t_color		floor;
+	t_color		ceiling;
 }				t_c3d;
 
 typedef struct	s_ray
