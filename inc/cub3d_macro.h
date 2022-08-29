@@ -6,13 +6,14 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:36:58 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/29 17:36:36 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/29 17:59:04 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_MACRO_H
 # define CUB3D_MACRO_H
 
+# define OK_CHAR " 01SEWN"
 # define NBR_PARSING_ERR 11
 # define MESS_ERR_LST "list of errors: \n"
 # define MESS_NO_FILE "file is missing\n"
@@ -28,6 +29,8 @@
 //# define MESS_MAP_LENGH "unvalid extention\n"
 //# define MESS_MAP_CHAR "unvalid extention\n"
 //# define MESS_MAP_BORDERS "unvalid extention\n"
+//# define MESS_MAP_BORDERS "unvalid extention\n"
+
 
 enum	e_parse_err
 {
@@ -45,8 +48,8 @@ enum	e_parse_err
 	ERR_FC_KEY,
 	ERR_FC_LENGH,
 	/********************	ERR_MAP*/
-	ERR_MAP_LENGH,
-	ERR_MAP_CHAR,
+	ERR_MAP_UNVALID_CHAR,
+	ERR_MAP_CHARACTER,
 	ERR_MAP_BORDERS,
 };
 
