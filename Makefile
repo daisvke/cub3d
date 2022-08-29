@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+         #
+#    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/29 03:43:54 by dtanigaw         ###   ########.fr        #
+#    Updated: 2022/08/29 14:32:54 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#	E X E C U T A B L E  N A M E 
+#	E X E C U T A B L E  N A M E
 
 NAME				=	cub3d
 
@@ -33,7 +33,8 @@ SRC_FILES			=	draw.c \
 						init.c \
 						keyhooks.c \
 						main.c \
-						parsing.c \
+						parsing_main.c \
+						parsing_check_file.c \
 						camera_movement.c \
 						player_movement.c \
 						raycasting.c \
@@ -79,7 +80,7 @@ $(MLX_LIB):
 
 $(NAME): $(MLX_LIB) $(OBJ)
 	@echo -e '\n$(YELLOW)-> Now compiling $(NAME)...$(RESET)'
-	$(CC) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB) 
+	$(CC) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB)
 	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)
