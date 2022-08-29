@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/29 14:32:54 by lchan            ###   ########.fr        #
+#    Updated: 2022/08/29 17:25:06 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,15 @@ INC					=	-I inc/
 #
 
 #	Source files
+
+#parsing_check_map.c
 SRC_DIR				=	src/
 SRC_FILES			=	draw.c \
 						exit.c \
 						init.c \
 						keyhooks.c \
 						main.c \
+						get_next_line.c \
 						parsing_main.c \
 						parsing_check_file.c \
 						camera_movement.c \

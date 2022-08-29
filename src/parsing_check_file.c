@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:17:13 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/29 15:00:24 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/29 17:13:56 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,50 @@ static int	__check_extention(char *file)
 	return (ret | (1<<ERR_EXTENTION));
 }
 
-int	__check_file(char **av, int	*fd)
+static int	__check_folder(char *file)
 {
-	int	err;
+	int	fd;
 
-	err = __check_extention(av[0]);
-	*fd = open(av[0], O_RDONLY);
-	printf("in __check_file fd = %d \n", *fd);
-	printf("errno %d \n", errno);
-	if (*fd == -1)
+	fd = open(file, O_DIRECTORY);
+	if (fd != -1)
 	{
-		if ((errno ^ EISDIR) == 0)
-			err |= (1<<ERR_FOLDER);
-		else if ((errno ^ EACCES) == 0)
-			err |= (1<<ERR_CHMOD);
-		else if ((errno ^ ENOENT) == 0)
-			err |= (1<<ERR_PATH);
-		else
-		{
-			perror("cub3d");
-			exit(errno);
-		}
+		close(fd);
+		return (1<<ERR_FOLDER);
 	}
-	return (err);
+	return (0);
 }
 
 /*****************************************************************
  * Set nth bit of integer x to 1 --> x | (1<<n)
  * errno val
- * 		EACCES : cant open file du to accessibility issue
- * 		EISDIR : user is trying to open a directory
+ * 		EACCES : cant open file due to accessibility issue
  * 		ENOENT : file does not exist and O_CREAT flag is not set
  * if open syscall fails for other reason, free all and exit;
 *****************************************************************/
+int	__check_file(char **av, int	*fd)
+{
+	int	err;
+
+	err = 0;
+	if (*av)
+	{
+		err += __check_extention(av[0]);
+		err += __check_folder(av[0]);
+		*fd = open(av[0], O_RDONLY);
+		if (*fd == -1 && !err)
+		{
+			if ((errno ^ EACCES) == 0)
+				err |= (1<<ERR_CHMOD);
+			else if ((errno ^ ENOENT) == 0)
+				err |= (1<<ERR_PATH);
+			else //--> not sure about this one, check with team mate
+			{
+				perror("cub3d");
+				exit(errno);
+			}
+		}
+	}
+	else
+		err |= (1<<ERR_NO_FILE);
+	return (err);
+}

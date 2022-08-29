@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/29 14:51:41 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/29 17:24:02 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <errno.h>
+# include "cub3d_macro.h"
+# include "get_next_line.h"
 
 # include <math.h>
 # include <stdbool.h>
@@ -35,28 +37,6 @@
 # define _XSIDE	0
 # define _YSIDE	1
 # define _SPEED	0.009
-
-# define NBR_PARSING_ERR 11
-
-enum	e_parse_err
-{
-	/********************	ERR_FILE*/
-	ERR_EXTENTION,	//bit 0/32
-	ERR_FOLDER,		//bit 1/32
-	ERR_CHMOD,		//bit 2/32
-	ERR_PATH,		//bit 3/32
-	/********************	ERR_TEXTURE*/
-	ERR_TEXTURE_KEY,
-	ERR_TEXTURE_PATH,
-	/********************	ERR_FC*/
-	ERR_FC_COLOR,
-	ERR_FC_KEY,
-	ERR_FC_LENGH,
-	/********************	ERR_MAP*/
-	ERR_MAP_LENGH,
-	ERR_MAP_CHAR,
-	ERR_MAP_BORDERS,
-};
 
 typedef struct	s_color
 {
@@ -152,6 +132,7 @@ void	c3d_init(t_c3d *env, char *argv[]);
 /************** parsing	*****************/
 void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv);
 int		__check_file(char **av, int	*fd);
+int		__check_map(t_c3d *env, t_player *player, int fd);
 
 int		c3d_exit(t_c3d *env, int errno);
 
