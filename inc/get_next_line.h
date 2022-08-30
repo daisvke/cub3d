@@ -5,32 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 04:07:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/29 17:23:33 by lchan            ###   ########.fr       */
+/*   Created: 2022/01/25 14:38:47 by lchan             #+#    #+#             */
+/*   Updated: 2022/08/30 16:13:52 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 	32
+#  define BUFFER_SIZE 42
 # endif
 
-# define NOT_FOUND		0
-# define OFF			-1
-
-/*
-** return values
-*/
-# define ERROR 			-1
-# define REACHED_EOF 	0
-# define LINE_READ		1
-
-# include <stdbool.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
+# include <stdio.h>
 
-int		get_next_line(int fd, char **line);
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+typedef struct s_list
+{
+	int				fd;
+	char			*content;
+	char			buff[BUFFER_SIZE + 1];
+	struct s_list	*next;
+}t_list;
+
+//get_next_line_utils.c
+size_t	ft_strlen_opt_newline(char *str, int opt_newline);
+char	*ft_strjoinfree_content(t_list *nod);
+t_list	*ft_struct_init(int fd);
+t_list	*ft_lst_init_addback(t_list **head, int fd);
+
+//get_next_line.c
+void	ft_rebuild_buff(t_list *nod);
+void	gnl_build_content(t_list **nod, int fd);
+char	*get_next_line(int fd);
 
 #endif

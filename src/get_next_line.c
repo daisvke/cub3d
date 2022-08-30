@@ -5,123 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/09 04:07:23 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/29 17:23:03 by lchan            ###   ########.fr       */
+/*   Created: 2022/02/03 19:09:40 by lchan             #+#    #+#             */
+/*   Updated: 2022/08/30 16:12:03 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	gnl_get_char_index(char *str, char c, bool increment)
+void	ft_rebuild_buff(t_list *nod)
 {
-	size_t	i;
+	int	start;
+	int	index;
 
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == c)
-			return (i);
-		++i;
-	}
-	if (increment)
-		return (i);
-	else
-		return (NOT_FOUND);
-}
-
-char	*gnl_concatenate(char *s1, char *s2, int len, bool is_empty)
-{
-	char	*str;
-	size_t	i;
-	size_t	size;
-
-	size = 0;
-	if (s1 && is_empty == false)
-		size += gnl_get_char_index(s1, '\0', true);
-	if (s2)
-		size += gnl_get_char_index(s2, '\0', true);
-	if (len >= 0 && (int)size > len)
-		size = len;
-	str = malloc(sizeof(char) * (size + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (is_empty == false && s1 && *s1 && i < size)
-		str[i++] = *s1++;
-	while (s2 && *s2 && i < size)
-		str[i++] = *s2++;
-	str[i] = '\0';
-	return (str);
-}
-
-int	gnl_get_line(char **data, int fd)
-{
-	static char	buffer[BUFFER_SIZE + 1];
-	int			res;
-	char		*tmp;
-
-	res = 0;
-	while (gnl_get_char_index(*data, '\n', false) == NOT_FOUND)
-	{
-		res = read(fd, buffer, BUFFER_SIZE);
-		if (res < 0)
-			return (ERROR);
-		if (res == 0)
-			break ;
-		buffer[res] = '\0';
-		tmp = gnl_concatenate(*data, buffer, OFF, false);
-		if (!tmp)
-			return (ERROR);
-		free(*data);
-		*data = tmp;
-	}
-	return (res);
-}
-
-int	gnl_run_and_return(char **data, char **line, int fd)
-{
-	int			res;
-	size_t		index;
-	char		*tmp;
-	bool		is_empty;
-
-	res = gnl_get_line(data, fd);
-	if (res == ERROR)
-		return (ERROR);
 	index = 0;
-	if (*data)
-		index = gnl_get_char_index(*data, '\n', true);
-	is_empty = index + 1 > gnl_get_char_index(*data, '\0', true);
-	*line = gnl_concatenate(*data, NULL, index, false);
-	if (!line)
-		return (ERROR);
-	tmp = gnl_concatenate(*data + index + 1, NULL, \
-		gnl_get_char_index(*data, '\0', true) - index - 1, is_empty);
-	if (!tmp)
-		return (ERROR);
-	free(*data);
-	*data = tmp;
-	if (res == REACHED_EOF && is_empty)
-		return (REACHED_EOF);
-	else
-		return (LINE_READ);
+	start = ft_strlen_opt_newline(nod->buff, 1);
+	while (nod->buff[start])
+		nod->buff[index++] = nod->buff[start++];
+	nod->buff[index] = '\0';
 }
 
-int	get_next_line(int fd, char **line)
+void	gnl_build_content(t_list **nod, int fd)
 {
-	static char	*data;
-	char		*data_cpy;
-	int			res;
+	int	ret;
 
-	if (BUFFER_SIZE <= 0 || !line)
-		return (ERROR);
-	data_cpy = data;
-	res = gnl_run_and_return(&data_cpy, line, fd);
-	if (res == REACHED_EOF || res == ERROR)
+	ret = -2;
+	while (1)
 	{
-		free(data_cpy);
-		data_cpy = NULL;
+		if (!(*nod)->buff[0])
+		{
+			ret = read(fd, (*nod)->buff, BUFFER_SIZE);
+			(*nod)->buff[ret] = '\0';
+		}
+		else
+		{
+			(*nod)->content = ft_strjoinfree_content(*nod);
+			ft_rebuild_buff(*nod);
+		}
+		if (ft_strlen_opt_newline((*nod)->content, 2))
+			break ;
+		if (ret == 0 || ret == -1)
+			break ;
 	}
-	data = data_cpy;
-	return (res);
+}
+
+char	*get_next_line(int fd)
+{
+	static t_list	*head;
+	t_list			*nod;
+
+	if (fd <= -1 || BUFFER_SIZE <= 0)
+		return (NULL);
+	nod = ft_lst_init_addback(&head, fd);
+	if (nod && nod->content)
+		nod->content = NULL;
+	gnl_build_content(&nod, nod->fd);
+	if (!nod->content && !nod->buff[0])
+	{
+		free(nod);
+		if (nod == head)
+			head = NULL;
+		nod = NULL;
+	}
+	if (nod)
+		return (nod->content);
+	else
+		return (NULL);
 }

@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/29 17:25:06 by lchan            ###   ########.fr        #
+#    Updated: 2022/08/30 16:15:17 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_FILES			=	draw.c \
 						keyhooks.c \
 						main.c \
 						get_next_line.c \
+						get_next_line_utils.c \
 						parsing_main.c \
 						parsing_check_file.c \
 						camera_movement.c \

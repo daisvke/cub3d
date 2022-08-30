@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:17:13 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/29 17:13:56 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/30 19:30:41 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	__find_last_c_occurence(char *path, char c)
 	return (occurence);
 }
 
-static int	__strncmp(const char *s1, const char *s2, size_t n)
+int	__strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
