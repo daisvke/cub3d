@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/30 19:35:26 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/30 21:13:22 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	__check_key(char *line, int *type)
 {
 	const char	*key_tab[] = {
 	[E_NO] = "NO ", [E_NO] = "SO ", [E_WE] = "WE ", [E_EA] = "EA ",
-	[E_F] = "F ", [E_C] = "C", [E_MAP] = MAP_CHAR,
+	[E_F] = "F ", [E_C] = "C ", [E_MAP] = MAP_CHAR,
 	};
-	int	i;
-	char	*tmp;
+	int			i;
+	char		*tmp;
 
 	i = -1;
 	tmp = line;
