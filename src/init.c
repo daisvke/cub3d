@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 12:39:28 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 17:21:04 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 		mlx->screenh);
 	mlx->canvas.addr = (int *)mlx_get_data_addr(mlx->canvas.mlx_img, \
 		&mlx->canvas.bpp, &mlx->canvas.line_len, &mlx->canvas.endian);
+	c3d_init_window(env, mlx);
 }
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])

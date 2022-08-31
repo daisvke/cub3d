@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:25 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 14:31:08 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/08/31 14:45:42 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char *argv[])
 
 	//__c3d_parse_map(&env, &(env.player), argv);
 	c3d_init(&env, argv);
-	c3d_init_window(&env, &env.mlx);
 	c3d_handle_keyhooks(&env);
 	return (0);
 }

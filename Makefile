@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/31 13:12:54 by lchan            ###   ########.fr        #
+#    Updated: 2022/08/31 17:23:03 by dtanigaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,10 +83,10 @@ $(MLX_LIB):
 	@echo "-> $(YELLOW)Now compiling minilibx...$(RESET)"
 	@$(MLX_MAKE) $(MLX_DIR) > /dev/null 2>&1
 	@echo -e '-> $(GREEN)OK$(RESET)\n'
-	@echo -e '$(YELLOW)-> Now linking $(NAME)...$(RESET)'
+	@echo -e '-> $(YELLOW)Now linking $(NAME)...$(RESET)'
 
 $(NAME): $(MLX_LIB) $(OBJ)
-	@echo -e '\n$(YELLOW)-> Now compiling $(NAME)...$(RESET)'
+	@echo -e '\n-> $(YELLOW)Now compiling $(NAME)...$(RESET)'
 	$(CC) $(MEM) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB)
 	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
 
@@ -97,7 +97,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)
 #	Clean & other rules
 clean:
 	make -s clean -C $(MLX_DIR)
-	@echo -e '$(BLUE)-> Cleaned minilibx$(RESET)'
+	@echo -e '-> $(BLUE)Cleaned minilibx$(RESET)'
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
