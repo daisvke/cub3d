@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/31 17:23:03 by dtanigaw         ###   ########.fr        #
+#    Updated: 2022/08/31 21:59:24 by dtanigaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME				=	cub3d
 
 #	CC flags
 CC	 				=	clang
-CFLAGS				=	$(MEM) -Wall -Wextra -g3	##initially muted
+CFLAGS				=	-Wall -Wextra -g3	##initially muted
 MEM					=	-Wall -Wextra -g3			##initially : -g3
 #OPT				=	-O2
 INC					=	-I inc/

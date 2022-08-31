@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 13:09:07 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 23:27:08 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define _TITLE		"cub3d"
 # define _SCREENW	640
 # define _SCREENH	480
+
+# define _TEX_NBR	4
+# define _TEX_SIZE	64
 
 # define _XSIDE	0
 # define _YSIDE	1
@@ -81,6 +84,7 @@ enum	e_move
 	_CAM_LEFT = 16,
 	_CAM_RIGHT = 32
 };
+
 typedef struct	s_player
 {
 	t_coord	dir;
@@ -96,6 +100,8 @@ typedef struct	s_c3d
 	double		*zbuffer;
 	t_mlx		mlx;
 	t_player	player;
+	int			*textures[_TEX_NBR];
+	char		*tex_paths[_TEX_NBR];
 	t_color		floor;
 	t_color		ceiling;
 }				t_c3d;
@@ -121,6 +127,7 @@ typedef struct	s_line
 	int		lineheight;
 	int		draw_start;
 	int		draw_end;
+	int		orientation;
 }				t_line;
 
 void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx);

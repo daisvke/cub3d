@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 17:21:04 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/08/31 22:29:37 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	// below corresponds to north (N)
 	player->dir.x = 0;
 	player->dir.y = -1;
+	// texture paths
+	env->tex_paths[0] = "./img/no_wall.xpm";
+	env->tex_paths[1] = "./img/so_wall.xpm";
+	env->tex_paths[2] = "./img/we_wall.xpm";
+	env->tex_paths[3] = "./img/ea_wall.xpm";
 
 	char map[7][21] = {
 		"111111111111111111111",
@@ -87,18 +92,67 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 			env->map[i][j] = map[i][j];
 }
 
-void	c3d_init_buffers(t_c3d *env, t_mlx mlx)
+void	c3d_init_buffers(t_c3d *env, t_mlx mlx) //buffer?
 {
 	double	w;
 
 	w = mlx.screenw;
-	env->zbuffer = malloc(sizeof(double) * w);
+//	env->zbuffer = malloc(sizeof(double) * w);
 	env->buffer = malloc(sizeof(*env->buffer) * (mlx.screenh + 1));
 	env->buffer[mlx.screenh] = 0;
 	for (int i=0; i < mlx.screenh; ++i)
 	{
 		env->buffer[i] = malloc(sizeof(**env->buffer) * (mlx.screenw + 1));
 		env->buffer[i][mlx.screenw] = 0;
+	}
+}
+
+void	c3d_init_texture_array(t_c3d *env)
+{
+	int	i;
+
+//	env->textures = malloc(sizeof(*env->textures) * _TEX_NBR);
+	i = 0;
+	while (i < _TEX_NBR)
+	{
+		env->textures[i] = malloc(sizeof(**env->textures) * _TEX_SIZE * _TEX_SIZE);
+		++i;
+	}
+}
+
+void	c3d_load_texture(t_c3d *env, t_mlx *mlx, int *tex, char *path)
+{
+	int		x;
+	int		y;
+	t_img	img;
+
+	img.mlx_img = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &img.x, &img.y);
+	if (!img.mlx_img)
+		printf("ERROR MLX IMG\n");
+	img.addr = (int *)mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+	y = 0;
+	while (y < img.y)
+	{
+		x = 0;
+		while (x < img.x)
+		{
+			tex[img.x * y + x] = img.addr[img.x * y + x];
+			++x;
+		}
+		++y;
+	}
+	mlx_destroy_image(mlx->mlx_ptr, img.mlx_img);
+}
+
+void	c3d_load_textures(t_c3d *env, t_mlx *mlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < _TEX_NBR)
+	{
+		c3d_load_texture(env, mlx, env->textures[i], env->tex_paths[i]);
+		++i;
 	}
 }
 
@@ -110,4 +164,6 @@ void	c3d_init(t_c3d *env, char *argv[])
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
 	c3d_init_buffers(env, env->mlx);
+	c3d_init_texture_array(env);
+	c3d_load_textures(env, &env->mlx);
 }

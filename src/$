@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:27 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 23:46:43 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/08/31 22:21:52 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ double	c3d_get_wall_xpos(t_ray ray, t_coord p1_pos)
 	double		wall_x;
 
 	if (ray.side == 0)
-		wall_x = p1_pos.y + ray.perp_walldist * ray.diry;
+		wall_x = p1_pos.y + ray.delta_distx * ray.diry;
 	else
-		wall_x = p1_pos.x + ray.perp_walldist * ray.dirx;
+		wall_x = p1_pos.x + ray.delta_distx * ray.dirx;
 	wall_x -= floor(wall_x);
 	return (wall_x);
 }
@@ -71,11 +71,25 @@ static void	c3d_get_wall_orientation(t_line *tex_line, t_ray ray)
 	if (ray.side == 1 && ray.diry >= 0)
 		tex_line->orientation = TYPE_WE;
 }
+/*
+int	cub_add_shadow(int color, double dw)
+{
+	t_rgb	rgb;
+	double	shade;
 
-void	c3d_set_wall_texture(t_c3d *env, t_line *tex_line, t_ray ray, int x)
+	shade = (10 - dw) / 10.0;
+	if (shade < 0)
+		shade = 0.01;
+	rgb.r = ((color & 0x00FF0000) >> 16) * shade;
+	rgb.g = ((color & 0x0000FF00) >> 8) * shade;
+	rgb.b = (color & 0x000000FF) * shade;
+	return (color);
+}
+*/
+void	c3d_set_texture(t_c3d *env, t_line *tex_line, t_ray ray, int x)
 {
 	double	step;
-	t_coord	tex;
+	t_icoord	tex; //i?
 	double	tex_pos;
 	int		y;
 	int		color;
@@ -90,12 +104,13 @@ void	c3d_set_wall_texture(t_c3d *env, t_line *tex_line, t_ray ray, int x)
 	{
 		tex.y = (int)tex_pos & (_TEX_SIZE - 1);
 		tex_pos += step;
+		printf("==y: %d  y=>%d x=>%d\n",y, tex_line->orientation,_TEX_SIZE * (int)tex.y + (int)tex.x);
 		color = env->textures[tex_line->orientation][_TEX_SIZE * (int)tex.y + (int)tex.x];
-		if (ray.side == 1)
-			color = (color >> 1) & 8355711;
+		//env->mlx.buffer[y][x] = c3d_add_shadow(color, ray->deltaw);
 		env->buffer[y][x] = color;
 		++y;
 	}
+//	cub_set_floor_ceiling(t->start, t->end, x, env);
 }
 
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
@@ -108,8 +123,8 @@ void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
 		env->buffer[y][x] = env->floor.color; 
 		++y;
 	}
-	c3d_set_wall_texture(env, &line, ray, x);
-	y += line.lineheight;
+	y = line.draw_start;
+	c3d_set_texture(env, &line, ray, x);
 	while (y < env->mlx.screenh)
 	{
 		env->buffer[y][x] = env->ceiling.color; 
