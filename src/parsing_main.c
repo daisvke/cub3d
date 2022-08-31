@@ -6,21 +6,11 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/29 17:17:00 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 12:21:50 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	__strlen(char *str)
-{
-	char	*tmp;
-
-	tmp = str;
-	while (*tmp)
-		tmp++;
-	return (tmp - str);
-}
 
 void	__free_parsing(t_c3d *env)
 {
@@ -41,7 +31,7 @@ void	__free_parsing(t_c3d *env)
 
 void	__putstr_err(const char *err_message)
 {
-	write (STDERR_FILENO, err_message, __strlen((char *)err_message));
+	write (STDERR_FILENO, err_message, ft_strlen((char *)err_message));
 }
 
 void	__print_err(int	err)
@@ -76,12 +66,16 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 	err = 0;
 	fd = -1;
 	err += __check_file(argv + 1, &fd);
-	//err += __check_map(env, player, fd);
+	if (! err)
+		err += __check_map(env, player, fd);
 	if (err)
 	{
 		//printf("err flag = %d\n", err);
 		__print_err(err);
-		//__free_parsing(env);
 		exit(err);
+	}
+	if (err)
+	{
+		printf("err flag = %d\n", err);
 	}
 }

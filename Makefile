@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/29 17:25:06 by lchan            ###   ########.fr        #
+#    Updated: 2022/08/31 13:12:54 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAME				=	cub3d
 
 #	CC flags
 CC	 				=	clang
-#CFLAGS				=	$(MEM)
-MEM					=	-g3
+CFLAGS				=	$(MEM) -Wall -Wextra -g3	##initially muted
+MEM					=	-Wall -Wextra -g3			##initially : -g3
 #OPT				=	-O2
 INC					=	-I inc/
 
@@ -36,8 +36,12 @@ SRC_FILES			=	draw.c \
 						keyhooks.c \
 						main.c \
 						get_next_line.c \
+						get_next_line_utils.c \
 						parsing_main.c \
 						parsing_check_file.c \
+						parsing_check_map.c \
+						parsing_pick_line.c\
+						parsing_utils.c\
 						camera_movement.c \
 						player_movement.c \
 						raycasting.c \
@@ -83,7 +87,7 @@ $(MLX_LIB):
 
 $(NAME): $(MLX_LIB) $(OBJ)
 	@echo -e '\n$(YELLOW)-> Now compiling $(NAME)...$(RESET)'
-	$(CC) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB)
+	$(CC) $(MEM) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB)
 	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)

@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:17:13 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/29 17:13:56 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 12:22:22 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ static int	__find_last_c_occurence(char *path, char c)
 	return (occurence);
 }
 
-static int	__strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		if (s1[i] == '\0' && s2[i] == '\0')
-			return (0);
-		i++;
-	}
-	return (0);
-}
-
 static int	__check_extention(char *file)
 {
 	int		dot;
@@ -52,7 +36,7 @@ static int	__check_extention(char *file)
 	{
 		dot = __find_last_c_occurence(file, '.');
 		tmp = file + dot + 1;
-		if (dot == 0 || __strncmp(tmp, "cub", 4) != 0)
+		if (dot == 0 || ft_strncmp(tmp, "cub", 4) != 0)
 			return (ret | (1<<ERR_EXTENTION));
 		return (0);
 	}
