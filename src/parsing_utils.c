@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:07 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 13:08:50 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 18:34:35 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,30 @@ int	ft_strchr_b(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (unsigned char) c)
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (-1);
+}
+
+char	*ft_strdup(char *s1)
+{
+	size_t	len;
+	char	*dup;
+
+	if (s1)
+		len = ft_strlen(s1);
+	else
+		len = 0;
+	dup = (char *)malloc((len + 1) * sizeof(char));
+	if (!dup)
+		return (0);
+	while (s1 && *s1 != '\0')
+	{
+		*dup = *s1;
+		s1++;
+		dup++;
+	}
+	*dup = '\0';
+	return (dup - len);
 }

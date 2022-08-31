@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 13:09:07 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 18:33:14 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <limits.h>
 # include "cub3d_macro.h"
 # include "get_next_line.h"
 
@@ -133,7 +134,9 @@ void	c3d_init(t_c3d *env, char *argv[]);
 void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv);
 int		__check_file(char **av, int	*fd);
 int		__check_map(t_c3d *env, t_player *player, int fd);
-void	__pick_line_set_type(int fd, t_parser *parser);
+int		__check_type(char *line, int *type);
+void	__parse_line(t_parser *parser, char *line);
+
 int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strchr_b(const char *s, int c);

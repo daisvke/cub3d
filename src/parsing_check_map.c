@@ -6,20 +6,25 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 13:14:36 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 18:33:35 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	__parse_line(t_parser *parser)
+//char	*__skip_space()
+
+void	__pick_line_set_type(int fd, t_parser *parser)
 {
-	printf("type = %d\n", parser->type);
-	printf("line = %s\n", parser->line);
-	free(parser->line);
+	parser->line = get_next_line(fd);
+	parser->gnl_cnt++;
+	while (__check_type(parser->line, &parser->type) == TYPE_USELESS)
+	{
+		free(parser->line);
+		parser->line = get_next_line(fd);
+		parser->gnl_cnt++;
+	}
 }
-
-
 
 int	__check_map(t_c3d *env, t_player *player, int fd)
 {
@@ -30,13 +35,14 @@ int	__check_map(t_c3d *env, t_player *player, int fd)
 	ft_memset(&parser, 0, sizeof(t_parser));
 	if (fd > -1)
 	{
-		//parser.err |= (1<<ERR_EMPTY_MAP);
 		__pick_line_set_type(fd, &parser);
 		while (parser.type != TYPE_EOF)
 		{
-			__parse_line(&parser);
+			__parse_line(&parser, parser.line);
 			__pick_line_set_type(fd, &parser);
 		}
+		if (parser.gnl_cnt == 1)
+			parser.err |= (1<<ERR_EMPTY_MAP);
 	// 	close (fd);
 	// 	if (__check_info_validity(&parser))
 	// 		__add_info_to_env(&parser, env);
