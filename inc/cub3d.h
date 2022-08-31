@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/29 17:24:02 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 13:09:07 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,12 @@ void	c3d_init(t_c3d *env, char *argv[]);
 void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv);
 int		__check_file(char **av, int	*fd);
 int		__check_map(t_c3d *env, t_player *player, int fd);
+void	__pick_line_set_type(int fd, t_parser *parser);
+int		ft_strlen(char *str);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strchr_b(const char *s, int c);
 
-int		c3d_exit(t_c3d *env, int errno);
+int		c3d_exit(t_c3d *env, int err_code);
 
 void	c3d_check_obstacles_and_move_up(char **map, t_player *player);
 void	c3d_check_obstacles_and_move_down(char **map, t_player *player);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/29 03:43:54 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:39:28 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,15 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
+	(void) argv;
 	// F and C from map
-	env->floor.r = 2; 
+	env->floor.r = 2;
 	env->floor.g = 2;
 	env->floor.b = 252;
 	env->floor.color = c3d_convert_rgb_to_int(env->floor);
-	env->ceiling.r = 200; 
-	env->ceiling.g = 20; 
-	env->ceiling.b = 200; 
+	env->ceiling.r = 200;
+	env->ceiling.g = 20;
+	env->ceiling.b = 200;
 	env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
 	// initial pos of the player, depends on where NSEW is set on the map
 	player->pos.x = 10;
@@ -63,7 +64,7 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	// below corresponds to north (N)
 	player->dir.x = 0;
 	player->dir.y = -1;
-	
+
 	char map[7][21] = {
 		"111111111111111111111",
 		"100000000110000000011",

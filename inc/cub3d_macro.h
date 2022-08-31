@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:36:58 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/30 21:12:34 by lchan            ###   ########.fr       */
+/*   Updated: 2022/08/31 13:09:00 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ enum	e_map_err{
 	ERR_MAP_BORDERS,
 };
 
+/*
 enum	e_line_type{
 	TYPE_USELESS = 1,		//line composed of space and/or \n
 	TYPE_TEXTURE,
@@ -70,6 +71,7 @@ enum	e_line_type{
 	TYPE_ERR,			//line start by unvalide char
 	TYPE_EOF,
 };
+
 
 enum	e_cnt_texture{
 	E_NO,
@@ -80,6 +82,21 @@ enum	e_cnt_texture{
 	E_C,
 	E_MAP,
 };
+*/
+
+enum	e_line_type{
+	TYPE_NO,
+	TYPE_SO,
+	TYPE_WE,
+	TYPE_EA,
+	TYPE_F,
+	TYPE_C,
+	TYPE_MAP,
+	TYPE_ERR,
+	TYPE_USELESS,//line composed of space and/or \n
+	TYPE_EOF,		//line start by unvalide char
+};
+
 
 enum	e_cnt_fc{
 	FLOOR,
@@ -98,6 +115,6 @@ typedef struct s_parser
 	int		type;				//type of line; e_line_type
 }t_parser;
 
-int	__strncmp(const char *s1, const char *s2, size_t n);
+
 
 #endif
