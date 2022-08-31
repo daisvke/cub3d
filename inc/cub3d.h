@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 00:31:29 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:46:09 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 # define _XSIDE	0
 # define _YSIDE	1
-# define _SPEED	0.009
+# define _SPEED	0.012
 
 typedef struct	s_color
 {
@@ -93,7 +93,8 @@ enum	e_move
 typedef struct	s_player
 {
 	t_coord	dir;
-	int			move;
+	double	speed;
+	int		move;
 	t_coord	pos;
 	t_coord	cam_plane;
 }				t_player;

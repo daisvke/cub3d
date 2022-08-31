@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 22:29:37 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:44:33 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,14 +156,20 @@ void	c3d_load_textures(t_c3d *env, t_mlx *mlx)
 	}
 }
 
+void	c3d_init_player_settings(t_mlx mlx, t_player *player)
+{
+	player->cam_plane.x = 0.66;
+	player->cam_plane.y = 0.0;
+	player->speed = (_SPEED * (mlx.screenw * mlx.screenh)) / (680 * 460);
+}
+
 void	c3d_init(t_c3d *env, char *argv[])
 {
 	c3d_memset(env, 0, sizeof(t_c3d));
-	env->player.cam_plane.x = 0.66;
-	env->player.cam_plane.y = 0.0;
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
 	c3d_init_buffers(env, env->mlx);
 	c3d_init_texture_array(env);
 	c3d_load_textures(env, &env->mlx);
+	c3d_init_player_settings(env->mlx, &env->player);
 }
