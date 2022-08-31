@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/31 21:59:24 by dtanigaw         ###   ########.fr        #
+#    Updated: 2022/08/31 23:53:31 by dtanigaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ INC					=	-I inc/
 
 #	Source files
 
-#parsing_check_map.c
 SRC_DIR				=	src/
 SRC_FILES			=	draw.c \
 						exit.c \
@@ -40,7 +39,8 @@ SRC_FILES			=	draw.c \
 						parsing_main.c \
 						parsing_check_file.c \
 						parsing_check_map.c \
-						parsing_pick_line.c\
+						parsing_check_type.c\
+						parsing_parse_line.c\
 						parsing_utils.c\
 						camera_movement.c \
 						player_movement.c \
