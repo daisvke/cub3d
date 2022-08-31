@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:35 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 23:04:28 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:29:01 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ void	c3d_set_ray(t_mlx *mlx, t_ray *ray, t_player player, int x)
 	ray->diry = player.dir.y + player.cam_plane.y * camx;
 	ray->mapx = (int)player.pos.x;
 	ray->mapy = (int)player.pos.y;
-	//ternaire
-	ray->delta_distx = (ray->dirx == 0) ? 1e30 : fabs(1 / ray->dirx);
-	ray->delta_disty = (ray->diry == 0) ? 1e30 : fabs(1 / ray->diry);
+	if (ray->dirx == 0)
+		ray->delta_distx = 1e30;
+	else
+		ray->delta_distx = fabs(1 / ray->dirx);
+	if (ray->diry == 0)
+		ray->delta_disty = 1e30;
+	else
+		ray->delta_disty = fabs(1 / ray->diry);
 }
 
 void	c3d_prepare_dda(t_ray *ray, t_coord pos)
@@ -99,7 +104,7 @@ void	c3d_execute_raycasting(t_c3d *env)
 	t_line		line;
 
 	x = 0;
-	ft_memset(&ray, 0, sizeof(ray));
+	c3d_memset(&ray, 0, sizeof(ray));
 	while (x < env->mlx.screenw)
 	{
 		c3d_set_ray(&env->mlx, &ray, env->player, x);

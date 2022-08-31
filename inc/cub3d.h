@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 23:57:01 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:31:29 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@
 # include <X11/X.h>
 
 # define _TITLE		"cub3d"
+/*
 # define _SCREENW	640
 # define _SCREENH	480
+*/
+# define _SCREENW	1200
+# define _SCREENH	640
 
 # define _TEX_NBR	4
 # define _TEX_SIZE	64
@@ -132,8 +136,9 @@ typedef struct	s_line
 }				t_line;
 
 void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx);
+void	c3d_draw_wall_texture_on_line(t_c3d *env, t_line *tex_line, t_ray ray, int x);
 void	c3d_execute_raycasting(t_c3d *env);
-void	*ft_memset(void *s, int c, size_t n);
+void	*c3d_memset(void *s, int c, size_t n);
 void	c3d_handle_keyhooks(t_c3d *env);
 void	c3d_init(t_c3d *env, char *argv[]);
 

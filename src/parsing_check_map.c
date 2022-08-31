@@ -32,7 +32,7 @@ int	__check_map(t_c3d *env, t_player *player, int fd)
 	(void)		player;
 	(void)		env;
 
-	ft_memset(&parser, 0, sizeof(t_parser));
+	c3d_memset(&parser, 0, sizeof(t_parser));
 	if (fd > -1)
 	{
 		__pick_line_set_type(fd, &parser);

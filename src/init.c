@@ -158,7 +158,7 @@ void	c3d_load_textures(t_c3d *env, t_mlx *mlx)
 
 void	c3d_init(t_c3d *env, char *argv[])
 {
-	ft_memset(env, 0, sizeof(t_c3d));
+	c3d_memset(env, 0, sizeof(t_c3d));
 	env->player.cam_plane.x = 0.66;
 	env->player.cam_plane.y = 0.0;
 	c3d_parse_map(env, &env->player, argv);

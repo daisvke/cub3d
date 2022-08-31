@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/08/31 23:57:36 by dtanigaw         ###   ########.fr        #
+#    Updated: 2022/09/01 00:22:20 by dtanigaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ INC					=	-I inc/
 
 SRC_DIR				=	src/
 SRC_FILES			=	draw.c \
+						draw_walls.c \
 						exit.c \
 						init.c \
 						keyhooks.c \
