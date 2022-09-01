@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:17:13 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 12:22:22 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 19:26:24 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,19 @@ static int	__check_folder(char *file)
  * 		ENOENT : file does not exist and O_CREAT flag is not set
  * if open syscall fails for other reason, free all and exit;
 *****************************************************************/
-int	__check_file(char **av, int	*fd)
+int	__check_file(char **av, int	*fd, t_parser *parser)
 {
-	int	err;
-
-	err = 0;
 	if (*av)
 	{
-		err += __check_extention(av[0]);
-		err += __check_folder(av[0]);
+		parser->blocking_err_flag += __check_extention(av[0]);
+		parser->blocking_err_flag += __check_folder(av[0]);
 		*fd = open(av[0], O_RDONLY);
-		if (*fd == -1 && !err)
+		if (*fd == -1 && !parser->blocking_err_flag)
 		{
 			if ((errno ^ EACCES) == 0)
-				err |= (1<<ERR_CHMOD);
+				parser->blocking_err_flag |= (1<<ERR_CHMOD);
 			else if ((errno ^ ENOENT) == 0)
-				err |= (1<<ERR_PATH);
+				parser->blocking_err_flag |= (1<<ERR_PATH);
 			else //--> not sure about this one, check with team mate
 			{
 				perror("cub3d");
@@ -87,6 +84,6 @@ int	__check_file(char **av, int	*fd)
 		}
 	}
 	else
-		err |= (1<<ERR_NO_FILE);
-	return (err);
+		parser->blocking_err_flag |= (1<<ERR_NO_FILE);
+	return (parser->blocking_err_flag);
 }

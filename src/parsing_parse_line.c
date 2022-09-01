@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 17:39:28 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 21:12:41 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 		}
 		parser->info_buf[type][i] = '\0';
 		parser->info_buf_flag |= (1<<type);
+		parser->info_buf_line[type] = parser->gnl_cnt;
 		if (parser->line)
 			free(parser->line);
 	}
@@ -55,6 +56,8 @@ void	__parse_color(t_parser *parser, char *line, int type)
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
+		parser->info_buf_flag |= (1<<type);
+		parser->info_buf_line[type] = parser->gnl_cnt;
 	}
 	else
 		__add_in_err_buf(parser, ERR_FC_MULTIDEF);
@@ -68,11 +71,24 @@ void	__parse_map(t_parser *parser, char *line, int type)
 	if (parser->map_buf_index < PARSER_BUFFER_SIZE - 1)
 	{
 		parser->map_buf[parser->map_buf_index] = line;
-		//parser->map_buf[parser->map_buf_index][1] = parser->gnl_cnt;
+		parser->map_line_buf[parser->map_buf_index] = parser->gnl_cnt;
 		parser->map_buf_index++;
 	}
 	else
 		__add_in_err_buf(parser, ERR_MAP_TOO_BIG);
+}
+
+char	*__skip_useless_char(char *line, int type)
+{
+	while (*line == ' ')
+		line++;
+	if (type <= TYPE_EA)
+		line += 3;
+	else
+		line += 2;
+	while (*line == ' ')
+		line++;
+	return (line);
 }
 
 void	__parse_line(t_parser *parser, char *line)
@@ -87,16 +103,7 @@ void	__parse_line(t_parser *parser, char *line)
 	__parse_line[TYPE_MAP] = &__parse_map;
 
 	if (parser->type <= TYPE_C)
-	{
-		while (*line == ' ')
-			line++;
-		if (parser->type <= TYPE_EA)
-			line += 3;
-		else
-			line += 2;
-		while (*line == ' ')
-			line++;
-	}
+		line = __skip_useless_char(line, parser->type);
 	if (parser->type == TYPE_ERR)
 		__add_in_err_buf(parser, ERR_GIBBERISH);
 	else

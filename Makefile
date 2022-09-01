@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/01 17:57:33 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/01 19:50:01 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC_FILES			=	draw.c \
 						parsing_fill_parser_buf.c \
 						parsing_check_type.c\
 						parsing_parse_line.c\
+						parsing_check_validity.c\
 						parsing_utils.c\
 						camera_movement.c \
 						player_movement.c \

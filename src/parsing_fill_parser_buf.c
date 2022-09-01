@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 17:22:20 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 21:49:31 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	__add_in_err_buf(t_parser *parser, int error_type)
 		parser->err_buf_index++;
 	}
 	if (error_type < ERR_GIBBERISH)
-		parser->blocking_err_index++;
+		parser->blocking_err_flag++;
 	if (parser->line)
 	{
 		free(parser->line);
@@ -42,9 +42,23 @@ int	__add_in_err_buf(t_parser *parser, int error_type)
 	return (1);
 }
 
+void	__update_err_flag(t_parser *parser, int flag)
+{
+	int	tmp;
+
+	tmp = flag - (flag &= ~15);
+	if ((tmp != 15))
+		parser->blocking_err_flag |= ERR_TEXTURE_KEY_MISSING;
+	flag |= 15;
+	if ((flag != 63))
+		parser->blocking_err_flag |= ERR_FC_KEY_MISSING;
+}
+
+/*************************************
+ * 63 means all 6 first bits are set;
+ * ***********************************/
 int	__fill_parser_buf(t_parser *parser, int fd)
 {
-	c3d_memset(parser, 0, sizeof(t_parser));
 	if (fd > -1)
 	{
 		__pick_line_set_type(fd, parser);
@@ -54,8 +68,10 @@ int	__fill_parser_buf(t_parser *parser, int fd)
 			__pick_line_set_type(fd, parser);
 		}
 		if (parser->gnl_cnt == 1)
-			__add_in_err_buf(parser, ERR_EMPTY_MAP);
+			__add_in_err_buf(parser, ERR_EMPTY_FILE);
 	 	close (fd);
 	}
-	return (parser->blocking_err_index);
+	if (parser->info_buf_flag != 63)
+		__update_err_flag(parser, parser->info_buf_flag);
+	return (parser->blocking_err_flag);
 }

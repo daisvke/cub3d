@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 17:17:58 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 21:51:13 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	__visual_parser_buf(t_parser *parser)
 	};
 
 	const char	*map_err_tab[] = {
-	[ERR_EMPTY_MAP] = "ERR_EMPTY_MAP", [ERR_MISSING_INFO] = "ERR_MISSING_INFO",
+	[ERR_EMPTY_FILE] = "ERR_EMPTY_FILE", [ERR_MISSING_MAP] = "ERR_MISSING_MAP",
 	[ERR_GIBBERISH] = "ERR_GIBBERISH", [ERR_TEXTURE_KEY_MISSING] = "ERR_TEXTURE_KEY_MISSING", [ERR_TEXTURE_MULTIDEF] = "ERR_TEXTURE_MULTIDEF",
 	[ERR_TEXTURE_PATH] = "ERR_TEXTURE_PATH", [ERR_TEXTURE_PATH_LENGH] = "ERR_TEXTURE_PATH_LENGH",
 	[ERR_FC_OVERFLOW] = "ERR_FC_OVERFLOW",
@@ -50,7 +50,7 @@ void	__visual_parser_buf(t_parser *parser)
 	[ERR_MAP_UNVALID_CHAR] = "ERR_MAP_UNVALID_CHAR", [ERR_MAP_CHARACTER] = "ERR_MAP_CHARACTER", [ERR_MAP_BORDERS] = "ERR_MAP_BORDERS",
 	[ERR_MAP_TOO_BIG] = "ERR_MAP_TOO_BIG",
 	};
-
+	printf("info_buf_flag = %d\n", parser->info_buf_flag);
 	printf("gnl_cnt = %d\n", parser->gnl_cnt);
 	while (++i <= TYPE_C)
 		printf("map_buf[%s] = %s\n", type_tab[i], parser->info_buf[i]);
@@ -59,14 +59,15 @@ void	__visual_parser_buf(t_parser *parser)
 	while (++i < parser->map_buf_index)
 		printf("%s", parser->map_buf[i]);
 	i = -1;
-	printf("err_found :\n\n");
+	printf("err_found :\n");
 	while (++i < parser->err_buf_index)
 		printf("line : %d : %s\n", parser->err_buf[i][0], map_err_tab[parser->err_buf[i][1]]);
+	i = -1;
+	printf("missing info :\n");
+	while (++i <=  TYPE_C)
+		if ((parser->blocking_err_flag >> i) & 1)
+			printf("%s\n", (map_err_tab[i]));
 }
-
-
-
-
 
 
 
@@ -97,19 +98,26 @@ void	__print_err_exit(int err)
  * ***************************/
 void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 {
-	int	err;
 	int	fd;
 	t_parser	parser;
-	(void) env;
 	(void) player;
+	(void) env;
 
-	err = 0;
 	fd = -1;
-	if (__check_file(argv + 1, &fd))
-		__print_err_exit(err);
-	__fill_parser_buf(&parser, fd);
-	__visual_parser_buf(&parser);
-	// if (__check_info_validity(parser))
+	c3d_memset(&parser, 0, sizeof(t_parser));
+	if (__check_file(argv + 1, &fd, &parser))
+		__print_err_exit(parser.blocking_err_flag);
+	else if (__fill_parser_buf(&parser, fd))
+	{
+		__visual_parser_buf(&parser);
+	}
+	//if(__add_to_env(&parser, env))
+		c3d_parse_map_exit(&parser);
+	//__add_to_env(&parser, env);
+
+
+
+
 	// 		__add_info_to_env(parser, env);
 /*
 	if (err)
@@ -117,3 +125,10 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 		printf("err flag = %d\n", err);
 	}*/
 }
+
+
+
+//need to set real error message for each error enum;
+//need to fix printing error
+//goal of 2 september : finish parsing check validity info and start parsing check validity map
+

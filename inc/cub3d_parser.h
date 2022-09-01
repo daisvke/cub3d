@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 17:36:25 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 21:41:24 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ enum	e_file_err
 };
 
 enum	e_map_err{
-	ERR_EMPTY_MAP,
-	ERR_MISSING_INFO,
+	ERR_EMPTY_FILE,
+	ERR_MISSING_MAP,
 	/********************	ERR_TEXTURE*/
 	ERR_TEXTURE_KEY_MISSING,	//not sure
 	ERR_TEXTURE_PATH,
@@ -88,12 +88,14 @@ typedef struct s_parser
 	int		gnl_cnt;
 	int		type;				//type of line; e_line_type
 	char	info_buf[6][PATH_MAX + 2];
-	char	*map_buf[PARSER_BUFFER_SIZE];	//save gnl of type map
+	int		info_buf_line[6];
+	char	*map_buf[PARSER_BUFFER_SIZE];
+	int		map_line_buf[PARSER_BUFFER_SIZE];	//save gnl of type map
 	int		err_buf[PARSER_BUFFER_SIZE][2];	//save line numbers of time error
 	int		info_buf_flag;
 	int		map_buf_index;		//is also the size of the map
 	int		err_buf_index;
-	int		blocking_err_index;
+	int		blocking_err_flag;
 }t_parser;
 
 #endif
