@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:36:58 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 18:22:02 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 13:49:15 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CUB3D_MACRO_H
 
 # define MAP_CHAR " 01SEWN"
+# define MAP_ORIENT_CHAR "SEWN"
+# define FOUND 0
 # define NBR_PARSING_ERR 11
 # define PARSER_BUFFER_SIZE 1024
 # define MESS_ERR_LST "list of errors: \n"

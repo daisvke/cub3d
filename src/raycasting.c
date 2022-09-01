@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:35 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 00:29:01 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:01:09 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	c3d_execute_raycasting(t_c3d *env)
 		c3d_prepare_dda(&ray, env->player.pos);
 		c3d_execute_dda(&ray, env->map);
 		c3d_set_line(&env->mlx, ray, &line);
-	//	env->zbuffer[x] = ray.perp_walldist;
 		c3d_render_line_to_buffer(env, line, ray, x);
 		++x;
 	}
