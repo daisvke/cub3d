@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 12:54:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:49:15 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,41 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	env->ceiling.g = 38;
 	env->ceiling.b = 38;
 	env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
+
 	// initial pos of the player, depends on where NSEW is set on the map
-	player->pos.x = 10;
+	player->pos.x = 11;
 	player->pos.y = 5;
+
 	// initial direction where player is looking at
-	// below corresponds to north (N)
-	player->dir.x = 0;
-	player->dir.y = -1;
+	char orient = 'N';
+	if (orient == 'N')
+	{
+		player->dir.x = 0.0;
+		player->dir.y = -1.0;
+		player->cam_plane.x = 0.66;
+		player->cam_plane.y = 0.0;
+	}
+	else if (orient == 'S')
+	{
+		player->dir.x = 0.0;
+		player->dir.y = 1.0;
+		player->cam_plane.x = -0.66;
+		player->cam_plane.y = 0.0;
+	}
+	else if (orient == 'W')
+	{
+		player->dir.x = -1.0;
+		player->dir.y = 0.0;
+		player->cam_plane.x = 0.0;
+		player->cam_plane.y = -0.66;
+	}
+	else if (orient == 'E')
+	{
+		player->dir.x = 1.0;
+		player->dir.y = 0.0;
+		player->cam_plane.x = 0.0;
+		player->cam_plane.y = 0.66;
+	}
 	// texture paths
 	env->tex_paths[0] = "./img/no_wall.xpm";
 	env->tex_paths[1] = "./img/so_wall.xpm";
@@ -89,7 +117,12 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	}
 	for (int i=0; i < 7; ++i)
 		for (int j=0; j < 21; ++j)
-			env->map[i][j] = map[i][j];
+		{
+			if (ft_strchr_b(MAP_ORIENT_CHAR, map[i][j]) != FOUND)  
+				env->map[i][j] = map[i][j];
+			else
+				env->map[i][j] = '0';
+		}
 }
 
 void	c3d_init_buffers(t_c3d *env, t_mlx mlx) //buffer?
@@ -97,7 +130,6 @@ void	c3d_init_buffers(t_c3d *env, t_mlx mlx) //buffer?
 	double	w;
 
 	w = mlx.screenw;
-//	env->zbuffer = malloc(sizeof(double) * w);
 	env->buffer = malloc(sizeof(*env->buffer) * (mlx.screenh + 1));
 	env->buffer[mlx.screenh] = 0;
 	for (int i=0; i < mlx.screenh; ++i)
@@ -111,7 +143,6 @@ void	c3d_init_texture_array(t_c3d *env)
 {
 	int	i;
 
-//	env->textures = malloc(sizeof(*env->textures) * _TEX_NBR);
 	i = 0;
 	while (i < _TEX_NBR)
 	{
@@ -158,8 +189,6 @@ void	c3d_load_textures(t_c3d *env, t_mlx *mlx)
 
 void	c3d_init_player_settings(t_mlx mlx, t_player *player)
 {
-	player->cam_plane.x = 0.66;
-	player->cam_plane.y = 0.0;
 	player->speed = (_SPEED * (mlx.screenw * mlx.screenh)) / (680 * 460);
 }
 
