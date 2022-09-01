@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:36:58 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 18:22:02 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 16:55:17 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,22 @@ enum	e_file_err
 enum	e_map_err{
 	ERR_EMPTY_MAP,
 	ERR_MISSING_INFO,
-	ERR_GIBBERISH,
 	/********************	ERR_TEXTURE*/
 	ERR_TEXTURE_KEY_MISSING,	//not sure
-	ERR_TEXTURE_MULTIDEF,
 	ERR_TEXTURE_PATH,
 	ERR_TEXTURE_PATH_LENGH,
 	/********************	ERR_FC_C*/
 	ERR_FC_OVERFLOW,
 	ERR_FC_KEY_MISSING,			//not sure
-	ERR_FC_MULTIDEF,
 	ERR_FC_COLOR_FORM,					//expected color form : F/C 255.255.255
 	/********************	ERR_MAP*/
 	ERR_MAP_UNVALID_CHAR,
 	ERR_MAP_CHARACTER,
 	ERR_MAP_BORDERS,
 	ERR_MAP_TOO_BIG,					//map has more than 1024 line
+	ERR_GIBBERISH,
+	ERR_FC_MULTIDEF,
+	ERR_TEXTURE_MULTIDEF,
 };
 
 enum	e_line_type{
@@ -74,27 +74,24 @@ enum	e_line_type{
 	TYPE_F,
 	TYPE_C,
 	TYPE_MAP,
-	TYPE_ERR,
+	TYPE_ERR,		//line start by unvalide chars
 	TYPE_USELESS,	//line composed of space and/or \n
-	TYPE_EOF,		//line start by unvalide char
+	TYPE_EOF,
 };
 
-enum	e_cnt_fc{
-	FLOOR,
-	CELLING,
-};
+
 typedef struct s_parser
 {
 	char	*line;				//current gnl line;
 	int		gnl_cnt;
 	int		type;				//type of line; e_line_type
-	char	*info_buf[6][PATH_MAX + 2];
-	char	*map_buf[PARSER_BUFFER_SIZE];
-	int		err_buf[PARSER_BUFFER_SIZE];
+	char	info_buf[6][PATH_MAX + 2];
+	char	*map_buf[PARSER_BUFFER_SIZE][2];	//save gnl of type map
+	int		err_buf[PARSER_BUFFER_SIZE][2];	//save line numbers of time error
 	int		info_buf_flag;
 	int		map_buf_index;		//is also the size of the map
 	int		err_buf_index;
-	int		err;
+	int		blocking_err_index;
 }t_parser;
 
 
