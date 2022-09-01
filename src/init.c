@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 13:49:15 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:28:26 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	for (int i=0; i < 7; ++i)
 		for (int j=0; j < 21; ++j)
 		{
-			if (ft_strchr_b(MAP_ORIENT_CHAR, map[i][j]) != FOUND)  
+			if (ft_strchr_b(MAP_ORIENT_CHAR, map[i][j]) != FOUND)
 				env->map[i][j] = map[i][j];
 			else
 				env->map[i][j] = '0';

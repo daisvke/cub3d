@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 12:38:31 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:43:35 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	c3d_exit(t_c3d *env, int err_code)
 {
 	(void)	env;
-	
+
 	printf("Error: ");
 	if (err_code == 1)
 		printf("1\n");

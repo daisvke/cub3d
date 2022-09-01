@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 16:10:52 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:27:22 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <limits.h>
-# include "cub3d_macro.h"
+# include "cub3d_parser.h"
 # include "get_next_line.h"
 
 # include <math.h>

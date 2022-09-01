@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/01 16:44:26 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/01 17:57:33 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ OBJ					=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 #	INC. files
 INC_DIR				=	inc/
-INC_FILES			=	cub3d.h
+INC_FILES			=	cub3d.h cub3d_parser.h get_next_line.h
 HEADERS				=	$(addprefix $(INC_DIR), $(INC_FILES))
 
 MLX_MAKE			=	make -s -C
@@ -96,6 +96,12 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)
 	$(CC) $(CFLAGS) $(INC) $(MLX_INC) -o $@ -c $<
 
 #	Clean & other rules
+
+debug: $(MLX_LIB) $(OBJ)
+	@echo -e '\n-> $(YELLOW)Now compiling $(NAME)...$(RESET)'
+	$(CC) -fsanitize=address $(MEM) $(MLX_FLAGS) -o $(NAME) $(OBJ) $(MLX_LIB)
+	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
+
 clean:
 	make -s clean -C $(MLX_DIR)
 	@echo -e '-> $(BLUE)Cleaned minilibx$(RESET)'

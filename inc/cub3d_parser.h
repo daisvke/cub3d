@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_macro.h                                      :+:      :+:    :+:   */
+/*   cub3d_parser.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 17:10:55 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:36:25 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_MACRO_H
-# define CUB3D_MACRO_H
+#ifndef CUB3D_PARSER_H
+# define CUB3D_PARSER_H
 
 # define MAP_CHAR " 01SEWN"
 # define MAP_ORIENT_CHAR "SEWN"
 # define FOUND 0
-# define NBR_PARSING_ERR 11
+# define NBR_PARSING_ERR 11 // not sure it is usefull anymore
 # define PARSER_BUFFER_SIZE 1024
 # define MESS_ERR_LST "list of errors: \n"
 
@@ -63,6 +63,7 @@ enum	e_map_err{
 	ERR_MAP_CHARACTER,
 	ERR_MAP_BORDERS,
 	ERR_MAP_TOO_BIG,					//map has more than 1024 line
+	/*******************	non_blocking_err*/
 	ERR_GIBBERISH,
 	ERR_FC_MULTIDEF,
 	ERR_TEXTURE_MULTIDEF,
@@ -81,21 +82,18 @@ enum	e_line_type{
 	TYPE_EOF,
 };
 
-
 typedef struct s_parser
 {
 	char	*line;				//current gnl line;
 	int		gnl_cnt;
 	int		type;				//type of line; e_line_type
 	char	info_buf[6][PATH_MAX + 2];
-	char	*map_buf[PARSER_BUFFER_SIZE][2];	//save gnl of type map
+	char	*map_buf[PARSER_BUFFER_SIZE];	//save gnl of type map
 	int		err_buf[PARSER_BUFFER_SIZE][2];	//save line numbers of time error
 	int		info_buf_flag;
 	int		map_buf_index;		//is also the size of the map
 	int		err_buf_index;
 	int		blocking_err_index;
 }t_parser;
-
-
 
 #endif

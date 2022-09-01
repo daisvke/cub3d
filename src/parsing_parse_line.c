@@ -6,29 +6,11 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 16:47:30 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/01 17:39:28 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	__add_in_err_buf(t_parser *parser, int error_type)
-{
-	if (parser->err_buf_index < PARSER_BUFFER_SIZE)
-	{
-		parser->err_buf[parser->err_buf_index][0] = parser->gnl_cnt;
-		parser->err_buf[parser->err_buf_index][1] = error_type;
-		parser->err_buf_index++;
-	}
-	if (error_type < ERR_GIBBERISH)
-		parser->blocking_err_index++;
-	if (parser->line)
-	{
-		free(parser->line);
-		parser->line = NULL;
-	}
-	return (1);
-}
 
 void	__parse_texture(t_parser *parser, char *line, int type)
 {
@@ -85,8 +67,8 @@ void	__parse_map(t_parser *parser, char *line, int type)
 	(void) type;
 	if (parser->map_buf_index < PARSER_BUFFER_SIZE - 1)
 	{
-		parser->map_buf[parser->map_buf_index][0] = line;
-		parser->map_buf[parser->map_buf_index][1] = parser->gnl_cnt;
+		parser->map_buf[parser->map_buf_index] = line;
+		//parser->map_buf[parser->map_buf_index][1] = parser->gnl_cnt;
 		parser->map_buf_index++;
 	}
 	else
