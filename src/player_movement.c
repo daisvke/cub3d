@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:32 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/29 03:43:54 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 04:09:41 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	c3d_check_obstacles_and_move_up(char **map, t_player *player)
 	int	x;
 	int	y;
 
-	x = player->pos.x + player->dir.x * player->speed;
-	y = player->pos.y + player->dir.y * player->speed;
+	x = player->pos.x + player->dir.x - player->speed;
+	y = player->pos.y + player->dir.y - player->speed;
 	if (map[y][x] == '0')
 	{
 		player->pos.x += player->dir.x * player->speed;
@@ -31,8 +31,8 @@ void	c3d_check_obstacles_and_move_down(char **map, t_player *player)
 	int	x;
 	int	y;
 
-	x = player->pos.x - player->dir.x * player->speed;
-	y = player->pos.y - player->dir.y * player->speed;
+	x = player->pos.x - player->dir.x - player->speed;
+	y = player->pos.y - player->dir.y - player->speed;
 	if (map[y][x] == '0')
 	{
 		player->pos.x -= player->dir.x * player->speed;
@@ -45,8 +45,8 @@ void	c3d_check_obstacles_and_move_left(char **map, t_player *player)
 	int	x;
 	int	y;
 
-	x = player->pos.x + player->dir.y * player->speed;
-	y = player->pos.y - player->dir.x * player->speed;
+	x = player->pos.x + player->dir.y - player->speed;
+	y = player->pos.y - player->dir.x - player->speed;
 	if (map[y][x] == '0')
 	{
 		player->pos.x += player->dir.y * player->speed;
@@ -59,8 +59,8 @@ void	c3d_check_obstacles_and_move_right(char **map, t_player *player)
 	int	x;
 	int	y;
 
-	x = player->pos.x - player->dir.y * player->speed;
-	y = player->pos.y + player->dir.x * player->speed;
+	x = player->pos.x - player->dir.y - player->speed;
+	y = player->pos.y + player->dir.x - player->speed;
 	if (map[y][x] == '0')
 	{
 		player->pos.x -= player->dir.y * player->speed;

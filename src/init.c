@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 00:44:33 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 03:53:44 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
 	(void) argv;
 	// F and C from map
-	env->floor.r = 2;
-	env->floor.g = 2;
-	env->floor.b = 252;
+	env->floor.r = 70;
+	env->floor.g = 70;
+	env->floor.b = 70;
 	env->floor.color = c3d_convert_rgb_to_int(env->floor);
-	env->ceiling.r = 200;
-	env->ceiling.g = 20;
-	env->ceiling.b = 200;
+	env->ceiling.r = 38;
+	env->ceiling.g = 38;
+	env->ceiling.b = 38;
 	env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
 	// initial pos of the player, depends on where NSEW is set on the map
 	player->pos.x = 10;

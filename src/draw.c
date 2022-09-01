@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:27 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 00:22:37 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/01 03:53:05 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x)
 	y = 0;
 	while (y < line.draw_start)
 	{
-		env->buffer[y][x] = env->floor.color; 
+		env->buffer[y][x] = env->ceiling.color; 
 		++y;
 	}
 	c3d_draw_wall_texture_on_line(env, &line, ray, x);
 	y += line.lineheight;
 	while (y < env->mlx.screenh)
 	{
-		env->buffer[y][x] = env->ceiling.color; 
+		env->buffer[y][x] = env->floor.color; 
 		++y;
 	}
 }
