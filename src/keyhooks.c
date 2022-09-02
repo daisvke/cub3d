@@ -15,7 +15,7 @@
 int	c3d_handle_keypress(int keycode, t_c3d *env)
 {
 	if (keycode == XK_Escape)
-		c3d_exit(env, 0);
+		c3d_exit_game(env, 0);
 	if (keycode == XK_Left)
 		env->player.move |= _CAM_LEFT;
 	if (keycode == XK_Right)
@@ -76,7 +76,7 @@ void	c3d_handle_keyhooks(t_c3d *env)
 {
 	mlx_hook(env->mlx.win_ptr, 2, 1L << 0, &c3d_handle_keypress, env);
 	mlx_hook(env->mlx.win_ptr, 3, 1L << 1, &c3d_handle_keyrelease, env);
-	mlx_hook(env->mlx.win_ptr, 33, 1L << 2, &c3d_exit, env);
+	mlx_hook(env->mlx.win_ptr, 33, 1L << 2, &c3d_exit_game, env);
 	mlx_loop_hook(env->mlx.mlx_ptr, &c3d_move_and_render, env);
 	mlx_loop(env->mlx.mlx_ptr);
 }

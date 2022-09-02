@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 00:28:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/03 00:38:48 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ int	c3d_convert_rgb_to_int(t_color color)
 	return (val);
 }
 
+void	c3d_init_window(t_c3d *env, t_mlx *mlx)
+{
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->screenw, mlx->screenh, _TITLE);
+	if (!mlx->win_ptr)
+		c3d_exit_init(env, 4);//free etc
+}
+
 void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 {
 	int	w;
@@ -31,16 +38,18 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 	mlx->screenh = _SCREENH;
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
-		c3d_exit(env, 1);
+		c3d_exit_init(env, 1);
 	mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
 	if (w < mlx->screenw)
 		mlx->screenw = w;
 	if (h < mlx->screenh)
 		mlx->screenh = h;
 	if (mlx->screenw <= 0 || mlx->screenh <= 0)
-		c3d_exit(env, 2);
+		c3d_exit_init(env, 2);
 	mlx->canvas.mlx_img = mlx_new_image(mlx->mlx_ptr, mlx->screenw, \
 		mlx->screenh);
+	if (!mlx->canvas.mlx_img)
+			c3d_exit_init(env, 3);
 	mlx->canvas.addr = (int *)mlx_get_data_addr(mlx->canvas.mlx_img, \
 		&mlx->canvas.bpp, &mlx->canvas.line_len, &mlx->canvas.endian);
 	c3d_init_window(env, mlx);

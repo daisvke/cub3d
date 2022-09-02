@@ -180,4 +180,8 @@ void	c3d_look_right(t_player *p);
 
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x);
 
+/************** free	*****************/
+int	c3d_exit_game(t_c3d *env, t_mlx *mlx);
+int	c3d_exit_init(t_c3d *env, int err_code);
+
 #endif
