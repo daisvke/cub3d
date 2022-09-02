@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/02 17:40:17 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 21:09:01 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 		}
 }
 
-void	c3d_init_buffers(t_c3d *env, t_mlx mlx) //buffer?
+void	c3d_init_buffer(t_c3d *env, t_mlx mlx) //buffer?
 {
 	double	w;
 
@@ -139,7 +139,7 @@ void	c3d_init_buffers(t_c3d *env, t_mlx mlx) //buffer?
 	}
 }
 
-void	c3d_init_texture_array(t_c3d *env)
+void	c3d_init_texture_arrays(t_c3d *env)
 {
 	int	i;
 
@@ -197,8 +197,8 @@ void	c3d_init(t_c3d *env, char *argv[])
 	c3d_memset(env, 0, sizeof(t_c3d));
 	c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);
-	c3d_init_buffers(env, env->mlx);
-	c3d_init_texture_array(env);
+	c3d_init_buffer(env, env->mlx);
+	c3d_init_texture_arrays(env);
 	//c3d_load_textures(env, &env->mlx);
 	//c3d_init_player_settings(env->mlx, &env->player);
 }

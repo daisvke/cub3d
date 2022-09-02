@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/02 14:45:54 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/02 21:28:12 by dtanigaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME				=	cub3d
 
 #	CC flags
 CC	 				=	clang
-CFLAGS				=	-Wall -Wextra -g3	##initially muted
+CFLAGS				=	-Wall -Wextra	##initially muted
 MEM					=	-Wall -Wextra -g3			##initially : -g3
 #OPT				=	-O2
 INC					=	-I inc/
@@ -32,6 +32,7 @@ SRC_DIR				=	src/
 SRC_FILES			=	draw.c \
 						draw_walls.c \
 						exit.c \
+						free.c \
 						init.c \
 						keyhooks.c \
 						main.c \

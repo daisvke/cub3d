@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/02 16:54:58 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 21:34:18 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,10 @@ typedef struct	s_c3d
 {
 	char		**map;
 	int			**buffer;
-	double		*zbuffer;
-	t_mlx		mlx;
-	t_player	player;
 	int			*textures[_TEX_NBR];
 	char		*tex_paths[_TEX_NBR];
+	t_mlx		mlx;
+	t_player	player;
 	t_color		floor;
 	t_color		ceiling;
 }				t_c3d;
@@ -143,6 +142,13 @@ void	*c3d_memset(void *s, int c, size_t n);
 void	c3d_handle_keyhooks(t_c3d *env);
 void	c3d_init(t_c3d *env, char *argv[]);
 void	c3d_init_window(t_c3d *env, t_mlx *mlx);
+
+/************** free	*****************/
+void	*c3d_free(void *ptr);
+void	c3d_free_array_of_char_pointers(char *array[]);
+void	c3d_free_array_of_int_pointers(int *array[]);
+void	c3d_free_pointers_from_char_array(char *array[]);
+void	c3d_free_pointers_from_int_array(int *array[]);
 
 /************** parsing	*****************/
 void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv);

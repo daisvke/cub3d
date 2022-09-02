@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 19:42:12 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/02 17:46:27 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 21:20:49 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,6 @@ int	c3d_load_textures(t_c3d *env, t_mlx *mlx)
 	}
 	return (0);
 }
-
-void	__free_tex_paths(t_c3d *env)
-{
-	int	i;
-
-	i = -1;
-	while (++i < _TEX_NBR)
-	{
-		free(env->textures[i]);
-		env->textures[i] = NULL;
-	}
-}
-
 
 int	__add_info_err_buf(t_parser *parser, int type, int error_num)
 {
