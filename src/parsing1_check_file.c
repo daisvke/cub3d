@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:17:13 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 19:26:24 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 12:44:28 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	__check_extention(char *file)
 	return (ret | (1<<ERR_EXTENTION));
 }
 
-static int	__check_folder(char *file)
+static int	__check_if_folder(char *file)
 {
 	int	fd;
 
@@ -68,7 +68,7 @@ int	__check_file(char **av, int	*fd, t_parser *parser)
 	if (*av)
 	{
 		parser->blocking_err_flag += __check_extention(av[0]);
-		parser->blocking_err_flag += __check_folder(av[0]);
+		parser->blocking_err_flag += __check_if_folder(av[0]);
 		*fd = open(av[0], O_RDONLY);
 		if (*fd == -1 && !parser->blocking_err_flag)
 		{

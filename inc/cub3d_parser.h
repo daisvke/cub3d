@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 21:41:24 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 14:16:06 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define MAP_CHAR " 01SEWN"
 # define MAP_ORIENT_CHAR "SEWN"
 # define FOUND 0
+# define COLOR_MAX_LEN 11
 # define NBR_PARSING_ERR 11 // not sure it is usefull anymore
 # define PARSER_BUFFER_SIZE 1024
 # define MESS_ERR_LST "list of errors: \n"
@@ -80,6 +81,11 @@ enum	e_line_type{
 	TYPE_ERR,		//line start by unvalide chars
 	TYPE_USELESS,	//line composed of space and/or \n
 	TYPE_EOF,
+};
+
+enum	e_err_buf_index{
+	LINE_NBR,
+	ERROR_CODE,
 };
 
 typedef struct s_parser

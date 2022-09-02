@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 21:49:31 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 13:23:20 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	__add_in_err_buf(t_parser *parser, int error_type)
 		parser->err_buf_index++;
 	}
 	if (error_type < ERR_GIBBERISH)
-		parser->blocking_err_flag++;
+		parser->blocking_err_flag |= (1<<error_type);
 	if (parser->line)
 	{
 		free(parser->line);
@@ -46,12 +46,12 @@ void	__update_err_flag(t_parser *parser, int flag)
 {
 	int	tmp;
 
-	tmp = flag - (flag &= ~15);
+	tmp = (flag - (flag &= ~15));
 	if ((tmp != 15))
-		parser->blocking_err_flag |= ERR_TEXTURE_KEY_MISSING;
+		parser->blocking_err_flag |= (1<<ERR_TEXTURE_KEY_MISSING);
 	flag |= 15;
 	if ((flag != 63))
-		parser->blocking_err_flag |= ERR_FC_KEY_MISSING;
+		parser->blocking_err_flag |= (1<<ERR_FC_KEY_MISSING);
 }
 
 /*************************************

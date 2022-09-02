@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 19:49:32 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 16:54:58 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	c3d_execute_raycasting(t_c3d *env);
 void	*c3d_memset(void *s, int c, size_t n);
 void	c3d_handle_keyhooks(t_c3d *env);
 void	c3d_init(t_c3d *env, char *argv[]);
+void	c3d_init_window(t_c3d *env, t_mlx *mlx);
 
 /************** parsing	*****************/
 void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv);
@@ -150,13 +151,17 @@ int		__fill_parser_buf(t_parser *parser, int fd);
 int		__check_type(char *line, int *type);
 void	__parse_line(t_parser *parser, char *line);
 int		__add_in_err_buf(t_parser *parser, int error_type);
-int		__check_parser_validity(t_parser *parser);
+int		__add_to_env(t_parser *parser, t_c3d *env);
 void	c3d_parse_map_exit(t_parser *parser);
+//void	c3d_load_textures(t_c3d *env, t_parser *parsing, t_mlx *mlx);
 
+void	__visual_env_rgb(t_c3d *env);
+void	__visual_env_tex_path(t_c3d *env);
 
-int		ft_strlen(char *str);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_strchr_b(const char *s, int c);
+int			ft_strlen(char *str);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strchr_b(const char *s, int c);
+long int	ft_atol(const char *str);
 
 int		c3d_exit(t_c3d *env, int err_code);
 

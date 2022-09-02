@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/01 21:12:41 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 13:19:23 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 		parser->info_buf[type][i] = '\0';
 		parser->info_buf_flag |= (1<<type);
 		parser->info_buf_line[type] = parser->gnl_cnt;
-		if (parser->line)
-			free(parser->line);
 	}
 	else
 		__add_in_err_buf(parser, ERR_TEXTURE_MULTIDEF);
@@ -47,6 +45,8 @@ void	__parse_color(t_parser *parser, char *line, int type)
 		{
 			while (*line == ' ')
 				line++;
+			while (*line == '0' && *(line + 1) == '0')
+				line++;
 			while (*line >= '0' && *line <= '9')
 				parser->info_buf[type][i++] = *(line++);
 			if (*line == ',')
@@ -61,8 +61,6 @@ void	__parse_color(t_parser *parser, char *line, int type)
 	}
 	else
 		__add_in_err_buf(parser, ERR_FC_MULTIDEF);
-	if (parser->line)
-		free(parser->line);
 }
 
 void	__parse_map(t_parser *parser, char *line, int type)
@@ -93,7 +91,7 @@ char	*__skip_useless_char(char *line, int type)
 
 void	__parse_line(t_parser *parser, char *line)
 {
-	void	((*__parse_line[8])(t_parser *parser, char *line, int type)); //not sure it's gonna be an int
+	void	((*__parse_line[7])(t_parser *parser, char *line, int type)); //not sure it's gonna be an int
 	__parse_line[TYPE_NO] = &__parse_texture;
 	__parse_line[TYPE_SO] = &__parse_texture;
 	__parse_line[TYPE_WE] = &__parse_texture;
@@ -108,4 +106,6 @@ void	__parse_line(t_parser *parser, char *line)
 		__add_in_err_buf(parser, ERR_GIBBERISH);
 	else
 		__parse_line[parser->type](parser, line, parser->type);
+	if (parser->type != TYPE_MAP && parser->line)
+		free(parser->line);
 }

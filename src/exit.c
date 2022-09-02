@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 19:41:17 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 15:06:31 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	c3d_exit(t_c3d *env, int err_code)
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-
-
 
 void	c3d_parse_map_exit(t_parser *parser)
 {

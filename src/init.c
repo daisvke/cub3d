@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 17:28:26 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 17:40:17 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
-	(void) argv;
-	// F and C from map
-	env->floor.r = 70;
-	env->floor.g = 70;
-	env->floor.b = 70;
-	env->floor.color = c3d_convert_rgb_to_int(env->floor);
-	env->ceiling.r = 38;
-	env->ceiling.g = 38;
-	env->ceiling.b = 38;
-	env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
+	// (void) argv;
+	// // F and C from map
+	// env->floor.r = 70;
+	// env->floor.g = 70;
+	// env->floor.b = 70;
+	// env->floor.color = c3d_convert_rgb_to_int(env->floor);
+	// env->ceiling.r = 38;
+	// env->ceiling.g = 38;
+	// env->ceiling.b = 38;
+	// env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
 
-	// initial pos of the player, depends on where NSEW is set on the map
-	player->pos.x = 11;
-	player->pos.y = 5;
+	// // initial pos of the player, depends on where NSEW is set on the map
+	// player->pos.x = 11;
+	// player->pos.y = 5;
 
 	// initial direction where player is looking at
 	char orient = 'N';
@@ -94,10 +94,10 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 		player->cam_plane.y = 0.66;
 	}
 	// texture paths
-	env->tex_paths[0] = "./img/no_wall.xpm";
-	env->tex_paths[1] = "./img/so_wall.xpm";
-	env->tex_paths[2] = "./img/we_wall.xpm";
-	env->tex_paths[3] = "./img/ea_wall.xpm";
+	// env->tex_paths[0] = "./img/no_wall.xpm";
+	// env->tex_paths[1] = "./img/so_wall.xpm";
+	// env->tex_paths[2] = "./img/we_wall.xpm";
+	// env->tex_paths[3] = "./img/ea_wall.xpm";
 
 	char map[7][21] = {
 		"111111111111111111111",
@@ -151,41 +151,41 @@ void	c3d_init_texture_array(t_c3d *env)
 	}
 }
 
-void	c3d_load_texture(t_c3d *env, t_mlx *mlx, int *tex, char *path)
-{
-	int		x;
-	int		y;
-	t_img	img;
+// void	c3d_load_texture(t_c3d *env, t_mlx *mlx, int *tex, char *path)
+// {
+// 	int		x;
+// 	int		y;
+// 	t_img	img;
 
-	img.mlx_img = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &img.x, &img.y);
-	if (!img.mlx_img)
-		printf("ERROR MLX IMG\n");
-	img.addr = (int *)mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-	y = 0;
-	while (y < img.y)
-	{
-		x = 0;
-		while (x < img.x)
-		{
-			tex[img.x * y + x] = img.addr[img.x * y + x];
-			++x;
-		}
-		++y;
-	}
-	mlx_destroy_image(mlx->mlx_ptr, img.mlx_img);
-}
+// 	img.mlx_img = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &img.x, &img.y);
+// 	if (!img.mlx_img)
+// 		printf("ERROR MLX IMG\n");
+// 	img.addr = (int *)mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+// 	y = 0;
+// 	while (y < img.y)
+// 	{
+// 		x = 0;
+// 		while (x < img.x)
+// 		{
+// 			tex[img.x * y + x] = img.addr[img.x * y + x];
+// 			++x;
+// 		}
+// 		++y;
+// 	}
+// 	mlx_destroy_image(mlx->mlx_ptr, img.mlx_img);
+// }
 
-void	c3d_load_textures(t_c3d *env, t_mlx *mlx)
-{
-	int	i;
+// void	c3d_load_textures(t_c3d *env, t_mlx *mlx)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < _TEX_NBR)
-	{
-		c3d_load_texture(env, mlx, env->textures[i], env->tex_paths[i]);
-		++i;
-	}
-}
+// 	i = 0;
+// 	while (i < _TEX_NBR)
+// 	{
+// 		c3d_load_texture(env, mlx, env->textures[i], env->tex_paths[i]);
+// 		++i;
+// 	}
+// }
 
 void	c3d_init_player_settings(t_mlx mlx, t_player *player)
 {
@@ -199,6 +199,6 @@ void	c3d_init(t_c3d *env, char *argv[])
 	c3d_init_mlx(env, &env->mlx);
 	c3d_init_buffers(env, env->mlx);
 	c3d_init_texture_array(env);
-	c3d_load_textures(env, &env->mlx);
-	c3d_init_player_settings(env->mlx, &env->player);
+	//c3d_load_textures(env, &env->mlx);
+	//c3d_init_player_settings(env->mlx, &env->player);
 }

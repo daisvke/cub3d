@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing8_visual.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 03:43:25 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/02 17:50:56 by lchan            ###   ########.fr       */
+/*   Created: 2022/09/02 14:43:46 by lchan             #+#    #+#             */
+/*   Updated: 2022/09/02 16:52:49 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	c3d_init_window(t_c3d *env, t_mlx *mlx)
+void	__visual_env_rgb(t_c3d *env)
 {
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->screenw, mlx->screenh, _TITLE);
-	if (!mlx->win_ptr)
-	{
-		free(mlx->win_ptr);
-		exit(EXIT_FAILURE);
-	}
+	printf("env->floor = %d\n", env->floor.r);
+	printf("env->floor = %d\n", env->floor.g);
+	printf("env->floor = %d\n", env->floor.b);
+	printf("env->ceiling = %d\n", env->ceiling.r);
+	printf("env->ceiling = %d\n", env->ceiling.g);
+	printf("env->ceiling = %d\n", env->ceiling.b);
 }
 
-int	main(int argc, char *argv[])
+void	__visual_env_tex_path(t_c3d *env)
 {
-	t_c3d	env;
-
-	c3d_init(&env, argv);
-	__c3d_parse_map(&env, &(env.player), argv);
-	c3d_handle_keyhooks(&env);
-	return (0);
+	printf("env->tex_paths = %s\n", env->tex_paths[0]);
 }

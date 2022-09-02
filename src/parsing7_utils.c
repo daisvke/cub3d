@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing7_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:07 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 18:34:35 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/02 14:15:20 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,24 @@ char	*ft_strdup(char *s1)
 	}
 	*dup = '\0';
 	return (dup - len);
+}
+
+long int	ft_atol(const char *str)
+{
+	int			sign;
+	long int	result;
+
+	sign = 1;
+	result = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if ((*str == '+' || *str == '-') && str++)
+		if (*(str - 1) == '-')
+			sign = -sign;
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		str++;
+	}
+	return (result * (long int)sign);
 }
