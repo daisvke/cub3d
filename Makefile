@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/03 17:07:33 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/03 22:18:33 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES			=	draw.c \
 						parser5_add_to_env.c\
 						parser6_add_to_env.c\
 						parser7_add_to_env.c\
+						parser8_add_to_env.c\
 						parser8_utils.c\
 						parser8_visual.c\
 						camera_movement.c \

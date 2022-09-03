@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 17:33:17 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 22:58:54 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	__parse_map(t_parser *parser, char *line, int type)
 
 void	__parse_line(t_parser *parser, char *line)
 {
-	void	((*__parse_line[7])(t_parser *parser, char *line, int type)); //not sure it's gonna be an int
+	void	((*__parse_line[7])(t_parser *parser, char *line, int type));
 	__parse_line[TYPE_NO] = &__parse_texture;
 	__parse_line[TYPE_SO] = &__parse_texture;
 	__parse_line[TYPE_WE] = &__parse_texture;

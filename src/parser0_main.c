@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing0_main.c                                    :+:      :+:    :+:   */
+/*   parser0_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 17:00:46 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 22:57:10 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,23 @@ void	__print_parser_buf_err_exit(t_parser *parser)
 {
 	int	i;
 	const char	*map_err_tab[] = {
-	[ERR_EMPTY_FILE] = "ERR_EMPTY_FILE", [ERR_MISSING_MAP] = "ERR_MISSING_MAP",
+	[ERR_EMPTY_FILE] = "ERR_EMPTY_FILE",
+//	[ERR_MISSING_MAP] = "ERR_MISSING_MAP",
 	[ERR_MAP_MISPLACED] = "ERR_MAP_MISPLACED",
-	[ERR_GIBBERISH] = "ERR_GIBBERISH", [ERR_TEXTURE_KEY_MISSING] = "ERR_TEXTURE_KEY_MISSING", [ERR_TEXTURE_MULTIDEF] = "ERR_TEXTURE_MULTIDEF",
-	[ERR_TEXTURE_PATH] = "ERR_TEXTURE_PATH", [ERR_TEXTURE_PATH_LENGH] = "ERR_TEXTURE_PATH_LENGH",
+	[ERR_GIBBERISH] = "ERR_GIBBERISH",
+	[ERR_TEXTURE_KEY_MISSING] = "ERR_TEXTURE_KEY_MISSING",
+	[ERR_TEXTURE_MULTIDEF] = "ERR_TEXTURE_MULTIDEF",
+	[ERR_TEXTURE_PATH] = "ERR_TEXTURE_PATH",
+	[ERR_TEXTURE_PATH_LENGH] = "ERR_TEXTURE_PATH_LENGH",
 	[ERR_FC_OVERFLOW] = "ERR_FC_OVERFLOW",
-	[ERR_FC_KEY_MISSING] = "ERR_FC_KEY_MISSING", [ERR_FC_MULTIDEF] = "ERR_FC_MULTIDEF", [ERR_FC_COLOR_FORM] = "ERR_FC_COLOR_FORM",
-	[ERR_MAP_UNVALID_CHAR] = "ERR_MAP_UNVALID_CHAR", [ERR_MAP_CHARACTER] = "ERR_MAP_CHARACTER", [ERR_MAP_BORDERS] = "ERR_MAP_BORDERS",
+	[ERR_FC_KEY_MISSING] = "ERR_FC_KEY_MISSING",
+	[ERR_FC_MULTIDEF] = "ERR_FC_MULTIDEF",
+	[ERR_FC_COLOR_FORM] = "ERR_FC_COLOR_FORM",
+	[ERR_MAP_TOO_SMALL] = "ERR_MAP_TOO_SMALL",
+	[ERR_MAP_NO_PLAYER] = "ERR_MAP_NO_PLAYER",
+	[ERR_MAP_MULTI_PLAYER] = "ERR_MAP_MULTI_PLAYER",
+	[ERR_MAP_UNVALID_CHAR] = "ERR_MAP_UNVALID_CHAR",
+	[ERR_MAP_BORDERS] = "ERR_MAP_BORDERS",
 	[ERR_MAP_TOO_BIG] = "ERR_MAP_TOO_BIG",
 	};
 
@@ -108,7 +118,7 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 	if (__check_file(argv + 1, &fd, &parser))
 		__print_file_err_exit(parser.blocking_err_flag);
 	__fill_parser_buf(&parser, fd);
-	//__visual_parser_buf(&parser);
+	__visual_parser_buf(&parser);
 	__print_parser_buf_err_exit(&parser);
 
 	if(c3d_add_to_env(&parser, env))

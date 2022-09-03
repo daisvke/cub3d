@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 19:42:12 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 17:15:03 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 21:59:50 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	c3d_add_to_env(t_parser *parser, t_c3d *env)
 {
 	c3d_add_path_to_env(parser, env);
 	c3d_add_color_to_env(parser, env);
-	c3d_add_map_to_env(parser,env);
+	c3d_add_map_to_env(parser, env);
 	return (parser->blocking_err_flag);
 }

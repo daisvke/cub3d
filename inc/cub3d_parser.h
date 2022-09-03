@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 17:19:10 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 22:25:49 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ enum	e_file_err
 
 enum	e_map_err{
 	ERR_EMPTY_FILE,
-	ERR_MISSING_MAP,
-	ERR_MAP_MISPLACED,
+	//ERR_MISSING_MAP,
 	/********************	ERR_TEXTURE*/
 	ERR_TEXTURE_KEY_MISSING,	//not sure
 	ERR_TEXTURE_PATH,
@@ -61,8 +60,12 @@ enum	e_map_err{
 	ERR_FC_KEY_MISSING,			//not sure
 	ERR_FC_COLOR_FORM,					//expected color form : F/C 255.255.255
 	/********************	ERR_MAP*/
+	ERR_MAP_MISPLACED,
+	ERR_MAP_TOO_SMALL,
+	ERR_MAP_NO_PLAYER,
+	ERR_MAP_MULTI_PLAYER,
 	ERR_MAP_UNVALID_CHAR,
-	ERR_MAP_CHARACTER,
+	ERR_MAP_CUTTED,
 	ERR_MAP_BORDERS,
 	ERR_MAP_TOO_BIG,					//map has more than 1024 line
 	/*******************	non_blocking_err*/
