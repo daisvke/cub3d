@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser7_add_to_env.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 03:43:25 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 17:37:44 by lchan            ###   ########.fr       */
+/*   Created: 2022/09/03 17:05:25 by lchan             #+#    #+#             */
+/*   Updated: 2022/09/03 17:14:48 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char *argv[])
+int	c3d_add_map_to_env(t_parser *parser, t_c3d *env)
 {
-	(void) argc;
-	t_c3d	env;
-
-	c3d_init(&env, argv);
-	__c3d_parse_map(&env, &(env.player), argv);
-	c3d_handle_keyhooks(&env);
-	return (0);
+	(void) parser;
+	(void) env;
+	printf("max_x = %d\n", parser->map_max_x);
+	printf("max_y = %d\n", parser->map_max_y);
+	return 0;
 }

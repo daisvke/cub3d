@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 12:49:32 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 17:00:46 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	__print_parser_buf_err_exit(t_parser *parser)
 	int	i;
 	const char	*map_err_tab[] = {
 	[ERR_EMPTY_FILE] = "ERR_EMPTY_FILE", [ERR_MISSING_MAP] = "ERR_MISSING_MAP",
+	[ERR_MAP_MISPLACED] = "ERR_MAP_MISPLACED",
 	[ERR_GIBBERISH] = "ERR_GIBBERISH", [ERR_TEXTURE_KEY_MISSING] = "ERR_TEXTURE_KEY_MISSING", [ERR_TEXTURE_MULTIDEF] = "ERR_TEXTURE_MULTIDEF",
 	[ERR_TEXTURE_PATH] = "ERR_TEXTURE_PATH", [ERR_TEXTURE_PATH_LENGH] = "ERR_TEXTURE_PATH_LENGH",
 	[ERR_FC_OVERFLOW] = "ERR_FC_OVERFLOW",
@@ -107,10 +108,10 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 	if (__check_file(argv + 1, &fd, &parser))
 		__print_file_err_exit(parser.blocking_err_flag);
 	__fill_parser_buf(&parser, fd);
-	__visual_parser_buf(&parser);
+	//__visual_parser_buf(&parser);
 	__print_parser_buf_err_exit(&parser);
 
-	if(__add_to_env(&parser, env))
+	if(c3d_add_to_env(&parser, env))
 		__print_parser_buf_err_exit(&parser);
 
 	//c3d_parse_map_exit(&parser);
@@ -128,8 +129,4 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 }
 
 
-
-//need to set real error message for each error enum;
-//need to fix printing error
-//goal of 2 september : finish parsing check validity info and start parsing check validity map
-
+//Samedi 3 septembre : la map doit etre a la fin du ficher d'entre.

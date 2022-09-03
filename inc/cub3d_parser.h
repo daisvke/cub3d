@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/02 14:16:06 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 17:19:10 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ enum	e_file_err
 enum	e_map_err{
 	ERR_EMPTY_FILE,
 	ERR_MISSING_MAP,
+	ERR_MAP_MISPLACED,
 	/********************	ERR_TEXTURE*/
 	ERR_TEXTURE_KEY_MISSING,	//not sure
 	ERR_TEXTURE_PATH,
@@ -91,7 +92,9 @@ enum	e_err_buf_index{
 typedef struct s_parser
 {
 	char	*line;				//current gnl line;
-	int		gnl_cnt;
+	int		gnl_cnt;			//nbr of gnl calls aka line nbr at each call
+	int		map_max_x;
+	int		map_max_y;
 	int		type;				//type of line; e_line_type
 	char	info_buf[6][PATH_MAX + 2];
 	int		info_buf_line[6];

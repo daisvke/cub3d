@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/03 12:54:58 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/03 17:07:33 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,16 @@ SRC_FILES			=	draw.c \
 						main.c \
 						get_next_line.c \
 						get_next_line_utils.c \
-						parsing0_main.c \
-						parsing1_check_file.c \
-						parsing2_fill_parser_buf.c \
-						parsing3_check_type.c\
-						parsing4_parse_line.c\
-						parsing5_add_to_env.c\
-						parsing7_utils.c\
-						parsing8_visual.c\
+						parser0_main.c \
+						parser1_check_file.c \
+						parser2_fill_parser_buf.c \
+						parser3_check_type.c\
+						parser4_parse_line.c\
+						parser5_add_to_env.c\
+						parser6_add_to_env.c\
+						parser7_add_to_env.c\
+						parser8_utils.c\
+						parser8_visual.c\
 						camera_movement.c \
 						player_movement.c \
 						raycasting.c \
