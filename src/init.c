@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 13:10:38 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 17:37:24 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
-	// (void) argv;
+	 (void) argv;
 	// // F and C from map
 	// env->floor.r = 70;
 	// env->floor.g = 70;

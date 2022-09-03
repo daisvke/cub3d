@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 15:24:55 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/03 21:51:11 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	c3d_exit_game(t_c3d *env, t_mlx *mlx)
 	{
 		mlx_loop_end(mlx->mlx_ptr);
 		mlx_destroy_display(mlx->mlx_ptr);
-		c3d_free(mlx->mlx_ptr);//needed ?
+		//c3d_free(mlx->mlx_ptr);//needed ?
 	}
 	exit(EXIT_SUCCESS);
 	return (0);

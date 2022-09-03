@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:07 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 14:26:09 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 15:44:21 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,27 @@ int	ft_strchr_b(const char *s, int c)
 	return (-1);
 }
 
-char	*ft_strdup(char *s1)
-{
-	size_t	len;
-	char	*dup;
+// char	*ft_strdup(char *s1)
+// {
+// 	size_t	len;
+// 	char	*dup;
 
-	if (s1)
-		len = ft_strlen(s1);
-	else
-		len = 0;
-	dup = (char *)malloc((len + 1) * sizeof(char));
-	if (!dup)
-		return (0);
-	while (s1 && *s1 != '\0')
-	{
-		*dup = *s1;
-		s1++;
-		dup++;
-	}
-	*dup = '\0';
-	return (dup - len);
-}
+// 	if (s1)
+// 		len = ft_strlen(s1);
+// 	else
+// 		len = 0;
+// 	dup = (char *)malloc((len + 1) * sizeof(char));
+// 	if (!dup)
+// 		return (0);
+// 	while (s1 && *s1 != '\0')
+// 	{
+// 		*dup = *s1;
+// 		s1++;
+// 		dup++;
+// 	}
+// 	*dup = '\0';
+// 	return (dup - len);
+// }
 
 int	ft_isdigit(int c)
 {
