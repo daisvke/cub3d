@@ -6,21 +6,21 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 00:38:48 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:10:38 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	c3d_convert_rgb_to_int(t_color color)
-{
-	int	val;
+// int	c3d_convert_rgb_to_int(t_color color)
+// {
+// 	int	val;
 
-	val = color.r;
-	val = (val << 8) + color.g;
-	val = (val << 8) + color.b;
-	return (val);
-}
+// 	val = color.r;
+// 	val = (val << 8) + color.g;
+// 	val = (val << 8) + color.b;
+// 	return (val);
+// }
 
 void	c3d_init_window(t_c3d *env, t_mlx *mlx)
 {
@@ -68,9 +68,9 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	// env->ceiling.b = 38;
 	// env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
 
-	// // initial pos of the player, depends on where NSEW is set on the map
-	// player->pos.x = 11;
-	// player->pos.y = 5;
+	// initial pos of the player, depends on where NSEW is set on the map
+	player->pos.x = 11;
+	player->pos.y = 5;
 
 	// initial direction where player is looking at
 	char orient = 'N';
@@ -209,5 +209,5 @@ void	c3d_init(t_c3d *env, char *argv[])
 	c3d_init_buffer(env, env->mlx);
 	c3d_init_texture_array(env);
 	//c3d_load_textures(env, &env->mlx);
-	//c3d_init_player_settings(env->mlx, &env->player);
+	c3d_init_player_settings(env->mlx, &env->player);
 }

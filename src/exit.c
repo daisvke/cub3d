@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 00:47:16 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/03 12:39:41 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	c3d_parse_map_exit(t_parser *parser)
 
 	i = -1;
 	while(++i < parser->map_buf_index)
-		c3d_free(parser->map_buf[i]);
+		parser->map_buf[i] = c3d_free(parser->map_buf[i]);
 	exit(EXIT_SUCCESS);
 }

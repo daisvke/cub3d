@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/02 17:53:15 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 12:49:32 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 	if (__check_file(argv + 1, &fd, &parser))
 		__print_file_err_exit(parser.blocking_err_flag);
 	__fill_parser_buf(&parser, fd);
-	//__visual_parser_buf(&parser);
+	__visual_parser_buf(&parser);
 	__print_parser_buf_err_exit(&parser);
 
 	if(__add_to_env(&parser, env))

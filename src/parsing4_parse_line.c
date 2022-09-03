@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_parse_line.c                               :+:      :+:    :+:   */
+/*   parsing4_parse_line.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/02 13:19:23 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 13:37:45 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	__parse_color(t_parser *parser, char *line, int type)
 		while (*line && *line != '\n')
 		{
 			while (*line == ' ')
+				line++; 
+			while (*line == '0' /*&& *(line + 1) == '0'*/)
 				line++;
-			while (*line == '0' && *(line + 1) == '0')
-				line++;
+			if (!(*line >= '0' && *line <= '9'))
+				line--;
 			while (*line >= '0' && *line <= '9')
 				parser->info_buf[type][i++] = *(line++);
 			if (*line == ',')

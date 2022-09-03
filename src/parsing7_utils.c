@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:07 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/02 14:15:20 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 14:26:09 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ char	*ft_strdup(char *s1)
 	}
 	*dup = '\0';
 	return (dup - len);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
 long int	ft_atol(const char *str)

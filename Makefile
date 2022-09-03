@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/02 21:28:12 by dtanigaw         ###   ########.fr        #
+#    Updated: 2022/09/03 12:54:58 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME				=	cub3d
 
 #	CC flags
 CC	 				=	clang
-CFLAGS				=	-Wall -Wextra	##initially muted
+CFLAGS				=	-Wall -Wextra -g3	##initially muted
 MEM					=	-Wall -Wextra -g3			##initially : -g3
 #OPT				=	-O2
 INC					=	-I inc/
@@ -102,7 +102,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)
 
 debug: $(MLX_LIB) $(OBJ)
 	@echo -e '\n-> $(YELLOW)Now compiling $(NAME)...$(RESET)'
-	$(CC) -fsanitize=address $(MEM) $(MLX_FLAGS) -o $(NAME) $(OBJ) $(MLX_LIB)
+	$(CC) -fsanitize=address -g3 $(MEM) $(MLX_FLAGS) -o $(NAME) $(OBJ) $(MLX_LIB)
 	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
 
 clean:
