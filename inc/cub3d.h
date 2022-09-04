@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 04:08:21 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 05:07:54 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@
 
 # define _TEX_NBR	4
 # define _TEX_SIZE	64
+# define _SPEED		0.015
 
-# define _XSIDE	0
-# define _YSIDE	1
-# define _SPEED	0.015
+# define _XSIDE		0
+# define _YSIDE		1
 
 typedef struct	s_color
 {
@@ -82,12 +82,12 @@ typedef struct	s_mlx
 
 enum	e_move
 {
-	_P1_UP = 1,
-	_P1_DOWN = 2,
-	_P1_LEFT = 4,
-	_P1_RIGHT = 8,
-	_CAM_LEFT = 16,
-	_CAM_RIGHT = 32
+	_P1_UP		=	1,
+	_P1_DOWN	=	2,
+	_P1_LEFT	=	4,
+	_P1_RIGHT	=	8,
+	_CAM_LEFT	=	16,
+	_CAM_RIGHT	=	32
 };
 
 typedef struct	s_player
@@ -135,11 +135,8 @@ typedef struct	s_line
 	int		orientation;
 }				t_line;
 
-void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx);
-void	c3d_draw_wall_texture_on_line(t_c3d *env, t_line *tex_line, t_ray ray, int x);
-void	c3d_execute_raycasting(t_c3d *env);
-void	*c3d_memset(void *s, int c, size_t n);
-void	c3d_handle_keyhooks(t_c3d *env);
+
+/************** init	*****************/
 void	c3d_init(t_c3d *env, char *argv[]);
 void	c3d_init_window(t_c3d *env, t_mlx *mlx);
 
@@ -176,9 +173,10 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strchr_b(const char *s, int c);
 long int	ft_atol(const char *str);
 int			ft_isdigit(int c);
+void	*c3d_memset(void *s, int c, size_t n);
 
-int		c3d_exit(t_c3d *env, int err_code);
-
+/************** keys	*****************/
+void	c3d_handle_keyhooks(t_c3d *env);
 void	c3d_check_obstacles_and_move_up(char **map, t_player *player);
 void	c3d_check_obstacles_and_move_down(char **map, t_player *player);
 void	c3d_check_obstacles_and_move_left(char **map, t_player *player);
@@ -186,9 +184,13 @@ void	c3d_check_obstacles_and_move_right(char **map, t_player *player);
 void	c3d_look_left(t_player *p);
 void	c3d_look_right(t_player *p);
 
+/************** render	*****************/
+void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx);
+void	c3d_draw_wall_texture_on_line(t_c3d *env, t_line *tex_line, t_ray ray, int x);
+void	c3d_execute_raycasting(t_c3d *env);
 void	c3d_render_line_to_buffer(t_c3d *env, t_line line, t_ray ray, int x);
 
-/************** free	*****************/
+/************** exit	*****************/
 int	c3d_exit_game(t_c3d *env, t_mlx *mlx);
 int	c3d_exit_init(t_c3d *env, int err_code);
 
