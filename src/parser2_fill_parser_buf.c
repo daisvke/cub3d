@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 17:43:26 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 23:31:44 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	__add_in_err_buf(t_parser *parser, int error_type)
 	return (1);
 }
 
-void	__update_err_flag(t_parser *parser, int flag)
+void	__check_missing_info(t_parser *parser, int flag)
 {
 	int	tmp;
 
@@ -55,24 +55,6 @@ void	__update_err_flag(t_parser *parser, int flag)
 		parser->blocking_err_flag |= (1<<ERR_FC_KEY_MISSING);
 }
 
-int	__check_map_is_last(t_parser *parser, int info_flag)
-{
-	int	last_info_line;
-	int	i;
-
-	i = -1;
-	last_info_line = 0;
-	while (++i < 6)
-		if (info_flag & (info_flag<<i)
-		&& parser->info_buf_line[i] > last_info_line)
-			last_info_line = parser->info_buf_line[i];
-	i = -1;
-	while (++i < parser->map_buf_index)
-		if (last_info_line > parser->map_line_buf[i])
-			return (-1);
-	return (0);
-}
-
 /*************************************
  * 63 means all 6 first bits are set;
  * ***********************************/
@@ -83,16 +65,23 @@ int	__fill_parser_buf(t_parser *parser, int fd)
 		__pick_line_set_type(fd, parser);
 		while (parser->type != TYPE_EOF)
 		{
+			if (parser->map_max_y
+			&& parser->info_buf_flag == 63
+			&& parser->type != TYPE_MAP)
+			{
+				printf("parser->info %d", parser->info_buf_flag);
+				parser->blocking_err_flag |= (1<<ERR_MAP_MISPLACED);
+				break;
+			}
 			__parse_line(parser, parser->line);
 			__pick_line_set_type(fd, parser);
 		}
 		if (parser->gnl_cnt == 1)
 			__add_in_err_buf(parser, ERR_EMPTY_FILE);
-		else if (__check_map_is_last(parser, parser->info_buf_flag))
-			__add_in_err_buf(parser, ERR_MAP_MISPLACED);
 	 	close (fd);
 	}
+	printf("parser->info_buf_flag = %d\n", parser->info_buf_flag);
 	if (parser->info_buf_flag != 63)
-		__update_err_flag(parser, parser->info_buf_flag);
+		__check_missing_info(parser, parser->info_buf_flag);
 	return (parser->blocking_err_flag);
 }
