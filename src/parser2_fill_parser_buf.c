@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 23:31:44 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/03 23:34:32 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	__fill_parser_buf(t_parser *parser, int fd)
 			&& parser->info_buf_flag == 63
 			&& parser->type != TYPE_MAP)
 			{
-				printf("parser->info %d", parser->info_buf_flag);
 				parser->blocking_err_flag |= (1<<ERR_MAP_MISPLACED);
 				break;
 			}
@@ -80,7 +79,6 @@ int	__fill_parser_buf(t_parser *parser, int fd)
 			__add_in_err_buf(parser, ERR_EMPTY_FILE);
 	 	close (fd);
 	}
-	printf("parser->info_buf_flag = %d\n", parser->info_buf_flag);
 	if (parser->info_buf_flag != 63)
 		__check_missing_info(parser, parser->info_buf_flag);
 	return (parser->blocking_err_flag);

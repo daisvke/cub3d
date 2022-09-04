@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 22:58:54 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/04 20:33:20 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	__parse_map(t_parser *parser, char *line, int type)
 	if (parser->map_buf_index < PARSER_BUFFER_SIZE - 1)
 	{
 		line_len = ft_strlen(line) - 1;
+		//line[line_len + 1] = '\0';
 		parser->map_buf[parser->map_buf_index] = line;
 		parser->map_line_buf[parser->map_buf_index] = parser->gnl_cnt;
 		parser->map_buf_index++;

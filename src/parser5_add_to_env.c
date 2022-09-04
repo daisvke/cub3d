@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 19:42:12 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/04 04:00:43 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 20:26:00 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,15 @@ int	c3d_add_path_to_env(t_parser *parser, t_c3d *env)
 
 int	c3d_add_to_env(t_parser *parser, t_c3d *env)
 {
-	c3d_add_path_to_env(parser, env);
-	c3d_add_color_to_env(parser, env);
-	c3d_add_map_to_env(parser, env);
-	return (parser->blocking_err_flag);
+	int	i;
+	int	((*__add_to_env[3])(t_parser *parser, t_c3d *env));
+
+	__add_to_env[0] = &c3d_add_path_to_env;
+	__add_to_env[1] = &c3d_add_color_to_env;
+	__add_to_env[2] = &c3d_add_map_to_env;
+	i = -1;
+	while (++i < 3)
+		if (__add_to_env[i](parser, env))
+			return (parser->blocking_err_flag);
+	return (0);
 }

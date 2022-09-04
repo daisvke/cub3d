@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/04 05:25:16 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 20:22:53 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ enum	e_map_err{
 	ERR_MAP_CUTTED,
 	ERR_MAP_BORDERS,
 	ERR_MAP_TOO_BIG,					//map has more than 1024 line
+	ERR_MAP_UNABLE_TO_CPY,
 	/*******************	non_blocking_err*/
 	ERR_GIBBERISH,
 	ERR_FC_MULTIDEF,
@@ -89,6 +90,11 @@ enum	e_line_type{
 enum	e_err_buf_index{
 	LINE_NBR,
 	ERROR_CODE,
+};
+
+enum	e_tab_free_opt{
+	NO_INDEX,
+	WITH_INDEX,
 };
 
 typedef struct s_parser

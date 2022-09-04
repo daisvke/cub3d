@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 22:57:10 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/04 21:56:04 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,25 @@ void	__print_parser_buf_err_exit(t_parser *parser)
 	}
 }
 
+char	**__freetab_index(char **tab, int index, int opt)
+{
+	int	i;
+
+	i = -1;
+	if (opt)
+	{
+		while (++i < index)
+			free(tab[i]);
+	}
+	else
+	{
+		while (tab[++i])
+			free(tab[i]);
+		free(tab);
+	}
+	return (NULL);
+}
+
 /*****************************
  * __check_file opens the file
  * __check_map closes the file
@@ -111,18 +130,26 @@ void	__c3d_parse_map(t_c3d *env, t_player *player, char **argv)
 	int	fd;
 	t_parser	parser;
 	(void) player;
-	(void) env;
 
 	fd = -1;
 	c3d_memset(&parser, 0, sizeof(t_parser));
 	if (__check_file(argv + 1, &fd, &parser))
 		__print_file_err_exit(parser.blocking_err_flag);
+	/************ filling parser : need to free only parser*/
+
+
 	__fill_parser_buf(&parser, fd);
-	__visual_parser_buf(&parser);
+	//__visual_parser_buf(&parser);
+	//__freetab_index(parser->map_buf, parser->map_buf_index, WITH_INDEX); //to free parser_map
 	__print_parser_buf_err_exit(&parser);
 
-	if(c3d_add_to_env(&parser, env))
-		__print_parser_buf_err_exit(&parser);
+	/************ cpy into env : need to free parser and env*/
+	c3d_add_to_env(&parser, env);
+	__visual_env_global(env);
+	__print_parser_buf_err_exit(&parser);
+	__freetab_index(parser.map_buf, parser.map_buf_index, WITH_INDEX);
+		//need to free parser + env;
+
 
 	//c3d_parse_map_exit(&parser);
 

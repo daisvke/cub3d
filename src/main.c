@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:25 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 05:33:20 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 22:24:31 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int argc, char *argv[])
 		__c3d_parse_map(&env, &(env.player), argv);
 		c3d_handle_keyhooks(&env);
 	}
-	printf("Error: not enough arguments\n"); // print usage
+	//printf("Error: not enough arguments\n"); // print usage
 	return (0);
 }
