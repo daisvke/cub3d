@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 04:44:39 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 05:39:00 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	c3d_exit_game(t_c3d *env, t_mlx *mlx)
 
 int	c3d_exit_init(t_c3d *env, int err_code)
 {
-	(void)	env;
-
+	(void)env;
 	printf("Error code: ");
 	if (err_code == 1)
 		printf("1: mlx_init failed!\n");
@@ -59,7 +58,7 @@ void	c3d_parse_map_exit(t_parser *parser)
 	int	i;
 
 	i = -1;
-	while(++i < parser->map_buf_index)
+	while (++i < parser->map_buf_index)
 		parser->map_buf[i] = c3d_free(parser->map_buf[i]);
 	exit(EXIT_SUCCESS);
 }

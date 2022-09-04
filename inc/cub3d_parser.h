@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 22:25:49 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/04 05:25:16 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 //# define MESS_MAP_CHAR "unvalid extention\n"
 //# define MESS_MAP_BORDERS "unvalid extention\n"
 //# define MESS_MAP_BORDERS "unvalid extention\n"
-
 
 enum	e_file_err
 {

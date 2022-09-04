@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 04:14:17 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 05:42:23 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 
 void	c3d_init_window(t_c3d *env, t_mlx *mlx)
 {
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->screenw, mlx->screenh, _TITLE);
+	mlx->win_ptr = mlx_new_window(\
+		mlx->mlx_ptr, mlx->screenw, mlx->screenh, _TITLE);
 	if (!mlx->win_ptr)
 		c3d_exit_init(env, 4);//free etc
 }
@@ -49,7 +50,7 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 	mlx->canvas.mlx_img = mlx_new_image(mlx->mlx_ptr, mlx->screenw, \
 		mlx->screenh);
 	if (!mlx->canvas.mlx_img)
-			c3d_exit_init(env, 3);
+		c3d_exit_init(env, 3);
 	mlx->canvas.addr = (int *)mlx_get_data_addr(mlx->canvas.mlx_img, \
 		&mlx->canvas.bpp, &mlx->canvas.line_len, &mlx->canvas.endian);
 	c3d_init_window(env, mlx);
@@ -57,7 +58,7 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 
 void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 {
-	 (void) argv;
+	(void)argv;
 	// // F and C from map
 	// env->floor.r = 70;
 	// env->floor.g = 70;
@@ -67,11 +68,11 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 	// env->ceiling.g = 38;
 	// env->ceiling.b = 38;
 	// env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
-
+	//
 	// initial pos of the player, depends on where NSEW is set on the map
 	player->pos.x = 11;
 	player->pos.y = 5;
-
+	//
 	// initial direction where player is looking at
 	char orient = 'N';
 	if (orient == 'N')

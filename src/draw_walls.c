@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:21:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/01 00:21:38 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/04 05:37:47 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static void	c3d_get_wall_orientation(t_line *tex_line, t_ray ray)
 		tex_line->orientation = TYPE_WE;
 }
 
-void	c3d_draw_wall_texture_on_line(t_c3d *env, t_line *tex_line, t_ray ray, int x)
+void	c3d_draw_wall_texture_on_line(\
+	t_c3d *env, t_line *tex_line, t_ray ray, int x)
 {
 	double	step;
 	t_coord	tex;
@@ -60,7 +61,7 @@ void	c3d_draw_wall_texture_on_line(t_c3d *env, t_line *tex_line, t_ray ray, int 
 
 	tex.x = c3d_get_texture_xpos(env->player.pos, ray);
 	step = 1.0 * _TEX_SIZE / tex_line->lineheight;
-	tex_pos = (tex_line->draw_start - env->mlx.screenh / 2
+	tex_pos = (tex_line->draw_start - env->mlx.screenh / 2 \
 		+ tex_line->lineheight / 2) * step;
 	c3d_get_wall_orientation(tex_line, ray);
 	y = tex_line->draw_start;

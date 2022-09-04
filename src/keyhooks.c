@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:29 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 04:31:10 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 05:40:12 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	c3d_handle_keypress(int keycode, t_c3d *env)
 	if (keycode == XK_d)
 		env->player.move |= _P1_RIGHT;
 	return (0);
-} 
+}
 
 int	c3d_handle_keyrelease(int keycode, t_c3d *env)
 {
