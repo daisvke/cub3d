@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 17:37:24 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/04 04:14:17 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,26 +125,32 @@ void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
 		env->map[i][21] = 0;
 	}
 	for (int i=0; i < 7; ++i)
+	{
 		for (int j=0; j < 21; ++j)
 		{
 			if (ft_strchr_b(MAP_ORIENT_CHAR, map[i][j]) != FOUND)
 				env->map[i][j] = map[i][j];
 			else
 				env->map[i][j] = '0';
+			if (j == 20)
+				env->map[i][j + 1] = 0;
 		}
+	}
 }
 
 void	c3d_init_buffer(t_c3d *env, t_mlx mlx)
 {
-	double	w;
+	int	h;
+	int	w;
 
+	h = mlx.screenh;
 	w = mlx.screenw;
-	env->buffer = malloc(sizeof(*env->buffer) * (mlx.screenh + 1));
-	env->buffer[mlx.screenh] = 0;
-	for (int i=0; i < mlx.screenh; ++i)
+	env->buffer = malloc(sizeof(*env->buffer) * (h + 1));
+	env->buffer[h] = 0;
+	for (int i=0; i < h; ++i)
 	{
-		env->buffer[i] = malloc(sizeof(**env->buffer) * (mlx.screenw + 1));
-		env->buffer[i][mlx.screenw] = 0;
+		env->buffer[i] = malloc(sizeof(**env->buffer) * (w + 1));
+		env->buffer[i][w] = 0;
 	}
 }
 

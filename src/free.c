@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 21:14:04 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/02 21:34:18 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/04 04:14:55 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	c3d_free_pointers_from_char_array(char *array[])
 	size_t	i;
 
 	i = 0;
-	while (array[i])
+	while (array[i] && i < _TEX_NBR)
 	{
 		c3d_free(array[i]);
 		++i;
@@ -74,7 +74,7 @@ void	c3d_free_pointers_from_int_array(int *array[])
 	size_t	i;
 
 	i = 0;
-	while (array[i])
+	while (array[i] && i < _TEX_NBR)
 	{
 		c3d_free(array[i]);
 		++i;

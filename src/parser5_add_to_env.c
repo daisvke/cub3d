@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 19:42:12 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 21:59:50 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/04 04:00:43 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	c3d_load_texture(t_c3d *env, t_mlx *mlx, int i, t_img *img)
 	path = env->tex_paths[i];
 	img->mlx_img = mlx_xpm_file_to_image(mlx->mlx_ptr, path, &img->x, &img->y);
 	if (!img->mlx_img)
-		return -1;
+		return (-1);
 	img->addr = (int *)mlx_get_data_addr(img->mlx_img, &img->bpp, &img->line_len, &img->endian);
 	y = 0;
 	while (y < img->y)

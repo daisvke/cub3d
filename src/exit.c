@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/03 21:51:11 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/04 04:44:39 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	c3d_exit_game(t_c3d *env, t_mlx *mlx)
 	if (env->buffer)
 		c3d_free_array_of_int_pointers(env->buffer);
 	c3d_free_pointers_from_int_array(env->textures);
-	c3d_free_pointers_from_char_array(env->tex_paths);
+//	c3d_free_pointers_from_char_array(env->tex_paths);
 	if (mlx->win_ptr)
 	{
 		mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
@@ -31,7 +31,7 @@ int	c3d_exit_game(t_c3d *env, t_mlx *mlx)
 	{
 		mlx_loop_end(mlx->mlx_ptr);
 		mlx_destroy_display(mlx->mlx_ptr);
-		//c3d_free(mlx->mlx_ptr);//needed ?
+		c3d_free(mlx->mlx_ptr);
 	}
 	exit(EXIT_SUCCESS);
 	return (0);

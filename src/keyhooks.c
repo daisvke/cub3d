@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:29 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/08/31 14:45:42 by dtanigaw         ###   ########.fr       */
+/*   Updated: 2022/09/04 04:31:10 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	c3d_handle_keypress(int keycode, t_c3d *env)
 {
 	if (keycode == XK_Escape)
-		c3d_exit_game(env, 0);
+		c3d_exit_game(env, &env->mlx);
 	if (keycode == XK_Left)
 		env->player.move |= _CAM_LEFT;
 	if (keycode == XK_Right)

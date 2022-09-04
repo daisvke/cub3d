@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/03 22:18:33 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/04 04:56:27 by mint             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAME				=	cub3d
 
 #	CC flags
 CC	 				=	clang
-CFLAGS				=	-Wall -Wextra -g3	##initially muted
-MEM					=	-Wall -Wextra -g3			##initially : -g3
+CFLAGS				=	-Wall -Wextra -g3
+MEM					=	-fsanitize=address -g3
 #OPT				=	-O2
 INC					=	-I inc/
 
@@ -94,7 +94,7 @@ $(MLX_LIB):
 
 $(NAME): $(MLX_LIB) $(OBJ)
 	@echo -e '\n-> $(YELLOW)Now compiling $(NAME)...$(RESET)'
-	$(CC) $(MEM) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB)
+	$(CC) $(MLX_FLAGS) -o $@ $(OBJ) $(MLX_LIB)
 	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)
@@ -105,7 +105,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) $(MLX_HEADER)
 
 debug: $(MLX_LIB) $(OBJ)
 	@echo -e '\n-> $(YELLOW)Now compiling $(NAME)...$(RESET)'
-	$(CC) -fsanitize=address -g3 $(MEM) $(MLX_FLAGS) -o $(NAME) $(OBJ) $(MLX_LIB)
+	$(CC) $(MEM) $(MLX_FLAGS) -o $(NAME) $(OBJ) $(MLX_LIB)
 	@echo -e '-> $(GREEN)$@ successfully compiled !$(RESET)'
 
 clean:
@@ -118,4 +118,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all debug clean fclean re
