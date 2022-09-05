@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	__visual_env_rgb(t_c3d *env)
+void	c3d_visual_env_rgb(t_c3d *env)
 {
 	printf("env->floor = %d\n", env->floor.r);
 	printf("env->floor = %d\n", env->floor.g);
@@ -22,12 +22,12 @@ void	__visual_env_rgb(t_c3d *env)
 	printf("env->ceiling = %d\n", env->ceiling.b);
 }
 
-void	__visual_env_tex_path(t_c3d *env)
+void	c3d_visual_env_tex_path(t_c3d *env)
 {
 	printf("env->tex_paths = %s\n", env->tex_paths[0]);
 }
 
-void	__visual_env_map(t_c3d *env)
+void	c3d_visual_env_map(t_c3d *env)
 {
 	char	**tmp;
 
@@ -40,17 +40,17 @@ void	__visual_env_map(t_c3d *env)
 	}
 }
 
-void	__visual_env_player(t_c3d *env)
+void	c3d_visual_env_player(t_c3d *env)
 {
 	printf(">>>>>>>player position :\n");
 	printf("x = %f\n", env->player.pos.x);
 	printf("y = %f\n", env->player.pos.y);
 }
 
-void	__visual_env_global(t_c3d *env)
+void	c3d_visual_env_global(t_c3d *env)
 {
-	__visual_env_rgb(env);
-	__visual_env_tex_path(env);
-	__visual_env_map(env);
-	__visual_env_player(env);
+	c3d_visual_env_rgb(env);
+	c3d_visual_env_tex_path(env);
+	c3d_visual_env_map(env);
+	c3d_visual_env_player(env);
 }

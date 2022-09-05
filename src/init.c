@@ -82,17 +82,17 @@ int	c3d_init_texture_array(t_c3d *env, t_mlx *mlx)
 int	c3d_print_err_init(t_c3d *env, int err_code)
 {
 	(void) env;
-	__putstr_err(NULL, "Error code: ");
+	c3d_putstr_err(NULL, "Error code: ");
 	if (err_code == -1)
 		perror("");
 	else if (err_code == 1)
-		__putstr_err(NULL, MS_MLX_INIT);
+		c3d_putstr_err(NULL, MS_MLX_INIT);
 	else if (err_code == 2)
-		__putstr_err(NULL, MS_MLX_RESOLUTION);
+		c3d_putstr_err(NULL, MS_MLX_RESOLUTION);
 	else if (err_code == 3)
-		__putstr_err(NULL, MS_MLX_NEW_IMG);
+		c3d_putstr_err(NULL, MS_MLX_NEW_IMG);
 	else if (err_code == 4)
-		__putstr_err(NULL, MS_MLX_NEW_WIN);
+		c3d_putstr_err(NULL, MS_MLX_NEW_WIN);
 	return (err_code);
 }
 

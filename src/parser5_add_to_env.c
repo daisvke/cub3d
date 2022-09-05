@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	__add_info_err_buf(t_parser *parser, int type, int error_num)
+int	c3d_add_info_err_buf(t_parser *parser, int type, int error_num)
 {
 	parser->blocking_err_flag |= (1 << error_num);
 	if (type <= TYPE_C)
@@ -84,21 +84,21 @@ int	c3d_add_path_to_env(t_parser *parser, t_c3d *env)
 		env->tex_paths[i] = parser->info_buf[i];
 	load_text_ret = c3d_load_textures(env, &(env->mlx));
 	if (load_text_ret)
-		return (__add_info_err_buf(parser, load_text_ret, ERR_TX_PATH));
+		return (c3d_add_info_err_buf(parser, load_text_ret, ERR_TX_PATH));
 	return (0);
 }
 
 int	c3d_add_to_env(t_parser *parser, t_c3d *env)
 {
 	int	i;
-	int	((*__add_to_env[3])(t_parser *parser, t_c3d *env));
+	int	((*c3d_add_to_env[3])(t_parser *parser, t_c3d *env));
 
-	__add_to_env[0] = &c3d_add_path_to_env;
-	__add_to_env[1] = &c3d_add_color_to_env;
-	__add_to_env[2] = &c3d_add_map_to_env;
+	c3d_add_to_env[0] = &c3d_add_path_to_env;
+	c3d_add_to_env[1] = &c3d_add_color_to_env;
+	c3d_add_to_env[2] = &c3d_add_map_to_env;
 	i = -1;
 	while (++i < 3)
-		if (__add_to_env[i](parser, env))
+		if (c3d_add_to_env[i](parser, env))
 			return (parser->blocking_err_flag);
 	return (0);
 }

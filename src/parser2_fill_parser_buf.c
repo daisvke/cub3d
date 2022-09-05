@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-void	__pick_line_set_type(int fd, t_parser *parser)
+void	c3d_pick_line_set_type(int fd, t_parser *parser)
 {
 	parser->line = get_next_line(fd);
 	parser->gnl_cnt++;
-	while (__check_type(parser->line, &parser->type) == TYPE_USELESS)
+	while (c3d_check_type(parser->line, &parser->type) == TYPE_USELESS)
 	{
 		free(parser->line);
 		parser->line = get_next_line(fd);
@@ -24,7 +24,7 @@ void	__pick_line_set_type(int fd, t_parser *parser)
 	}
 }
 
-int	__add_in_err_buf(t_parser *parser, int error_type)
+int	c3d_add_in_err_buf(t_parser *parser, int error_type)
 {
 	if (parser->err_buf_index < PARSER_BUFFER_SIZE)
 	{
@@ -42,7 +42,7 @@ int	__add_in_err_buf(t_parser *parser, int error_type)
 	return (1);
 }
 
-void	__check_missing_info(t_parser *parser, int flag)
+void	c3d_check_missing_info(t_parser *parser, int flag)
 {
 	int	tmp;
 
@@ -59,23 +59,23 @@ void	__check_missing_info(t_parser *parser, int flag)
 /*************************************
  * 63 means all 6 first bits are set;
  * ***********************************/
-int	__fill_parser_buf(t_parser *parser, int fd)
+int	c3d_fill_parser_buf(t_parser *parser, int fd)
 {
 	if (fd > -1)
 	{
-		__pick_line_set_type(fd, parser);
+		c3d_pick_line_set_type(fd, parser);
 		while (parser->type != TYPE_EOF)
 		{
-			__parse_line(parser, parser->line);
+			c3d_parse_line(parser, parser->line);
 			if (parser->type == TYPE_MAP && parser->info_buf_flag != 63)
-				__add_info_err_buf(parser, TYPE_MAP, ERR_MP_MISPLACED);
-			__pick_line_set_type(fd, parser);
+				c3d_add_info_err_buf(parser, TYPE_MAP, ERR_MP_MISPLACED);
+			c3d_pick_line_set_type(fd, parser);
 		}
 		if (parser->gnl_cnt == 1)
-			__add_in_err_buf(parser, ERR_EMPTY_FILE);
+			c3d_add_in_err_buf(parser, ERR_EMPTY_FILE);
 		close (fd);
 	}
 	if (parser->info_buf_flag != 63)
-		__check_missing_info(parser, parser->info_buf_flag);
+		c3d_check_missing_info(parser, parser->info_buf_flag);
 	return (parser->blocking_err_flag);
 }

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	__set_player_dir(t_player *player, char orient)
+void	c3d_set_player_dir(t_player *player, char orient)
 {
 	if (orient == 'N' || orient == 'S')
 	{
@@ -39,7 +39,7 @@ void	__set_player_dir(t_player *player, char orient)
 	}
 }
 
-int	__update_player_position(t_c3d *env, char **map)
+int	c3d_update_player_position(t_c3d *env, char **map)
 {
 	int	y;
 	int	x;
@@ -54,7 +54,7 @@ int	__update_player_position(t_c3d *env, char **map)
 			{
 				env->player.pos.x = x + X_ADJUST;
 				env->player.pos.y = y + Y_ADJUST;
-				__set_player_dir(&env->player, map[y][x]);
+				c3d_set_player_dir(&env->player, map[y][x]);
 				map[y][x] = '0';
 				return (0);
 			}

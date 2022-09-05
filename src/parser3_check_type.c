@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int	__is_type_null(char *line, int *type)
+static int	c3d_is_type_null(char *line, int *type)
 {
 	if (!line)
 	{
@@ -22,7 +22,7 @@ static int	__is_type_null(char *line, int *type)
 	return (0);
 }
 
-static int	__is_type_useless(char *line, int *type)
+static int	c3d_is_type_useless(char *line, int *type)
 {
 	if (*line == '\n')
 	{
@@ -32,7 +32,7 @@ static int	__is_type_useless(char *line, int *type)
 	return (0);
 }
 
-static int	__is_type_key(char *line, int *type)
+static int	c3d_is_type_key(char *line, int *type)
 {
 	const char	*key_tab[] = {
 	[TYPE_NO] = "NO ", [TYPE_SO] = "SO ",
@@ -50,7 +50,7 @@ static int	__is_type_key(char *line, int *type)
 	return (0);
 }
 
-static int	__is_type_map(char *line, int *type)
+static int	c3d_is_type_map(char *line, int *type)
 {
 	while (*line != '\n')
 	{
@@ -66,22 +66,22 @@ static int	__is_type_map(char *line, int *type)
 	return (*type);
 }
 
-int	__check_type(char *line, int *type)
+int	c3d_check_type(char *line, int *type)
 {
 	int	i;
-	int	((*__check_type[4])(char *line, int *type));
+	int	((*c3d_check_type[4])(char *line, int *type));
 
-	__check_type[0] = &__is_type_null;
-	__check_type[1] = &__is_type_useless;
-	__check_type[2] = &__is_type_key;
-	__check_type[3] = &__is_type_map;
+	c3d_check_type[0] = &c3d_is_type_null;
+	c3d_check_type[1] = &c3d_is_type_useless;
+	c3d_check_type[2] = &c3d_is_type_key;
+	c3d_check_type[3] = &c3d_is_type_map;
 	i = 0;
 	*type = 0;
 	if (line)
 		while (*line == ' ')
 			line++;
 	while (i < 4)
-		if (__check_type[i++](line, type))
+		if (c3d_check_type[i++](line, type))
 			break ;
 	return (*type);
 }

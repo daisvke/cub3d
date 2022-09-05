@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int	__find_last_c_occurence(char *path, char c)
+static int	c3d_find_last_c_occurence(char *path, char c)
 {
 	int	i;
 	int	occurence;
@@ -25,7 +25,7 @@ static int	__find_last_c_occurence(char *path, char c)
 	return (occurence);
 }
 
-static int	__check_extention(char *file)
+static int	c3d_check_extention(char *file)
 {
 	int		dot;
 	char	*tmp;
@@ -34,7 +34,7 @@ static int	__check_extention(char *file)
 	ret = 0;
 	if (file)
 	{
-		dot = __find_last_c_occurence(file, '.');
+		dot = c3d_find_last_c_occurence(file, '.');
 		tmp = file + dot + 1;
 		if (dot == 0 || ft_strncmp(tmp, "cub", 4) != 0)
 			return (ret | (1 << ERR_EXTENTION));
@@ -43,7 +43,7 @@ static int	__check_extention(char *file)
 	return (ret | (1 << ERR_EXTENTION));
 }
 
-static int	__check_if_folder(char *file)
+static int	c3d_check_if_folder(char *file)
 {
 	int	fd;
 
@@ -63,12 +63,12 @@ static int	__check_if_folder(char *file)
  * 		ENOENT : file does not exist and O_CREAT flag is not set
  * if open syscall fails for other reason, free all and exit;
 *****************************************************************/
-int	__check_file(char **av, int	*fd, t_parser *parser)
+int	c3d_check_file(char **av, int	*fd, t_parser *parser)
 {
 	if (*av)
 	{
-		parser->blocking_err_flag += __check_extention(av[0]);
-		parser->blocking_err_flag += __check_if_folder(av[0]);
+		parser->blocking_err_flag += c3d_check_extention(av[0]);
+		parser->blocking_err_flag += c3d_check_if_folder(av[0]);
 		*fd = open(av[0], O_RDONLY);
 		if (*fd == -1 && !parser->blocking_err_flag)
 		{

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	__check_cutted_map(t_parser *parser, t_c3d *env)
+int	c3d_check_cutted_map(t_parser *parser, t_c3d *env)
 {
 	int	i;
 	int	j;
@@ -25,12 +25,12 @@ int	__check_cutted_map(t_parser *parser, t_c3d *env)
 	while (j < parser->map_buf_index - 1)
 	{
 		if (map_line[++i] + 1 != map_line[++j])
-			return (__update_err_flag(parser, ERR_MP_CUTTED));
+			return (c3d_update_err_flag(parser, ERR_MP_CUTTED));
 	}
 	return (0);
 }
 
-int	__check_player(t_parser *parser, t_c3d *env)
+int	c3d_check_player(t_parser *parser, t_c3d *env)
 {
 	int		player_flag;
 	char	**map;
@@ -50,13 +50,13 @@ int	__check_player(t_parser *parser, t_c3d *env)
 		}
 	}
 	if (player_flag == 0)
-		return (__update_err_flag(parser, ERR_MP_NO_PLAYER));
+		return (c3d_update_err_flag(parser, ERR_MP_NO_PLAYER));
 	else if (player_flag > 1)
-		return (__update_err_flag(parser, ERR_MP_MULTI_PLAYER));
+		return (c3d_update_err_flag(parser, ERR_MP_MULTI_PLAYER));
 	return (0);
 }
 
-int	__check_surrounding_cells(char **map, int x, int y)
+int	c3d_check_surrounding_cells(char **map, int x, int y)
 {
 	if (x == 0 || y == 0)
 		return (-1);
@@ -68,7 +68,7 @@ int	__check_surrounding_cells(char **map, int x, int y)
 	return (0);
 }
 
-int	__check_if_open_map(t_parser *parser, t_c3d *env)
+int	c3d_check_if_open_map(t_parser *parser, t_c3d *env)
 {
 	int		y;
 	int		x;
@@ -82,8 +82,8 @@ int	__check_if_open_map(t_parser *parser, t_c3d *env)
 		while (map[y][++x])
 		{
 			if (ft_strchr_b("0SEWN", map[y][x]) == FOUND
-			&& __check_surrounding_cells(map, x, y))
-				return (__update_err_flag(parser, ERR_MP_BORDERS));
+			&& c3d_check_surrounding_cells(map, x, y))
+				return (c3d_update_err_flag(parser, ERR_MP_BORDERS));
 		}
 	}
 	return (0);
@@ -92,18 +92,18 @@ int	__check_if_open_map(t_parser *parser, t_c3d *env)
 int	c3d_add_map_to_env(t_parser *parser, t_c3d *env)
 {
 	int	i;
-	int	((*__check_map[4])(t_parser *parser, t_c3d *env));
+	int	((*c3d_check_map[4])(t_parser *parser, t_c3d *env));
 
-	__check_map[0] = &__check_player;
-	__check_map[1] = &__check_cutted_map;
-	__check_map[2] = &__cpy_map_to_env;
-	__check_map[3] = &__check_if_open_map;
+	c3d_check_map[0] = &c3d_check_player;
+	c3d_check_map[1] = &c3d_check_cutted_map;
+	c3d_check_map[2] = &c3d_cpy_map_to_env;
+	c3d_check_map[3] = &c3d_check_if_open_map;
 	i = -1;
 	if (parser->map_max_x < 3 || parser->map_max_y < 3)
-		return (__update_err_flag(parser, ERR_MP_TOO_SMALL));
+		return (c3d_update_err_flag(parser, ERR_MP_TOO_SMALL));
 	while (++i < 4)
-		if (__check_map[i](parser, env))
+		if (c3d_check_map[i](parser, env))
 			return (-1);
-	__update_player_position(env, env->map);
+	c3d_update_player_position(env, env->map);
 	return (0);
 }

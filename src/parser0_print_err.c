@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:11:18 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 18:54:36 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 23:13:48 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void	ft_putnbr_fd(int n, int fd)
 	write (fd, &nb, 1);
 }
 
-void	__putstr_err(const char *err_type, const char *err_message)
+void	c3d_putstr_err(const char *err_type, const char *err_message)
 {
 	if (err_type)
 		write (STDERR_FILENO, err_type, ft_strlen((char *) err_type));
 	write (STDERR_FILENO, err_message, ft_strlen((char *)err_message));
 }
 
-void	__putstr_err_line(int line, const char *err_message)
+void	c3d_putstr_err_line(int line, const char *err_message)
 {
-	__putstr_err (NULL, "Line ");
+	c3d_putstr_err (NULL, "Line ");
 	ft_putnbr_fd(line, STDERR_FILENO);
-	__putstr_err (NULL, err_message);
+	c3d_putstr_err (NULL, err_message);
 }
 
-void	__print_file_err_exit(int err)
+void	c3d_print_file_err_exit(int err)
 {
 	int			n_bit;
 	const char	*err_msg[] = {
@@ -53,11 +53,11 @@ void	__print_file_err_exit(int err)
 	n_bit = -1;
 	while (++n_bit < NBR_PARSING_ERR)
 		if ((err >> n_bit) & 1)
-			__putstr_err(NULL, err_msg[n_bit]);
+			c3d_putstr_err(NULL, err_msg[n_bit]);
 	exit(err);
 }
 
-void	__print_parse_err_exit(t_parser *parse, t_c3d *env)
+void	c3d_print_parse_err_exit(t_parser *parse, t_c3d *env)
 {
 	int			i;
 	const char	*tab[] = {
@@ -75,11 +75,12 @@ void	__print_parse_err_exit(t_parser *parse, t_c3d *env)
 	i = -1;
 	if (parse->err_buf[0][0])
 		while (++i < parse->err_buf_index)
-			__putstr_err_line(parse->err_buf[i][0], tab[parse->err_buf[i][1]]);
+			c3d_putstr_err_line(parse->err_buf[i][0], \
+				tab[parse->err_buf[i][1]]);
 	i = -1;
 	while (++i < ERR_GIBBER)
 		if ((parse->blocking_err_flag >> i) & 1)
-			__putstr_err(MS_BLK_ERR, tab[i]);
+			c3d_putstr_err(MS_BLK_ERR, tab[i]);
 	i = -1;
 	while (++i <= ERR_GIBBER)
 		if ((parse->blocking_err_flag >> i) & 1)

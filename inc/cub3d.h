@@ -148,23 +148,23 @@ void		c3d_free_pointers_from_char_array(char *array[]);
 void		c3d_free_pointers_from_int_array(int *array[]);
 
 /************** parsing	*****************/
-void		__c3d_parse_map(t_c3d *env, char **argv);
-void		__print_parse_err_exit(t_parser *parser, t_c3d *env);
-void		__print_file_err_exit(int err);
-int			__check_file(char **av, int	*fd, t_parser *parser);
-int			__fill_parser_buf(t_parser *parser, int fd);
-int			__check_type(char *line, int *type);
-void		__parse_line(t_parser *parser, char *line);
-int			__add_in_err_buf(t_parser *parser, int error_type);
+void		c3d_c3d_parse_map(t_c3d *env, char **argv);
+void		c3d_print_parse_err_exit(t_parser *parser, t_c3d *env);
+void		c3d_print_file_err_exit(int err);
+int			c3d_check_file(char **av, int	*fd, t_parser *parser);
+int			c3d_fill_parser_buf(t_parser *parser, int fd);
+int			c3d_check_type(char *line, int *type);
+void		c3d_parse_line(t_parser *parser, char *line);
+int			c3d_add_in_err_buf(t_parser *parser, int error_type);
 int			c3d_add_to_env(t_parser *parser, t_c3d *env);
 int			c3d_add_color_to_env(t_parser *parser, t_c3d *env);
 int			c3d_add_map_to_env(t_parser *parser, t_c3d *env);
-int			__update_player_position(t_c3d *env, char **map);
-int			__cpy_map_to_env(t_parser *parser, t_c3d *env);
-char		**__freetab_index(char **tab, int index, int opt);
-int			__update_err_flag(t_parser *parser, int err_nbr);
-int			__add_info_err_buf(t_parser *parser, int type, int error_num);
-void		__putstr_err(const char *err_type, const char *err_message);
+int			c3d_update_player_position(t_c3d *env, char **map);
+int			c3d_cpy_map_to_env(t_parser *parser, t_c3d *env);
+char		**c3d_freetab_index(char **tab, int index, int opt);
+int			c3d_update_err_flag(t_parser *parser, int err_nbr);
+int			c3d_add_info_err_buf(t_parser *parser, int type, int error_num);
+void		c3d_putstr_err(const char *err_type, const char *err_message);
 
 /************** utils	*****************/
 int			ft_strlen(char *str);
@@ -197,7 +197,7 @@ void		c3d_parse_map_exit(t_parser *parser);
 void		c3d_add_to_env_exit(t_parser *parser, t_c3d *env);
 
 /************** visual	*****************/
-void		__visual_env_rgb(t_c3d *env);
-void		__visual_env_tex_path(t_c3d *env);
-void		__visual_env_global(t_c3d *env);
+void		c3d_visual_env_rgb(t_c3d *env);
+void		c3d_visual_env_tex_path(t_c3d *env);
+void		c3d_visual_env_global(t_c3d *env);
 #endif

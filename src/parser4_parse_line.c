@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-char	*__skip_useless_char(char *line, int type, int opt)
+char	*c3d_skip_useless_char(char *line, int type, int opt)
 {
 	if (opt == 0)
 	{
@@ -37,7 +37,7 @@ char	*__skip_useless_char(char *line, int type, int opt)
 	return (line);
 }
 
-void	__parse_texture(t_parser *parser, char *line, int type)
+void	c3d_parse_texture(t_parser *parser, char *line, int type)
 {
 	int		i;
 
@@ -48,7 +48,7 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 		{
 			parser->info_buf[type][i] = line[i];
 			if (i == PATH_MAX
-				&& __add_in_err_buf(parser, ERR_TX_PATH_LENGH))
+				&& c3d_add_in_err_buf(parser, ERR_TX_PATH_LENGH))
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
@@ -56,10 +56,10 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 		parser->info_buf_line[type] = parser->gnl_cnt;
 	}
 	else
-		__add_in_err_buf(parser, ERR_TX_MULTIDEF);
+		c3d_add_in_err_buf(parser, ERR_TX_MULTIDEF);
 }
 
-void	__parse_color(t_parser *parser, char *line, int type)
+void	c3d_parse_color(t_parser *parser, char *line, int type)
 {
 	int		i;
 
@@ -68,13 +68,13 @@ void	__parse_color(t_parser *parser, char *line, int type)
 		i = 0;
 		while (*line && *line != '\n')
 		{
-			line = __skip_useless_char(line, type, 1);
+			line = c3d_skip_useless_char(line, type, 1);
 			while (*line >= '0' && *line <= '9')
 				parser->info_buf[type][i++] = *(line++);
 			if (*line == ',')
 				parser->info_buf[type][i++] = *(line++);
 			else if ((*line != '\n' && *line != ' ')
-				&& __add_in_err_buf(parser, ERR_FC_FORM))
+				&& c3d_add_in_err_buf(parser, ERR_FC_FORM))
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
@@ -82,10 +82,10 @@ void	__parse_color(t_parser *parser, char *line, int type)
 		parser->info_buf_line[type] = parser->gnl_cnt;
 	}
 	else
-		__add_in_err_buf(parser, ERR_FC_MULTIDEF);
+		c3d_add_in_err_buf(parser, ERR_FC_MULTIDEF);
 }
 
-void	__parse_map(t_parser *parser, char *line, int type)
+void	c3d_parse_map(t_parser *parser, char *line, int type)
 {
 	int	line_len;
 
@@ -101,26 +101,26 @@ void	__parse_map(t_parser *parser, char *line, int type)
 		parser->map_max_y++;
 	}
 	else
-		__add_in_err_buf(parser, ERR_MP_TOO_BIG);
+		c3d_add_in_err_buf(parser, ERR_MP_TOO_BIG);
 }
 
-void	__parse_line(t_parser *parser, char *line)
+void	c3d_parse_line(t_parser *parser, char *line)
 {
-	void	((*__parse_line[7])(t_parser *parser, char *line, int type));
+	void	((*c3d_parse_line[7])(t_parser *parser, char *line, int type));
 
-	__parse_line[TYPE_NO] = &__parse_texture;
-	__parse_line[TYPE_SO] = &__parse_texture;
-	__parse_line[TYPE_WE] = &__parse_texture;
-	__parse_line[TYPE_EA] = &__parse_texture;
-	__parse_line[TYPE_F] = &__parse_color;
-	__parse_line[TYPE_C] = &__parse_color;
-	__parse_line[TYPE_MAP] = &__parse_map;
+	c3d_parse_line[TYPE_NO] = &c3d_parse_texture;
+	c3d_parse_line[TYPE_SO] = &c3d_parse_texture;
+	c3d_parse_line[TYPE_WE] = &c3d_parse_texture;
+	c3d_parse_line[TYPE_EA] = &c3d_parse_texture;
+	c3d_parse_line[TYPE_F] = &c3d_parse_color;
+	c3d_parse_line[TYPE_C] = &c3d_parse_color;
+	c3d_parse_line[TYPE_MAP] = &c3d_parse_map;
 	if (parser->type <= TYPE_C)
-		line = __skip_useless_char(line, parser->type, 0);
+		line = c3d_skip_useless_char(line, parser->type, 0);
 	if (parser->type == TYPE_ERR)
-		__add_in_err_buf(parser, ERR_GIBBER);
+		c3d_add_in_err_buf(parser, ERR_GIBBER);
 	else
-		__parse_line[parser->type](parser, line, parser->type);
+		c3d_parse_line[parser->type](parser, line, parser->type);
 	if (parser->type != TYPE_MAP && parser->line)
 		free(parser->line);
 }

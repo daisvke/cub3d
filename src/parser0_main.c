@@ -12,13 +12,13 @@
 
 #include "cub3d.h"
 
-int	__update_err_flag(t_parser *parser, int err_nbr)
+int	c3d_update_err_flag(t_parser *parser, int err_nbr)
 {
 	parser->blocking_err_flag |= (1 << err_nbr);
 	return (parser->blocking_err_flag);
 }
 
-char	**__freetab_index(char **tab, int index, int opt)
+char	**c3d_freetab_index(char **tab, int index, int opt)
 {
 	int	i;
 
@@ -38,23 +38,23 @@ char	**__freetab_index(char **tab, int index, int opt)
 }
 
 /*****************************
- * __check_file opens the file
- * __check_map closes the file
+ * c3d_check_file opens the file
+ * c3d_check_map closes the file
  * ***************************/
-void	__c3d_parse_map(t_c3d *env, char **argv)
+void	c3d_c3d_parse_map(t_c3d *env, char **argv)
 {
 	int			fd;
 	t_parser	parser;
 
 	fd = -1;
 	c3d_memset(&parser, 0, sizeof(t_parser));
-	if (__check_file(argv + 1, &fd, &parser))
-		__print_file_err_exit(parser.blocking_err_flag);
-	else if (__fill_parser_buf(&parser, fd))
-		__print_parse_err_exit(&parser, env);
+	if (c3d_check_file(argv + 1, &fd, &parser))
+		c3d_print_file_err_exit(parser.blocking_err_flag);
+	else if (c3d_fill_parser_buf(&parser, fd))
+		c3d_print_parse_err_exit(&parser, env);
 	else if (c3d_init(env))
 		c3d_add_to_env_exit(&parser, env);
 	else if (c3d_add_to_env(&parser, env))
-		__print_parse_err_exit(&parser, env);
-	__freetab_index(parser.map_buf, parser.map_buf_index, WITH_INDEX);
+		c3d_print_parse_err_exit(&parser, env);
+	c3d_freetab_index(parser.map_buf, parser.map_buf_index, WITH_INDEX);
 }

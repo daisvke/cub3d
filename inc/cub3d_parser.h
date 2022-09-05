@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 23:09:25 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/05 23:16:56 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@
 # define MS_TX_KEY_MISS "	: one or more texture path missing\n"
 # define MS_TX_PATH "	: texture path seems incorrect\n"
 # define MS_TX_PATH_LENGH "	: path too long\n"
-# define MS_FC_OVERFLOW "	: colors value can not exceed 255\n"
+# define MS_FC_OVERFLOW "	: colors value cannot exceed 255\n"
 # define MS_FC_KEY_MISS "	: one or more color missing\n"
 # define MS_FC_FORM "	: expected color format : F/C 255.255.255\n"
 # define MS_MP_MISPLACED "	: map misplaced\n"
 # define MS_MP_TOO_SMALL "	: no map / map is too small\n"
 # define MS_MP_NO_PLAYER "	: a player is needed in the map\n"
 # define MS_MP_MULTI_PLAYER "	: found more than one player in the map\n"
-# define MS_MP_CUTTED "	: according to the subject the map has to be in one piece\n"
+# define MS_MP_CUTTED "	: map cannot be cut\n"
 # define MS_MP_BORDERS "	: incorrect map borders\n"
 # define MS_MP_TOO_BIG "	: map is too big\n"
-# define MS_MP_UNABLE_TO_CPY "	: impossible to cpy map\n"
+# define MS_MP_UNABLE_TO_CPY "	: impossible to copy map\n"
 # define MS_GIBBER "	: found gibberish in infile\n"
 # define MS_FC_MULTIDEF "	: re-definition of colors ignored\n"
 # define MS_TX_MULTIDEF "	: re-definition of texture ignored\n"

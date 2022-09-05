@@ -28,7 +28,7 @@ int	main(int argc, char *argv[])
 	t_c3d	env;
 
 	(void) argc;
-	__c3d_parse_map(&env, argv);
+	c3d_c3d_parse_map(&env, argv);
 	c3d_init_window(&env, &env.mlx);
 	c3d_handle_keyhooks(&env);
 	return (0);

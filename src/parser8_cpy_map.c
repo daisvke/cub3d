@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-char	**__init_env_map(t_parser *parser)
+char	**c3d_init_env_map(t_parser *parser)
 {
 	char	**map;
 	int		i;
@@ -27,7 +27,7 @@ char	**__init_env_map(t_parser *parser)
 			c3d_memset(map[i], 0, parser->map_max_x);
 			if (!map[i])
 			{
-				map = __freetab_index(map, 0, NO_INDEX);
+				map = c3d_freetab_index(map, 0, NO_INDEX);
 				break ;
 			}
 		}
@@ -36,7 +36,7 @@ char	**__init_env_map(t_parser *parser)
 	return (map);
 }
 
-char	**__map_cpy(t_parser *parser, char **env_map)
+char	**c3d_map_cpy(t_parser *parser, char **env_map)
 {
 	char	*to_cpy;
 	char	*dst;
@@ -55,15 +55,15 @@ char	**__map_cpy(t_parser *parser, char **env_map)
 	return (env_map);
 }
 
-int	__cpy_map_to_env(t_parser *parser, t_c3d *env)
+int	c3d_cpy_map_to_env(t_parser *parser, t_c3d *env)
 {
 	char	**map;
 
-	map = __init_env_map(parser);
+	map = c3d_init_env_map(parser);
 	if (!map)
 		c3d_add_to_env_exit(parser, env);
-	env->map = __map_cpy(parser, map);
+	env->map = c3d_map_cpy(parser, map);
 	if (!env->map)
-		return (__update_err_flag(parser, ERR_MP_UNABLE_TO_CPY));
+		return (c3d_update_err_flag(parser, ERR_MP_UNABLE_TO_CPY));
 	return (0);
 }

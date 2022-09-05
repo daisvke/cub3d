@@ -22,7 +22,7 @@ int	c3d_convert_rgb_to_int(t_color color)
 	return (val);
 }
 
-void	__send_color_to_env(long long rgb[3], t_c3d *env, int type)
+void	c3d_send_color_to_env(long long rgb[3], t_c3d *env, int type)
 {
 	if (type == TYPE_F)
 	{
@@ -40,7 +40,7 @@ void	__send_color_to_env(long long rgb[3], t_c3d *env, int type)
 	}
 }
 
-int	__conv_and_add_to_env(t_parser *parser, t_c3d *env, int type)
+int	c3d_conv_and_add_to_env(t_parser *parser, t_c3d *env, int type)
 {
 	long long	rgb[3];
 	int			rgb_index;
@@ -52,21 +52,21 @@ int	__conv_and_add_to_env(t_parser *parser, t_c3d *env, int type)
 	buf = &(parser->info_buf[type][info_index]);
 	c3d_memset(&rgb, 0, sizeof(rgb));
 	if (ft_strlen(buf) > 11)
-		return (__add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
+		return (c3d_add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
 	while (++rgb_index < 3)
 	{
 		rgb[rgb_index] = ft_atol(buf);
 		if (rgb[rgb_index] > 255)
-			return (__add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
+			return (c3d_add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
 		while (*buf >= '0' && *buf <= '9')
 			buf++;
 		buf++;
 	}
-	__send_color_to_env(rgb, env, type);
+	c3d_send_color_to_env(rgb, env, type);
 	return (0);
 }
 
-int	__recheck_color_form(t_parser *parser, char *color, int type)
+int	c3d_recheck_color_form(t_parser *parser, char *color, int type)
 {
 	int	num_flag;
 
@@ -81,7 +81,7 @@ int	__recheck_color_form(t_parser *parser, char *color, int type)
 			color++;
 	}
 	if (num_flag)
-		__add_info_err_buf(parser, type, ERR_FC_FORM);
+		c3d_add_info_err_buf(parser, type, ERR_FC_FORM);
 	return (num_flag);
 }
 
@@ -90,12 +90,12 @@ int	c3d_add_color_to_env(t_parser *parser, t_c3d *env)
 	int	ret;
 
 	ret = 0;
-	ret += __recheck_color_form(parser, parser->info_buf[TYPE_F], TYPE_F);
-	ret += __recheck_color_form(parser, parser->info_buf[TYPE_C], TYPE_C);
+	ret += c3d_recheck_color_form(parser, parser->info_buf[TYPE_F], TYPE_F);
+	ret += c3d_recheck_color_form(parser, parser->info_buf[TYPE_C], TYPE_C);
 	if (!ret)
 	{
-		ret += __conv_and_add_to_env(parser, env, TYPE_F);
-		ret += __conv_and_add_to_env(parser, env, TYPE_C);
+		ret += c3d_conv_and_add_to_env(parser, env, TYPE_F);
+		ret += c3d_conv_and_add_to_env(parser, env, TYPE_C);
 	}
 	return (ret);
 }
