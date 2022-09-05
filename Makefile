@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/04 05:00:57 by mint             ###   ########.fr        #
+#    Updated: 2022/09/05 16:22:58 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,15 @@ SRC_FILES			=	draw.c \
 						get_next_line.c \
 						get_next_line_utils.c \
 						parser0_main.c \
+						parser0_print_err.c \
 						parser1_check_file.c \
 						parser2_fill_parser_buf.c \
 						parser3_check_type.c\
 						parser4_parse_line.c\
 						parser5_add_to_env.c\
-						parser6_add_to_env.c\
-						parser7_add_to_env.c\
-						parser8_add_to_env.c\
+						parser6_add_color.c\
+						parser7_add_map.c\
+						parser8_cpy_map.c\
 						parser8_utils.c\
 						parser8_visual.c\
 						camera_movement.c \
@@ -65,7 +66,7 @@ INC_DIR				=	inc/
 INC_FILES			=	cub3d.h cub3d_parser.h get_next_line.h
 HEADERS				=	$(addprefix $(INC_DIR), $(INC_FILES))
 
-#	Minilibx	
+#	Minilibx
 MLX_MAKE			=	make -s -C
 MLX_DIR				=	mlx_linux/
 MLX_LIB				=	$(MLX_DIR)libmlx.a

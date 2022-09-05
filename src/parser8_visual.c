@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing8_visual.c                                  :+:      :+:    :+:   */
+/*   parser8_visual.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:43:46 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/02 16:52:49 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/04 21:06:36 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,32 @@ void	__visual_env_rgb(t_c3d *env)
 void	__visual_env_tex_path(t_c3d *env)
 {
 	printf("env->tex_paths = %s\n", env->tex_paths[0]);
+}
+
+void	__visual_env_map(t_c3d *env)
+{
+	char **tmp;
+
+	tmp = env->map;
+	printf(">>>>>> env_map\n");
+	while (*tmp)
+	{
+		printf(" = %s\n", *tmp);
+		tmp++;
+	}
+}
+
+void	__visual_env_player(t_c3d *env)
+{
+	printf(">>>>>>>player position :\n");
+	printf("x = %f\n", env->player.pos.x);
+	printf("y = %f\n", env->player.pos.y);
+}
+
+void	__visual_env_global(t_c3d *env)
+{
+	__visual_env_rgb(env);
+	__visual_env_tex_path(env);
+	__visual_env_map(env);
+	__visual_env_player(env);
 }

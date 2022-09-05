@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 19:42:12 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/04 04:00:43 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/05 15:56:06 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	__add_info_err_buf(t_parser *parser, int type, int error_num)
 {
 	parser->blocking_err_flag |= (1<<error_num);
-	parser->err_buf[parser->err_buf_index][LINE_NBR] = parser->info_buf_line[type];
+	if (type <= TYPE_C)
+		parser->err_buf[parser->err_buf_index][LINE_NBR] = parser->info_buf_line[type];
+	else
+		parser->err_buf[parser->err_buf_index][LINE_NBR] = parser->gnl_cnt;
 	parser->err_buf[parser->err_buf_index][ERROR_CODE] = error_num;
 	parser->err_buf_index++;
 	return (-1);
@@ -79,14 +82,21 @@ int	c3d_add_path_to_env(t_parser *parser, t_c3d *env)
 		env->tex_paths[i] = parser->info_buf[i];
 	load_text_ret = c3d_load_textures(env, &(env->mlx));
 	if (load_text_ret)
-		return (__add_info_err_buf(parser, load_text_ret, ERR_TEXTURE_PATH));
+		return (__add_info_err_buf(parser, load_text_ret, ERR_TX_PATH));
 	return (0);
 }
 
 int	c3d_add_to_env(t_parser *parser, t_c3d *env)
 {
-	c3d_add_path_to_env(parser, env);
-	c3d_add_color_to_env(parser, env);
-	c3d_add_map_to_env(parser, env);
-	return (parser->blocking_err_flag);
+	int	i;
+	int	((*__add_to_env[3])(t_parser *parser, t_c3d *env));
+
+	__add_to_env[0] = &c3d_add_path_to_env;
+	__add_to_env[1] = &c3d_add_color_to_env;
+	__add_to_env[2] = &c3d_add_map_to_env;
+	i = -1;
+	while (++i < 3)
+		if (__add_to_env[i](parser, env))
+			return (parser->blocking_err_flag);
+	return (0);
 }

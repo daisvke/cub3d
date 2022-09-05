@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 05:39:00 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/04 14:55:47 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ void	c3d_parse_map_exit(t_parser *parser)
 	while (++i < parser->map_buf_index)
 		parser->map_buf[i] = c3d_free(parser->map_buf[i]);
 	exit(EXIT_SUCCESS);
+}
+
+void	c3d_add_to_env_exit(t_parser *parser, t_c3d *env)
+{
+	int	i;
+
+	i = -1;
+	while (++i < parser->map_buf_index)
+		parser->map_buf[i] = c3d_free(parser->map_buf[i]);
+	c3d_exit_game(env, &(env->mlx));
 }
