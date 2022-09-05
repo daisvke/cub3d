@@ -74,9 +74,12 @@ int	c3d_move_and_render(t_c3d *env)
 
 void	c3d_handle_keyhooks(t_c3d *env)
 {
-	mlx_hook(env->mlx.win_ptr, 2, 1L << 0, &c3d_handle_keypress, env);
-	mlx_hook(env->mlx.win_ptr, 3, 1L << 1, &c3d_handle_keyrelease, env);
-	mlx_hook(env->mlx.win_ptr, 33, 1L << 2, &c3d_exit_game, env);
+	void	*win;
+
+	win = env->mlx.win_ptr;
+	mlx_hook(win, KeyPress, KeyPressMask, &c3d_handle_keypress, env);
+	mlx_hook(win, KeyRelease, KeyReleaseMask, &c3d_handle_keyrelease, env);
+	mlx_hook(win, ClientMessage, StructureNotifyMask, &c3d_exit_game, env);
 	mlx_loop_hook(env->mlx.mlx_ptr, &c3d_move_and_render, env);
 	mlx_loop(env->mlx.mlx_ptr);
 }
