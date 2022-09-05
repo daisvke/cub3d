@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 16:33:22 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 19:51:16 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,21 @@
 # define PARSER_BUFFER_SIZE 1024
 # define DIR 1.0
 # define CAM_PLANE 0.66
+# define X_ADJUST 0.5
+# define Y_ADJUST 0.5
+
+# define MS_MLX_INIT "1: mlx_init failed!\n"
+# define MS_MLX_RESOLUTION "2: the screen resolution is too low!\n"
+# define MS_MLX_NEW_IMG "3: mlx_new_image failed!\n"
+# define MS_MLX_NEW_WIN "4: mlx_new_window failed!\n"
 
 # define MS_ERR_LST "list of errors: \n"
 # define MS_BLK_ERR "blocking error"
-# define MS_NO_FILE "	: path to map is missing\n"
-# define MS_EXTENTION "	: invalid extention\n"
-# define MS_FOLDER "	: expecting : file.cut but received : directory.cub\n"
-# define MS_CHMOD "	: access denied\n"
-# define MS_PATH "	: path seems incorrect\n"
+# define MS_NO_FILE "path to map is missing\n"
+# define MS_EXTENTION "invalid extention\n"
+# define MS_FOLDER "expecting : file.cut but received : directory.cub\n"
+# define MS_CHMOD "access denied\n"
+# define MS_PATH "path seems incorrect\n"
 # define MS_EMPTY_FILE "	: map seems to be empty\n"
 # define MS_TX_KEY_MISS "	: one or more texture path missing\n"
 # define MS_TX_PATH "	: texture path seems incorrect\n"
@@ -37,7 +44,7 @@
 # define MS_FC_KEY_MISS "	: one or more color missing\n"
 # define MS_FC_FORM "	: expected color format : F/C 255.255.255\n"
 # define MS_MP_MISPLACED "	: map misplaced\n"
-# define MS_MP_TOO_SMALL "	: map is too small\n"
+# define MS_MP_TOO_SMALL "	: no map / map is too small\n"
 # define MS_MP_NO_PLAYER "	: a player is needed in the map\n"
 # define MS_MP_MULTI_PLAYER "	: found more than one player in the map\n"
 # define MS_MP_CUTTED "	: according to the subject the map has to be in one piece\n"

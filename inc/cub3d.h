@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 16:24:09 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 19:53:30 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ typedef struct s_line
 }	t_line;
 
 /************** init	*****************/
-void		c3d_init(t_c3d *env, char *argv[]);
+int			c3d_init(t_c3d *env);
+int			c3d_print_err_init(t_c3d *env, int err_code);
 void		c3d_init_window(t_c3d *env, t_mlx *mlx);
 
 /************** free	*****************/
@@ -147,8 +148,8 @@ void		c3d_free_pointers_from_char_array(char *array[]);
 void		c3d_free_pointers_from_int_array(int *array[]);
 
 /************** parsing	*****************/
-void		__c3d_parse_map(t_c3d *env, t_player *player, char **argv);
-void		__print_parse_err_exit(t_parser *parser);
+void		__c3d_parse_map(t_c3d *env, char **argv);
+void		__print_parse_err_exit(t_parser *parser, t_c3d *env);
 void		__print_file_err_exit(int err);
 int			__check_file(char **av, int	*fd, t_parser *parser);
 int			__fill_parser_buf(t_parser *parser, int fd);
@@ -160,16 +161,11 @@ int			c3d_add_color_to_env(t_parser *parser, t_c3d *env);
 int			c3d_add_map_to_env(t_parser *parser, t_c3d *env);
 int			__cpy_map_to_env(t_parser *parser, t_c3d *env);
 char		**__freetab_index(char **tab, int index, int opt);
-int			update_err_flag(t_parser *parser, int err_nbr);
+int			__update_err_flag(t_parser *parser, int err_nbr);
 int			__add_info_err_buf(t_parser *parser, int type, int error_num);
+void		__putstr_err(const char *err_type, const char *err_message);
 
-//void	c3d_load_textures(t_c3d *env, t_parser *parsing, t_mlx *mlx);
-
-void		__visual_env_rgb(t_c3d *env);
-void		__visual_env_tex_path(t_c3d *env);
-void		__visual_env_global(t_c3d *env);
-
-
+/************** utils	*****************/
 int			ft_strlen(char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strchr_b(const char *s, int c);
@@ -196,8 +192,11 @@ void		c3d_render_line_to_buffer(\
 
 /************** exit	*****************/
 int			c3d_exit_game(t_c3d *env, t_mlx *mlx);
-int			c3d_exit_init(t_c3d *env, int err_code);
 void		c3d_parse_map_exit(t_parser *parser);
 void		c3d_add_to_env_exit(t_parser *parser, t_c3d *env);
 
+/************** visual	*****************/
+void		__visual_env_rgb(t_c3d *env);
+void		__visual_env_tex_path(t_c3d *env);
+void		__visual_env_global(t_c3d *env);
 #endif

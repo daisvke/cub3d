@@ -6,13 +6,11 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:05:25 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 16:18:29 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 17:58:19 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 int	__check_cutted_map(t_parser *parser, t_c3d *env)
 {
@@ -27,7 +25,7 @@ int	__check_cutted_map(t_parser *parser, t_c3d *env)
 	while (j < parser->map_buf_index - 1)
 	{
 		if (map_line[++i] + 1 != map_line[++j])
-			return (update_err_flag(parser, ERR_MP_CUTTED));
+			return (__update_err_flag(parser, ERR_MP_CUTTED));
 	}
 	return (0);
 }
@@ -52,9 +50,9 @@ int	__check_player(t_parser *parser, t_c3d *env)
 		}
 	}
 	if (player_flag == 0)
-		return (update_err_flag(parser, ERR_MP_NO_PLAYER));
+		return (__update_err_flag(parser, ERR_MP_NO_PLAYER));
 	else if (player_flag > 1)
-		return (update_err_flag(parser, ERR_MP_MULTI_PLAYER));
+		return (__update_err_flag(parser, ERR_MP_MULTI_PLAYER));
 	return (0);
 }
 
@@ -85,7 +83,7 @@ int	__check_if_open_map(t_parser *parser, t_c3d *env)
 		{
 			if (ft_strchr_b("0SEWN", map[y][x]) == FOUND
 			&& __check_surrounding_cells(map, x, y))
-				return (update_err_flag(parser, ERR_MP_BORDERS));
+				return (__update_err_flag(parser, ERR_MP_BORDERS));
 		}
 	}
 	return (0);
@@ -136,9 +134,10 @@ int	__update_player_position(t_c3d *env, char **map)
 		{
 			if (ft_strchr_b("SEWN", map[y][x]) == FOUND)
 			{
-				env->player.pos.x = x;
-				env->player.pos.y = y;
+				env->player.pos.x = x + X_ADJUST;
+				env->player.pos.y = y + Y_ADJUST;
 				__set_player_dir(&env->player, map[y][x]);
+				map[y][x] = '0';
 				return (0);
 			}
 		}
@@ -158,7 +157,7 @@ int	c3d_add_map_to_env(t_parser *parser, t_c3d *env)
 
 	i = -1;
 	if (parser->map_max_x < 3 || parser->map_max_y < 3)
-		return (update_err_flag(parser, ERR_MP_TOO_SMALL));
+		return (__update_err_flag(parser, ERR_MP_TOO_SMALL));
 	while (++i < 4)
 		if (__check_map[i](parser, env))
 			return (-1);

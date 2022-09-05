@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:11:18 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 16:17:42 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 18:54:36 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,16 @@ void	__print_file_err_exit(int err)
 	};
 
 	n_bit = -1;
-	__putstr_err(NULL, MS_ERR_LST);
 	while (++n_bit < NBR_PARSING_ERR)
 		if ((err >> n_bit) & 1)
 			__putstr_err(NULL, err_msg[n_bit]);
 	exit(err);
 }
 
-void	__print_parse_err_exit(t_parser *parser)
+void	__print_parse_err_exit(t_parser *parse, t_c3d *env)
 {
 	int			i;
-	const char	*map_err_tab[] = {
+	const char	*tab[] = {
 	[ERR_EMPTY_FILE] = MS_EMPTY_FILE, [ERR_TX_KEY_MISS] = MS_TX_KEY_MISS,
 	[ERR_TX_PATH] = MS_TX_PATH, [ERR_TX_PATH_LENGH] = MS_TX_PATH_LENGH,
 	[ERR_FC_OVERFLOW] = MS_FC_OVERFLOW, [ERR_FC_KEY_MISS] = MS_FC_KEY_MISS,
@@ -74,17 +73,15 @@ void	__print_parse_err_exit(t_parser *parser)
 	};
 
 	i = -1;
-	if (parser->err_buf[0][0])
-		while (++i < parser->err_buf_index)
-			__putstr_err_line(parser->err_buf[i][LINE_NBR], map_err_tab[parser->err_buf[i][ERROR_CODE]]);
+	if (parse->err_buf[0][0])
+		while (++i < parse->err_buf_index)
+			__putstr_err_line(parse->err_buf[i][0], tab[parse->err_buf[i][1]]);
 	i = -1;
 	while (++i < ERR_GIBBER)
-		if ((parser->blocking_err_flag >> i) & 1)
-			__putstr_err(MS_BLK_ERR, map_err_tab[i]);
+		if ((parse->blocking_err_flag >> i) & 1)
+			__putstr_err(MS_BLK_ERR, tab[i]);
 	i = -1;
 	while (++i <= ERR_GIBBER)
-		if ((parser->blocking_err_flag >> i) & 1)
-			c3d_parse_map_exit(parser);
+		if ((parse->blocking_err_flag >> i) & 1)
+			c3d_add_to_env_exit(parse, env);
 }
-
-//__putstr_err(NULL, MS_ERR_LST);

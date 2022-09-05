@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:38 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 14:55:47 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 18:55:15 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,6 @@ int	c3d_exit_game(t_c3d *env, t_mlx *mlx)
 	return (0);
 }
 
-int	c3d_exit_init(t_c3d *env, int err_code)
-{
-	(void)env;
-	printf("Error code: ");
-	if (err_code == 1)
-		printf("1: mlx_init failed!\n");
-	if (err_code == 2)
-		printf("2: the screen resolution is too low!\n");
-	if (err_code == 3)
-		printf("3: mlx_new_image failed!\n");
-	if (err_code == 4)
-		printf("4: mlx_new_window failed!\n");
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
 void	c3d_parse_map_exit(t_parser *parser)
 {
 	int	i;
@@ -60,15 +44,10 @@ void	c3d_parse_map_exit(t_parser *parser)
 	i = -1;
 	while (++i < parser->map_buf_index)
 		parser->map_buf[i] = c3d_free(parser->map_buf[i]);
-	exit(EXIT_SUCCESS);
 }
 
 void	c3d_add_to_env_exit(t_parser *parser, t_c3d *env)
 {
-	int	i;
-
-	i = -1;
-	while (++i < parser->map_buf_index)
-		parser->map_buf[i] = c3d_free(parser->map_buf[i]);
+	c3d_parse_map_exit(parser);
 	c3d_exit_game(env, &(env->mlx));
 }
