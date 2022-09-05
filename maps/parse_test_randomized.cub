@@ -6,13 +6,13 @@ C    225,30,0
 
 
 1000000000110000000000001
-NO ./path_to_the_north_texture
+wNO ./path_to_the_north_texture
 1011000001110000000000001
-   F 225,30,0
+   F 225,30,222
 
 
 1001000000000000000000001
-           WE ./path_to_the_west_texture
+           WE ./path_to_the_west_texture 
 WE                   ./path_to_the_west_texture
 W E                   ./path_to_the_west_texture
 111111111011000001110000000000001

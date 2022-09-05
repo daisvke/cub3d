@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser6_add_to_env.c                               :+:      :+:    :+:   */
+/*   parser6_add_color.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:34:45 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 21:47:49 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 13:17:34 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	__recheck_color_form(t_parser *parser, char *color, int type)
 			color++;
 	}
 	if (num_flag)
-		__add_info_err_buf(parser, type, ERR_FC_COLOR_FORM);
+		__add_info_err_buf(parser, type, ERR_FC_FORM);
 	return (num_flag);
 }
 

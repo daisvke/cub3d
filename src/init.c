@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 20:56:22 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 16:25:07 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,95 +56,95 @@ void	c3d_init_mlx(t_c3d *env, t_mlx *mlx)
 	c3d_init_window(env, mlx);
 }
 
-void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
-{
-	(void)argv;
-	// F and C from map
-	// env->floor.r = 70;
-	// env->floor.g = 70;
-	// env->floor.b = 70;
-	// env->floor.color = c3d_convert_rgb_to_int(env->floor);
-	// env->ceiling.r = 38;
-	// env->ceiling.g = 38;
-	// env->ceiling.b = 38;
-	// env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
+// void	c3d_parse_map(t_c3d *env, t_player *player, char *argv[])
+// {
+// 	(void)argv;
+// 	// F and C from map
+// 	// env->floor.r = 70;
+// 	// env->floor.g = 70;
+// 	// env->floor.b = 70;
+// 	// env->floor.color = c3d_convert_rgb_to_int(env->floor);
+// 	// env->ceiling.r = 38;
+// 	// env->ceiling.g = 38;
+// 	// env->ceiling.b = 38;
+// 	// env->ceiling.color = c3d_convert_rgb_to_int(env->ceiling);
 
-	// initial pos of the player, depends on where NSEW is set on the map
-
-
-
-
-	// player->pos.x = 11;
-	// player->pos.y = 5;
-
-	// initial direction where player is looking at
-	char orient = 'N';
-	if (orient == 'N')
-	{
-		player->dir.x = 0.0;
-		player->dir.y = -1.0;
-		player->cam_plane.x = 0.66;
-		player->cam_plane.y = 0.0;
-	}
-	else if (orient == 'S')
-	{
-		player->dir.x = 0.0;
-		player->dir.y = 1.0;
-		player->cam_plane.x = -0.66;
-		player->cam_plane.y = 0.0;
-	}
-	else if (orient == 'W')
-	{
-		player->dir.x = -1.0;
-		player->dir.y = 0.0;
-		player->cam_plane.x = 0.0;
-		player->cam_plane.y = -0.66;
-	}
-	else if (orient == 'E')
-	{
-		player->dir.x = 1.0;
-		player->dir.y = 0.0;
-		player->cam_plane.x = 0.0;
-		player->cam_plane.y = 0.66;
-	}
+// 	// initial pos of the player, depends on where NSEW is set on the map
 
 
 
-	// texture paths
-	// env->tex_paths[0] = "./img/no_wall.xpm";
-	// env->tex_paths[1] = "./img/so_wall.xpm";
-	// env->tex_paths[2] = "./img/we_wall.xpm";
-	// env->tex_paths[3] = "./img/ea_wall.xpm";
 
-	// char map[7][21] = {
-	// 	"111111111111111111111",
-	// 	"100000000110000000011",
-	// 	"100000010000010000001",
-	// 	"101000000000010010001",
-	// 	"100000000000110000001",
-	// 	"1000000000N0000000001",
-	// 	"111111111111111111111"
-	// };
-	// env->map = malloc(sizeof(*env->map) * 8);
-	// env->map[7] = 0;
-	// for (int i=0; i < 7; ++i)
-	// {
-	// 	env->map[i] = malloc(sizeof(char) * 22);
-	// 	env->map[i][21] = 0;
-	// }
-	// for (int i=0; i < 7; ++i)
-	// {
-	// 	for (int j=0; j < 21; ++j)
-	// 	{
-	// 		if (ft_strchr_b(MAP_ORIENT_CHAR, map[i][j]) != FOUND)
-	// 			env->map[i][j] = map[i][j];
-	// 		else
-	// 			env->map[i][j] = '0';
-	// 		if (j == 20)
-	// 			env->map[i][j + 1] = 0;
-	// 	}
-	// }
-}
+// 	// player->pos.x = 11;
+// 	// player->pos.y = 5;
+
+// 	// initial direction where player is looking at
+// 	char orient = 'N';
+// 	if (orient == 'N')
+// 	{
+// 		player->dir.x = 0.0;
+// 		player->dir.y = -1.0;
+// 		player->cam_plane.x = 0.66;
+// 		player->cam_plane.y = 0.0;
+// 	}
+// 	else if (orient == 'S')
+// 	{
+// 		player->dir.x = 0.0;
+// 		player->dir.y = 1.0;
+// 		player->cam_plane.x = -0.66;
+// 		player->cam_plane.y = 0.0;
+// 	}
+// 	else if (orient == 'W')
+// 	{
+// 		player->dir.x = -1.0;
+// 		player->dir.y = 0.0;
+// 		player->cam_plane.x = 0.0;
+// 		player->cam_plane.y = -0.66;
+// 	}
+// 	else if (orient == 'E')
+// 	{
+// 		player->dir.x = 1.0;
+// 		player->dir.y = 0.0;
+// 		player->cam_plane.x = 0.0;
+// 		player->cam_plane.y = 0.66;
+// 	}
+
+
+
+// 	// texture paths
+// 	// env->tex_paths[0] = "./img/no_wall.xpm";
+// 	// env->tex_paths[1] = "./img/so_wall.xpm";
+// 	// env->tex_paths[2] = "./img/we_wall.xpm";
+// 	// env->tex_paths[3] = "./img/ea_wall.xpm";
+
+// 	// char map[7][21] = {
+// 	// 	"111111111111111111111",
+// 	// 	"100000000110000000011",
+// 	// 	"100000010000010000001",
+// 	// 	"101000000000010010001",
+// 	// 	"100000000000110000001",
+// 	// 	"1000000000N0000000001",
+// 	// 	"111111111111111111111"
+// 	// };
+// 	// env->map = malloc(sizeof(*env->map) * 8);
+// 	// env->map[7] = 0;
+// 	// for (int i=0; i < 7; ++i)
+// 	// {
+// 	// 	env->map[i] = malloc(sizeof(char) * 22);
+// 	// 	env->map[i][21] = 0;
+// 	// }
+// 	// for (int i=0; i < 7; ++i)
+// 	// {
+// 	// 	for (int j=0; j < 21; ++j)
+// 	// 	{
+// 	// 		if (ft_strchr_b(MAP_ORIENT_CHAR, map[i][j]) != FOUND)
+// 	// 			env->map[i][j] = map[i][j];
+// 	// 		else
+// 	// 			env->map[i][j] = '0';
+// 	// 		if (j == 20)
+// 	// 			env->map[i][j + 1] = 0;
+// 	// 	}
+// 	// }
+// }
 
 void	c3d_init_buffer(t_c3d *env, t_mlx mlx)
 {
@@ -217,6 +217,7 @@ void	c3d_init_player_settings(t_mlx mlx, t_player *player)
 
 void	c3d_init(t_c3d *env, char *argv[])
 {
+	(void) argv;
 	c3d_memset(env, 0, sizeof(t_c3d));
 	//c3d_parse_map(env, &env->player, argv);
 	c3d_init_mlx(env, &env->mlx);

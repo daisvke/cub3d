@@ -6,17 +6,13 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:05:25 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/04 22:23:09 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 16:18:29 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	update_err_flag(t_parser *parser, int err_nbr)
-{
-	parser->blocking_err_flag |= (1<<err_nbr);
-	return(parser->blocking_err_flag);
-}
+
 
 int	__check_cutted_map(t_parser *parser, t_c3d *env)
 {
@@ -31,7 +27,7 @@ int	__check_cutted_map(t_parser *parser, t_c3d *env)
 	while (j < parser->map_buf_index - 1)
 	{
 		if (map_line[++i] + 1 != map_line[++j])
-			return (update_err_flag(parser, ERR_MAP_CUTTED));
+			return (update_err_flag(parser, ERR_MP_CUTTED));
 	}
 	return (0);
 }
@@ -50,15 +46,15 @@ int	__check_player(t_parser *parser, t_c3d *env)
 		tmp = *map++;
 		while (*tmp)
 		{
-			if (ft_strchr_b("NSWE", *tmp) == FOUND)
+			if (ft_strchr_b(MAP_ORIENT_CHAR, *tmp) == FOUND)
 				player_flag++;
 			tmp++;
 		}
 	}
 	if (player_flag == 0)
-		return (update_err_flag(parser, ERR_MAP_NO_PLAYER));
+		return (update_err_flag(parser, ERR_MP_NO_PLAYER));
 	else if (player_flag > 1)
-		return (update_err_flag(parser, ERR_MAP_MULTI_PLAYER));
+		return (update_err_flag(parser, ERR_MP_MULTI_PLAYER));
 	return (0);
 }
 
@@ -89,7 +85,7 @@ int	__check_if_open_map(t_parser *parser, t_c3d *env)
 		{
 			if (ft_strchr_b("0SEWN", map[y][x]) == FOUND
 			&& __check_surrounding_cells(map, x, y))
-				return (update_err_flag(parser, ERR_MAP_BORDERS));
+				return (update_err_flag(parser, ERR_MP_BORDERS));
 		}
 	}
 	return (0);
@@ -100,30 +96,30 @@ void	__set_player_dir(t_player *player, char orient)
 	if (orient == 'N')
 	{
 		player->dir.x = 0.0;
-		player->dir.y = -1.0;
-		player->cam_plane.x = 0.66;
+		player->dir.y = -DIR;
+		player->cam_plane.x = CAM_PLANE;
 		player->cam_plane.y = 0.0;
 	}
 	else if (orient == 'S')
 	{
 		player->dir.x = 0.0;
-		player->dir.y = 1.0;
-		player->cam_plane.x = -0.66;
+		player->dir.y = DIR;
+		player->cam_plane.x = -CAM_PLANE;
 		player->cam_plane.y = 0.0;
 	}
 	else if (orient == 'W')
 	{
-		player->dir.x = -1.0;
+		player->dir.x = -DIR;
 		player->dir.y = 0.0;
 		player->cam_plane.x = 0.0;
-		player->cam_plane.y = -0.66;
+		player->cam_plane.y = -CAM_PLANE;
 	}
 	else if (orient == 'E')
 	{
-		player->dir.x = 1.0;
+		player->dir.x = DIR;
 		player->dir.y = 0.0;
 		player->cam_plane.x = 0.0;
-		player->cam_plane.y = 0.66;
+		player->cam_plane.y = CAM_PLANE;
 	}
 }
 
@@ -162,13 +158,10 @@ int	c3d_add_map_to_env(t_parser *parser, t_c3d *env)
 
 	i = -1;
 	if (parser->map_max_x < 3 || parser->map_max_y < 3)
-		return (update_err_flag(parser, ERR_MAP_TOO_SMALL));
+		return (update_err_flag(parser, ERR_MP_TOO_SMALL));
 	while (++i < 4)
 		if (__check_map[i](parser, env))
 			return (-1);
 	__update_player_position(env, env->map);
 	return 0;
 }
-
-	// printf("max_x = %d\n", parser->map_max_x);
-	// printf("max_y = %d\n", parser->map_max_y);

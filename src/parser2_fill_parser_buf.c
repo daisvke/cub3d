@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/03 23:34:32 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 16:15:53 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	__add_in_err_buf(t_parser *parser, int error_type)
 		parser->err_buf[parser->err_buf_index][1] = error_type;
 		parser->err_buf_index++;
 	}
-	if (error_type < ERR_GIBBERISH)
+	if (error_type < ERR_GIBBER)
 		parser->blocking_err_flag |= (1<<error_type);
 	if (parser->line)
 	{
@@ -49,10 +49,10 @@ void	__check_missing_info(t_parser *parser, int flag)
 	tmp = flag;
 	tmp -= flag &= ~15;
 	if ((tmp != 15))
-		parser->blocking_err_flag |= (1<<ERR_TEXTURE_KEY_MISSING);
+		parser->blocking_err_flag |= (1<<ERR_TX_KEY_MISS);
 	flag |= 15;
 	if ((flag != 63))
-		parser->blocking_err_flag |= (1<<ERR_FC_KEY_MISSING);
+		parser->blocking_err_flag |= (1<<ERR_FC_KEY_MISS);
 }
 
 /*************************************
@@ -65,14 +65,9 @@ int	__fill_parser_buf(t_parser *parser, int fd)
 		__pick_line_set_type(fd, parser);
 		while (parser->type != TYPE_EOF)
 		{
-			if (parser->map_max_y
-			&& parser->info_buf_flag == 63
-			&& parser->type != TYPE_MAP)
-			{
-				parser->blocking_err_flag |= (1<<ERR_MAP_MISPLACED);
-				break;
-			}
 			__parse_line(parser, parser->line);
+			if (parser->type == TYPE_MAP && parser->info_buf_flag != 63)
+				__add_info_err_buf(parser, TYPE_MAP, ERR_MP_MISPLACED);
 			__pick_line_set_type(fd, parser);
 		}
 		if (parser->gnl_cnt == 1)

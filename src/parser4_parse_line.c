@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/04 20:33:20 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 16:15:53 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 		{
 			parser->info_buf[type][i] = line[i];
 			if (i == PATH_MAX
-			&& __add_in_err_buf(parser, ERR_TEXTURE_PATH_LENGH))
+			&& __add_in_err_buf(parser, ERR_TX_PATH_LENGH))
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
@@ -56,7 +56,7 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 		parser->info_buf_line[type] = parser->gnl_cnt;
 	}
 	else
-		__add_in_err_buf(parser, ERR_TEXTURE_MULTIDEF);
+		__add_in_err_buf(parser, ERR_TX_MULTIDEF);
 }
 
 void	__parse_color(t_parser *parser, char *line, int type)
@@ -74,7 +74,7 @@ void	__parse_color(t_parser *parser, char *line, int type)
 			if (*line == ',')
 				parser->info_buf[type][i++] = *(line++);
 			else if ((*line != '\n' && *line != ' ')
-				&& __add_in_err_buf(parser, ERR_FC_COLOR_FORM))
+				&& __add_in_err_buf(parser, ERR_FC_FORM))
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
@@ -93,7 +93,6 @@ void	__parse_map(t_parser *parser, char *line, int type)
 	if (parser->map_buf_index < PARSER_BUFFER_SIZE - 1)
 	{
 		line_len = ft_strlen(line) - 1;
-		//line[line_len + 1] = '\0';
 		parser->map_buf[parser->map_buf_index] = line;
 		parser->map_line_buf[parser->map_buf_index] = parser->gnl_cnt;
 		parser->map_buf_index++;
@@ -102,7 +101,7 @@ void	__parse_map(t_parser *parser, char *line, int type)
 		parser->map_max_y++;
 	}
 	else
-		__add_in_err_buf(parser, ERR_MAP_TOO_BIG);
+		__add_in_err_buf(parser, ERR_MP_TOO_BIG);
 }
 
 void	__parse_line(t_parser *parser, char *line)
@@ -119,7 +118,7 @@ void	__parse_line(t_parser *parser, char *line)
 	if (parser->type <= TYPE_C)
 		line = __skip_useless_char(line, parser->type, 0);
 	if (parser->type == TYPE_ERR)
-		__add_in_err_buf(parser, ERR_GIBBERISH);
+		__add_in_err_buf(parser, ERR_GIBBER);
 	else
 		__parse_line[parser->type](parser, line, parser->type);
 	if (parser->type != TYPE_MAP && parser->line)

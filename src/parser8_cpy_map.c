@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 22:10:43 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/04 22:05:43 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 15:58:05 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	**__init_env_map(t_parser *parser)
 		{
 			map[i] = malloc(sizeof(char) * (parser->map_max_x + 1));
 			c3d_memset(map[i], 0, parser->map_max_x);
-			//printf("map[%d] = %.*s\n", i, parser->map_max_x, map[i]);
 			if (!map[i])
 			{
 				map = __freetab_index(map, 0, NO_INDEX);
@@ -53,11 +52,6 @@ char	**__map_cpy(t_parser *parser, char **env_map)
 		*dst = '\0';
 	}
 	env_map[i] = NULL;
-
-	// char **tmp;
-	// tmp = env_map;
-	// while (*tmp)
-	// 	printf("%s\n", *tmp++);
 	return (env_map);
 }
 
@@ -70,8 +64,7 @@ int	__cpy_map_to_env(t_parser *parser, t_c3d *env)
 		c3d_add_to_env_exit(parser, env);
 	env->map = __map_cpy(parser, map);
 	if (!env->map)
-		return (update_err_flag(parser, ERR_MAP_UNABLE_TO_CPY));
+		return (update_err_flag(parser, ERR_MP_UNABLE_TO_CPY));
 	return (0);
 }
-	//__freetab_index(parser->map_buf, parser->map_buf_index, 0); //to free parser_map
-	//map = __freetab_index(map, 0, 1); //to free env->map
+

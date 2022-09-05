@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/04 20:27:00 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/05 16:22:58 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_FILES			=	draw.c \
 						get_next_line.c \
 						get_next_line_utils.c \
 						parser0_main.c \
+						parser0_print_err.c \
 						parser1_check_file.c \
 						parser2_fill_parser_buf.c \
 						parser3_check_type.c\

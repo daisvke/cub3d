@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 21:05:16 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 16:24:09 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ void		c3d_free_pointers_from_int_array(int *array[]);
 
 /************** parsing	*****************/
 void		__c3d_parse_map(t_c3d *env, t_player *player, char **argv);
+void		__print_parse_err_exit(t_parser *parser);
+void		__print_file_err_exit(int err);
 int			__check_file(char **av, int	*fd, t_parser *parser);
 int			__fill_parser_buf(t_parser *parser, int fd);
 int			__check_type(char *line, int *type);
