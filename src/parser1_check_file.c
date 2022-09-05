@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:17:13 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 17:21:13 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:06:36 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static int	__check_extention(char *file)
 		dot = __find_last_c_occurence(file, '.');
 		tmp = file + dot + 1;
 		if (dot == 0 || ft_strncmp(tmp, "cub", 4) != 0)
-			return (ret | (1<<ERR_EXTENTION));
+			return (ret | (1 << ERR_EXTENTION));
 		return (0);
 	}
-	return (ret | (1<<ERR_EXTENTION));
+	return (ret | (1 << ERR_EXTENTION));
 }
 
 static int	__check_if_folder(char *file)
@@ -51,7 +51,7 @@ static int	__check_if_folder(char *file)
 	if (fd != -1)
 	{
 		close(fd);
-		return (1<<ERR_FOLDER);
+		return (1 << ERR_FOLDER);
 	}
 	return (0);
 }
@@ -73,10 +73,10 @@ int	__check_file(char **av, int	*fd, t_parser *parser)
 		if (*fd == -1 && !parser->blocking_err_flag)
 		{
 			if ((errno ^ EACCES) == 0)
-				parser->blocking_err_flag |= (1<<ERR_CHMOD);
+				parser->blocking_err_flag |= (1 << ERR_CHMOD);
 			else if ((errno ^ ENOENT) == 0)
-				parser->blocking_err_flag |= (1<<ERR_PATH);
-			else //--> not sure about this one, check with team mate
+				parser->blocking_err_flag |= (1 << ERR_PATH);
+			else
 			{
 				perror("cub3d");
 				exit(errno);
@@ -84,6 +84,6 @@ int	__check_file(char **av, int	*fd, t_parser *parser)
 		}
 	}
 	else
-		parser->blocking_err_flag |= (1<<ERR_NO_FILE);
+		parser->blocking_err_flag |= (1 << ERR_NO_FILE);
 	return (parser->blocking_err_flag);
 }

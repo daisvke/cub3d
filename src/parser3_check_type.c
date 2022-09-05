@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_pick_line.c                                :+:      :+:    :+:   */
+/*   parser3_check_type.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:37:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/31 15:12:56 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:12:35 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ static int	__is_type_useless(char *line, int *type)
 	return (0);
 }
 
-/**************************************************************
- * based on where type stops, the corresponding e_line_type will be returned
- * ************************************************************/
 static int	__is_type_key(char *line, int *type)
 {
 	const char	*key_tab[] = {
@@ -45,9 +42,9 @@ static int	__is_type_key(char *line, int *type)
 
 	while ((*type) < TYPE_MAP)
 	{
-		if (ft_strncmp(key_tab[*type], line,
-			ft_strlen((char *)key_tab[*type])) == 0)
-			return (1) ;
+		if (ft_strncmp(key_tab[*type], line, \
+				ft_strlen((char *)key_tab[*type])) == 0)
+			return (1);
 		(*type)++;
 	}
 	return (0);

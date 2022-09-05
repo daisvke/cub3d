@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 16:15:53 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:14:03 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ void	__parse_texture(t_parser *parser, char *line, int type)
 {
 	int		i;
 
-	if (!(parser->info_buf_flag & (1<<type)))
+	if (!(parser->info_buf_flag & (1 << type)))
 	{
 		i = -1;
 		while (line[++i] && ft_strchr_b(" \n", line[i]) == -1)
 		{
 			parser->info_buf[type][i] = line[i];
 			if (i == PATH_MAX
-			&& __add_in_err_buf(parser, ERR_TX_PATH_LENGH))
+				&& __add_in_err_buf(parser, ERR_TX_PATH_LENGH))
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
-		parser->info_buf_flag |= (1<<type);
+		parser->info_buf_flag |= (1 << type);
 		parser->info_buf_line[type] = parser->gnl_cnt;
 	}
 	else
@@ -63,7 +63,7 @@ void	__parse_color(t_parser *parser, char *line, int type)
 {
 	int		i;
 
-	if ((parser->info_buf_flag & (1<<type)) == 0)
+	if ((parser->info_buf_flag & (1 << type)) == 0)
 	{
 		i = 0;
 		while (*line && *line != '\n')
@@ -78,7 +78,7 @@ void	__parse_color(t_parser *parser, char *line, int type)
 				break ;
 		}
 		parser->info_buf[type][i] = '\0';
-		parser->info_buf_flag |= (1<<type);
+		parser->info_buf_flag |= (1 << type);
 		parser->info_buf_line[type] = parser->gnl_cnt;
 	}
 	else
@@ -87,9 +87,9 @@ void	__parse_color(t_parser *parser, char *line, int type)
 
 void	__parse_map(t_parser *parser, char *line, int type)
 {
-	(void) type;
 	int	line_len;
 
+	(void) type;
 	if (parser->map_buf_index < PARSER_BUFFER_SIZE - 1)
 	{
 		line_len = ft_strlen(line) - 1;
@@ -107,6 +107,7 @@ void	__parse_map(t_parser *parser, char *line, int type)
 void	__parse_line(t_parser *parser, char *line)
 {
 	void	((*__parse_line[7])(t_parser *parser, char *line, int type));
+
 	__parse_line[TYPE_NO] = &__parse_texture;
 	__parse_line[TYPE_SO] = &__parse_texture;
 	__parse_line[TYPE_WE] = &__parse_texture;
@@ -114,7 +115,6 @@ void	__parse_line(t_parser *parser, char *line)
 	__parse_line[TYPE_F] = &__parse_color;
 	__parse_line[TYPE_C] = &__parse_color;
 	__parse_line[TYPE_MAP] = &__parse_map;
-
 	if (parser->type <= TYPE_C)
 		line = __skip_useless_char(line, parser->type, 0);
 	if (parser->type == TYPE_ERR)

@@ -6,7 +6,7 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/05 16:22:58 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/05 21:35:04 by lchan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,10 @@ SRC_FILES			=	draw.c \
 						parser5_add_to_env.c\
 						parser6_add_color.c\
 						parser7_add_map.c\
+						parser7_add_player.c\
 						parser8_cpy_map.c\
-						parser8_utils.c\
-						parser8_visual.c\
+						parser9_utils.c\
+						parser10_visual.c\
 						camera_movement.c \
 						player_movement.c \
 						raycasting.c \

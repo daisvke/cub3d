@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 22:10:43 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 17:58:19 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:23:46 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int	__cpy_map_to_env(t_parser *parser, t_c3d *env)
 		return (__update_err_flag(parser, ERR_MP_UNABLE_TO_CPY));
 	return (0);
 }
-

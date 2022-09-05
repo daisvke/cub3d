@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 19:53:30 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:34:40 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ int			__add_in_err_buf(t_parser *parser, int error_type);
 int			c3d_add_to_env(t_parser *parser, t_c3d *env);
 int			c3d_add_color_to_env(t_parser *parser, t_c3d *env);
 int			c3d_add_map_to_env(t_parser *parser, t_c3d *env);
+int			__update_player_position(t_c3d *env, char **map);
 int			__cpy_map_to_env(t_parser *parser, t_c3d *env);
 char		**__freetab_index(char **tab, int index, int opt);
 int			__update_err_flag(t_parser *parser, int err_nbr);
