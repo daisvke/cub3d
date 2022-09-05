@@ -42,8 +42,8 @@ static int	c3d_is_type_key(char *line, int *type)
 
 	while ((*type) < TYPE_MAP)
 	{
-		if (ft_strncmp(key_tab[*type], line, \
-				ft_strlen((char *)key_tab[*type])) == 0)
+		if (c3d_strncmp(key_tab[*type], line, \
+				c3d_strlen((char *)key_tab[*type])) == 0)
 			return (1);
 		(*type)++;
 	}
@@ -54,7 +54,7 @@ static int	c3d_is_type_map(char *line, int *type)
 {
 	while (*line != '\n')
 	{
-		if (ft_strchr_b(MAP_CHAR, *line) == -1)
+		if (c3d_strchr_b(MAP_CHAR, *line) == -1)
 		{
 			*type = TYPE_ERR;
 			break ;

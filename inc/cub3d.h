@@ -167,11 +167,11 @@ int			c3d_add_info_err_buf(t_parser *parser, int type, int error_num);
 void		c3d_putstr_err(const char *err_type, const char *err_message);
 
 /************** utils	*****************/
-int			ft_strlen(char *str);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-int			ft_strchr_b(const char *s, int c);
-long int	ft_atol(const char *str);
-int			ft_isdigit(int c);
+int			c3d_strlen(char *str);
+int			c3d_strncmp(const char *s1, const char *s2, size_t n);
+int			c3d_strchr_b(const char *s, int c);
+long int	c3d_atol(const char *str);
+int			c3d_isdigit(int c);
 void		*c3d_memset(void *s, int c, size_t n);
 
 /************** keys	*****************/

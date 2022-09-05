@@ -44,7 +44,7 @@ int	c3d_check_player(t_parser *parser, t_c3d *env)
 		tmp = *map++;
 		while (*tmp)
 		{
-			if (ft_strchr_b(MAP_ORIENT_CHAR, *tmp) == FOUND)
+			if (c3d_strchr_b(MAP_ORIENT_CHAR, *tmp) == FOUND)
 				player_flag++;
 			tmp++;
 		}
@@ -81,7 +81,7 @@ int	c3d_check_if_open_map(t_parser *parser, t_c3d *env)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (ft_strchr_b("0SEWN", map[y][x]) == FOUND
+			if (c3d_strchr_b("0SEWN", map[y][x]) == FOUND
 			&& c3d_check_surrounding_cells(map, x, y))
 				return (c3d_update_err_flag(parser, ERR_MP_BORDERS));
 		}

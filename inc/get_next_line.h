@@ -35,13 +35,13 @@ typedef struct s_list
 }t_list;
 
 //get_next_line_utils.c
-size_t	ft_strlen_opt_newline(char *str, int opt_newline);
-char	*ft_strjoinfree_content(t_list *nod);
-t_list	*ft_struct_init(int fd);
-t_list	*ft_lst_init_addback(t_list **head, int fd);
+size_t	c3d_strlen_opt_newline(char *str, int opt_newline);
+char	*c3d_strjoinfree_content(t_list *nod);
+t_list	*c3d_struct_init(int fd);
+t_list	*c3d_lst_init_addback(t_list **head, int fd);
 
 //get_next_line.c
-void	ft_rebuild_buff(t_list *nod);
+void	c3d_rebuild_buff(t_list *nod);
 void	gnl_build_content(t_list **nod, int fd);
 char	*get_next_line(int fd);
 

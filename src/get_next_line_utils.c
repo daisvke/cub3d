@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen_opt_newline(char *str, int opt_newline)
+size_t	c3d_strlen_opt_newline(char *str, int opt_newline)
 {
 	size_t	index;
 
@@ -42,12 +42,12 @@ size_t	ft_strlen_opt_newline(char *str, int opt_newline)
 }
 /**************************************************************
 - opt_line = 1 : give the position after newline in the buffer.
-	Usefull for ft_strjoinfree and  buff_rebuild;
+	Usefull for c3d_strjoinfree and  buff_rebuild;
 - opt_line = 2 : is equivalent to a strchr for new_line
 - opt_newline = 0 : normal strlen;
 ***************************************************************/
 
-char	*ft_strjoinfree_content(t_list *nod)
+char	*c3d_strjoinfree_content(t_list *nod)
 {
 	int		len_content;
 	int		len_buff;
@@ -56,8 +56,8 @@ char	*ft_strjoinfree_content(t_list *nod)
 
 	if (!nod->content && !nod->buff[0])
 		return (NULL);
-	len_content = ft_strlen_opt_newline(nod->content, 0);
-	len_buff = ft_strlen_opt_newline(nod->buff, 1);
+	len_content = c3d_strlen_opt_newline(nod->content, 0);
+	len_buff = c3d_strlen_opt_newline(nod->buff, 1);
 	index = -1;
 	new_content = (char *)malloc((len_content + len_buff + 1) * sizeof (char));
 	if (!new_content)
@@ -73,7 +73,7 @@ char	*ft_strjoinfree_content(t_list *nod)
 	return (new_content - (len_content + len_buff));
 }
 
-t_list	*ft_struct_init(int fd)
+t_list	*c3d_struct_init(int fd)
 {
 	t_list	*tmp;
 	int		i;
@@ -90,7 +90,7 @@ t_list	*ft_struct_init(int fd)
 	return (tmp);
 }
 
-t_list	*ft_lst_init_addback(t_list **head, int fd)
+t_list	*c3d_lst_init_addback(t_list **head, int fd)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -101,7 +101,7 @@ t_list	*ft_lst_init_addback(t_list **head, int fd)
 		while (tmp->fd != fd)
 			tmp = tmp->next;
 	else
-		tmp = ft_struct_init(fd);
+		tmp = c3d_struct_init(fd);
 	if (!*head)
 		*head = tmp;
 	else if (tmp2->next)

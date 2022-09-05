@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	c3d_putnbr_fd(int n, int fd)
 {
 	long int	nb;
 
@@ -23,7 +23,7 @@ void	ft_putnbr_fd(int n, int fd)
 		nb = -nb;
 	}
 	if (nb >= 10)
-		ft_putnbr_fd(nb / 10, fd);
+		c3d_putnbr_fd(nb / 10, fd);
 	nb = nb % 10 + '0';
 	write (fd, &nb, 1);
 }
@@ -31,14 +31,14 @@ void	ft_putnbr_fd(int n, int fd)
 void	c3d_putstr_err(const char *err_type, const char *err_message)
 {
 	if (err_type)
-		write (STDERR_FILENO, err_type, ft_strlen((char *) err_type));
-	write (STDERR_FILENO, err_message, ft_strlen((char *)err_message));
+		write (STDERR_FILENO, err_type, c3d_strlen((char *) err_type));
+	write (STDERR_FILENO, err_message, c3d_strlen((char *)err_message));
 }
 
 void	c3d_putstr_err_line(int line, const char *err_message)
 {
 	c3d_putstr_err (NULL, "Line ");
-	ft_putnbr_fd(line, STDERR_FILENO);
+	c3d_putnbr_fd(line, STDERR_FILENO);
 	c3d_putstr_err (NULL, err_message);
 }
 

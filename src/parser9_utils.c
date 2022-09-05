@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	ft_strlen(char *str)
+int	c3d_strlen(char *str)
 {
 	char	*tmp;
 
@@ -22,7 +22,7 @@ int	ft_strlen(char *str)
 	return (tmp - str);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	c3d_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
@@ -38,7 +38,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	ft_strchr_b(const char *s, int c)
+int	c3d_strchr_b(const char *s, int c)
 {
 	int	i;
 
@@ -52,14 +52,14 @@ int	ft_strchr_b(const char *s, int c)
 	return (-1);
 }
 
-int	ft_isdigit(int c)
+int	c3d_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-long int	ft_atol(const char *str)
+long int	c3d_atol(const char *str)
 {
 	int			sign;
 	long int	result;

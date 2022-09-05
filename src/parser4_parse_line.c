@@ -44,7 +44,7 @@ void	c3d_parse_texture(t_parser *parser, char *line, int type)
 	if (!(parser->info_buf_flag & (1 << type)))
 	{
 		i = -1;
-		while (line[++i] && ft_strchr_b(" \n", line[i]) == -1)
+		while (line[++i] && c3d_strchr_b(" \n", line[i]) == -1)
 		{
 			parser->info_buf[type][i] = line[i];
 			if (i == PATH_MAX
@@ -92,7 +92,7 @@ void	c3d_parse_map(t_parser *parser, char *line, int type)
 	(void) type;
 	if (parser->map_buf_index < PARSER_BUFFER_SIZE - 1)
 	{
-		line_len = ft_strlen(line) - 1;
+		line_len = c3d_strlen(line) - 1;
 		parser->map_buf[parser->map_buf_index] = line;
 		parser->map_line_buf[parser->map_buf_index] = parser->gnl_cnt;
 		parser->map_buf_index++;

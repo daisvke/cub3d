@@ -36,7 +36,7 @@ static int	c3d_check_extention(char *file)
 	{
 		dot = c3d_find_last_c_occurence(file, '.');
 		tmp = file + dot + 1;
-		if (dot == 0 || ft_strncmp(tmp, "cub", 4) != 0)
+		if (dot == 0 || c3d_strncmp(tmp, "cub", 4) != 0)
 			return (ret | (1 << ERR_EXTENTION));
 		return (0);
 	}

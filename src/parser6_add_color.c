@@ -51,11 +51,11 @@ int	c3d_conv_and_add_to_env(t_parser *parser, t_c3d *env, int type)
 	info_index = 0;
 	buf = &(parser->info_buf[type][info_index]);
 	c3d_memset(&rgb, 0, sizeof(rgb));
-	if (ft_strlen(buf) > 11)
+	if (c3d_strlen(buf) > 11)
 		return (c3d_add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
 	while (++rgb_index < 3)
 	{
-		rgb[rgb_index] = ft_atol(buf);
+		rgb[rgb_index] = c3d_atol(buf);
 		if (rgb[rgb_index] > 255)
 			return (c3d_add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
 		while (*buf >= '0' && *buf <= '9')
@@ -73,9 +73,9 @@ int	c3d_recheck_color_form(t_parser *parser, char *color, int type)
 	num_flag = 3;
 	while (*color)
 	{
-		if (ft_isdigit(*color))
+		if (c3d_isdigit(*color))
 			num_flag--;
-		while (*color && ft_isdigit(*color))
+		while (*color && c3d_isdigit(*color))
 			color++;
 		if (*color == ',')
 			color++;

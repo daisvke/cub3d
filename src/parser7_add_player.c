@@ -50,7 +50,7 @@ int	c3d_update_player_position(t_c3d *env, char **map)
 		x = -1;
 		while (map[y][++x])
 		{
-			if (ft_strchr_b("SEWN", map[y][x]) == FOUND)
+			if (c3d_strchr_b("SEWN", map[y][x]) == FOUND)
 			{
 				env->player.pos.x = x + X_ADJUST;
 				env->player.pos.y = y + Y_ADJUST;

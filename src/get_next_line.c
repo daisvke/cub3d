@@ -12,13 +12,13 @@
 
 #include "get_next_line.h"
 
-void	ft_rebuild_buff(t_list *nod)
+void	c3d_rebuild_buff(t_list *nod)
 {
 	int	start;
 	int	index;
 
 	index = 0;
-	start = ft_strlen_opt_newline(nod->buff, 1);
+	start = c3d_strlen_opt_newline(nod->buff, 1);
 	while (nod->buff[start])
 		nod->buff[index++] = nod->buff[start++];
 	nod->buff[index] = '\0';
@@ -38,10 +38,10 @@ void	gnl_build_content(t_list **nod, int fd)
 		}
 		else
 		{
-			(*nod)->content = ft_strjoinfree_content(*nod);
-			ft_rebuild_buff(*nod);
+			(*nod)->content = c3d_strjoinfree_content(*nod);
+			c3d_rebuild_buff(*nod);
 		}
-		if (ft_strlen_opt_newline((*nod)->content, 2))
+		if (c3d_strlen_opt_newline((*nod)->content, 2))
 			break ;
 		if (ret == 0 || ret == -1)
 			break ;
@@ -55,7 +55,7 @@ char	*get_next_line(int fd)
 
 	if (fd <= -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	nod = ft_lst_init_addback(&head, fd);
+	nod = c3d_lst_init_addback(&head, fd);
 	if (nod && nod->content)
 		nod->content = NULL;
 	gnl_build_content(&nod, nod->fd);
