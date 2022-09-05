@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 21:34:40 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:56:38 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ void		c3d_render_line_to_buffer(\
 	t_c3d *env, t_line line, t_ray ray, int x);
 
 /************** exit	*****************/
-int			c3d_exit_game(t_c3d *env, t_mlx *mlx);
+int			c3d_exit_game(t_c3d *env);
 void		c3d_parse_map_exit(t_parser *parser);
 void		c3d_add_to_env_exit(t_parser *parser, t_c3d *env);
 

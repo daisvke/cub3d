@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:25 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 21:19:22 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/05 22:57:37 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	c3d_init_window(t_c3d *env, t_mlx *mlx)
 	if (!mlx->win_ptr)
 	{
 		c3d_print_err_init(env, 4);
-		c3d_exit_game(env, &env->mlx);
+		c3d_exit_game(env);
 	}
 }
 
