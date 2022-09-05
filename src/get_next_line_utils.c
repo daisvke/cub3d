@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:15:01 by lchan             #+#    #+#             */
-/*   Updated: 2022/08/30 16:13:15 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:36:46 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ t_list	*ft_lst_init_addback(t_list **head, int fd)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
-	int		i;
 
-	i = -1;
 	tmp = (*head);
 	tmp2 = (*head);
 	if (tmp)
