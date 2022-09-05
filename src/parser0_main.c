@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 19:03:37 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 19:28:40 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:05:08 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	__update_err_flag(t_parser *parser, int err_nbr)
 {
-	parser->blocking_err_flag |= (1<<err_nbr);
-	return(parser->blocking_err_flag);
+	parser->blocking_err_flag |= (1 << err_nbr);
+	return (parser->blocking_err_flag);
 }
 
 char	**__freetab_index(char **tab, int index, int opt)
@@ -43,7 +43,7 @@ char	**__freetab_index(char **tab, int index, int opt)
  * ***************************/
 void	__c3d_parse_map(t_c3d *env, char **argv)
 {
-	int	fd;
+	int			fd;
 	t_parser	parser;
 
 	fd = -1;
@@ -52,10 +52,9 @@ void	__c3d_parse_map(t_c3d *env, char **argv)
 		__print_file_err_exit(parser.blocking_err_flag);
 	else if (__fill_parser_buf(&parser, fd))
 		__print_parse_err_exit(&parser, env);
-	c3d_init(env);
-		//c3d_add_to_env_exit(&parser, env);
-	if (c3d_add_to_env(&parser, env))
+	else if (c3d_init(env))
+		c3d_add_to_env_exit(&parser, env);
+	else if (c3d_add_to_env(&parser, env))
 		__print_parse_err_exit(&parser, env);
 	__freetab_index(parser.map_buf, parser.map_buf_index, WITH_INDEX);
 }
-//changer l exit mode de print_parse_err_exit --> c3d_add_to_env_exit

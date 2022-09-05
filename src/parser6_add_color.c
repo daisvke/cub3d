@@ -6,12 +6,11 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:34:45 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 13:17:34 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:17:58 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int	c3d_convert_rgb_to_int(t_color color)
 {
@@ -46,20 +45,20 @@ int	__conv_and_add_to_env(t_parser *parser, t_c3d *env, int type)
 	long long	rgb[3];
 	int			rgb_index;
 	int			info_index;
-	char 		*buf;
+	char		*buf;
 
 	rgb_index = -1;
 	info_index = 0;
 	buf = &(parser->info_buf[type][info_index]);
 	c3d_memset(&rgb, 0, sizeof(rgb));
 	if (ft_strlen(buf) > 11)
-		return(__add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
+		return (__add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
 	while (++rgb_index < 3)
 	{
 		rgb[rgb_index] = ft_atol(buf);
 		if (rgb[rgb_index] > 255)
 			return (__add_info_err_buf(parser, type, ERR_FC_OVERFLOW));
-		while(*buf >= '0' && *buf<= '9')
+		while (*buf >= '0' && *buf <= '9')
 			buf++;
 		buf++;
 	}
@@ -95,8 +94,8 @@ int	c3d_add_color_to_env(t_parser *parser, t_c3d *env)
 	ret += __recheck_color_form(parser, parser->info_buf[TYPE_C], TYPE_C);
 	if (!ret)
 	{
-		ret +=__conv_and_add_to_env(parser, env, TYPE_F);
-		ret +=__conv_and_add_to_env(parser, env, TYPE_C);
+		ret += __conv_and_add_to_env(parser, env, TYPE_F);
+		ret += __conv_and_add_to_env(parser, env, TYPE_C);
 	}
 	return (ret);
 }

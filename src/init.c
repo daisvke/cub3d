@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 19:50:34 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/05 21:41:12 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	c3d_init_texture_array(t_c3d *env, t_mlx *mlx)
 	i = 0;
 	while (i < _TEX_NBR)
 	{
-		env->textures[i] = malloc(sizeof(**env->textures) * _TEX_SIZE * _TEX_SIZE);
+		env->textures[i] = \
+		malloc(sizeof(**env->textures) * _TEX_SIZE * _TEX_SIZE);
 		if (!env->textures[i])
 			return (-1);
 		++i;
@@ -99,14 +100,13 @@ int	c3d_init(t_c3d *env)
 {
 	int	i;
 	int	ret;
-	int	((*c3d_init[4])(t_c3d *env,  t_mlx *mlx));
+	int	((*c3d_init[4])(t_c3d *env, t_mlx *mlx));
+
 	c3d_init[0] = &c3d_init_mlx;
 	c3d_init[1] = &c3d_init_buffer;
 	c3d_init[2] = &c3d_init_texture_array;
-
 	i = -1;
 	ret = 0;
-
 	c3d_memset(env, 0, sizeof(t_c3d));
 	while (++i < 3)
 	{
@@ -117,11 +117,10 @@ int	c3d_init(t_c3d *env)
 			return (ret);
 		}
 	}
-	env->player.speed =
+	env->player.speed = \
 	(_SPEED * (env->mlx.screenw * env->mlx.screenh)) / (680 * 460);
 	return (ret);
 }
-
 
 /******************* OLD VERSION ***********************/
 
