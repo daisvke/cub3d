@@ -19,7 +19,7 @@ void	c3d_check_obstacles_and_move_up(char **map, t_player *player)
 
 	x = player->pos.x + player->dir.x * (player->speed * 12);
 	y = player->pos.y + player->dir.y * (player->speed * 12);
-	if (map[y][x] == '0')
+	if (map[y][x] == '0' || map[y][x] == 'X')
 	{
 		player->pos.x += player->dir.x * player->speed;
 		player->pos.y += player->dir.y * player->speed;
@@ -33,7 +33,7 @@ void	c3d_check_obstacles_and_move_down(char **map, t_player *player)
 
 	x = player->pos.x - player->dir.x * (player->speed * 12);
 	y = player->pos.y - player->dir.y * (player->speed * 12);
-	if (map[y][x] == '0')
+	if (map[y][x] == '0' || map[y][x] == 'X')
 	{
 		player->pos.x -= player->dir.x * player->speed;
 		player->pos.y -= player->dir.y * player->speed;
@@ -47,7 +47,7 @@ void	c3d_check_obstacles_and_move_left(char **map, t_player *player)
 
 	x = player->pos.x + player->dir.y * (player->speed * 12);
 	y = player->pos.y - player->dir.x * (player->speed * 12);
-	if (map[y][x] == '0')
+	if (map[y][x] == '0' || map[y][x] == 'X')
 	{
 		player->pos.x += player->dir.y * player->speed;
 		player->pos.y -= player->dir.x * player->speed;
@@ -61,7 +61,7 @@ void	c3d_check_obstacles_and_move_right(char **map, t_player *player)
 
 	x = player->pos.x - player->dir.y * (player->speed * 12);
 	y = player->pos.y + player->dir.x * (player->speed * 12);
-	if (map[y][x] == '0')
+	if (map[y][x] == '0' || map[y][x] == 'X')
 	{
 		player->pos.x -= player->dir.y * player->speed;
 		player->pos.y += player->dir.x * player->speed;

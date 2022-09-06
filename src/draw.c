@@ -12,6 +12,54 @@
 
 #include "cub3d.h"
 
+void	c3d_draw_square(t_c3d *env, int startx, int starty, int color)
+{
+	int	wall;
+	int	y;
+	int	x;
+
+	wall = 4;
+	y = 0;
+	while (y < wall)
+	{
+		x = 0;
+		while (x < wall)
+		{
+			env->buffer[starty * wall + y][startx * wall + x] = color;
+			++x;
+		}
+		++y;
+	}
+}
+
+void	c3d_draw_map(t_c3d *env, char **map, int playerx, int playery)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == '1'
+				|| map[y][x] == 'X'
+				|| (y == playery && x == playerx))
+			{
+				if (map[y][x] == '1')
+					color = 0xFFFFFF;
+				else
+					color = 0xFF0000;
+				c3d_draw_square(env, 5 + x, 5 + y, color);
+			}
+			++x;
+		}
+		++y;
+	}
+}
+
 void	c3d_draw_on_screen(t_c3d *env, t_mlx *mlx)
 {
 	int	x;

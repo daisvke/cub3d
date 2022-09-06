@@ -46,6 +46,8 @@
 # define _XSIDE		0
 # define _YSIDE		1
 
+# define _EXIT_CHAR	'x'
+
 typedef struct s_color
 {
 	int	r;
@@ -185,6 +187,7 @@ void		c3d_look_right(t_player *p);
 
 /************** render	*****************/
 void		c3d_draw_on_screen(t_c3d *env, t_mlx *mlx);
+void		c3d_draw_map(t_c3d *env, char **map, int playerx, int playery);
 void		c3d_draw_wall_texture_on_line(\
 	t_c3d *env, t_line *tex_line, t_ray ray, int x);
 void		c3d_execute_raycasting(t_c3d *env);

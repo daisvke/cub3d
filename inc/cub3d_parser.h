@@ -6,14 +6,14 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 23:16:56 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/06 02:48:37 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_PARSER_H
 # define CUB3D_PARSER_H
 
-# define MAP_CHAR " 01SEWN"
+# define MAP_CHAR " 01SEWNX"
 # define MAP_ORIENT_CHAR "SEWN"
 # define FOUND 0
 # define COLOR_MAX_LEN 11

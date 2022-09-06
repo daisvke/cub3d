@@ -51,6 +51,7 @@ int	c3d_handle_keyrelease(int keycode, t_c3d *env)
 void	c3d_render_and_put_img_to_window(t_c3d *env)
 {
 	c3d_execute_raycasting(env);
+	c3d_draw_map(env, env->map, (int)env->player.pos.x, (int)env->player.pos.y);
 	c3d_draw_on_screen(env, &env->mlx);
 }
 
@@ -68,6 +69,11 @@ int	c3d_move_and_render(t_c3d *env)
 		c3d_look_left(&env->player);
 	if (env->player.move & _CAM_RIGHT)
 		c3d_look_right(&env->player);
+	if (env->map[(int)env->player.pos.y][(int)env->player.pos.x] == 'X')
+	{
+		printf("GAME CLEAR !\n");
+		c3d_exit_game(env);
+	}
 	c3d_render_and_put_img_to_window(env);
 	return (0);
 }
