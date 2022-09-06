@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 22:56:38 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/06 05:58:27 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,8 @@
 # include <X11/X.h>
 
 # define _TITLE		"cub3d"
-/*
-# define _SCREENW	640
-# define _SCREENH	480
-*/
-# define _SCREENW	1200
-# define _SCREENH	640
+# define _SCREENW	1920
+# define _SCREENH	1080
 
 # define _TEX_NBR	4
 # define _TEX_SIZE	64
