@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 19:42:12 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 21:15:21 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/06 18:29:51 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	c3d_load_textures(t_c3d *env, t_mlx *mlx)
 		j++;
 	}
 	if (i != _TEX_NBR)
-		return (i);
+		return (-1);
 	return (0);
 }
 

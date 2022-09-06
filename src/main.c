@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:25 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/05 22:57:37 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/06 18:38:56 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char *argv[])
 	t_c3d	env;
 
 	(void) argc;
+	c3d_memset(&env, 0, sizeof(t_c3d));
 	c3d_c3d_parse_map(&env, argv);
 	c3d_init_window(&env, &env.mlx);
 	c3d_handle_keyhooks(&env);

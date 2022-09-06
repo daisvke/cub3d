@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/06 02:48:37 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/06 18:41:33 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # define MAP_ORIENT_CHAR "SEWN"
 # define FOUND 0
 # define COLOR_MAX_LEN 11
-# define NBR_PARSING_ERR 11 // not sure it is usefull anymore
+# define NBR_PARSING_ERR 11
 # define PARSER_BUFFER_SIZE 1024
+# define MAP_MAX_LENGH 475
+# define MAP_MAX_HEIGHT 263
 # define DIR 1.0
 # define CAM_PLANE 0.66
 # define X_ADJUST 0.5
@@ -59,7 +61,7 @@ enum	e_file_err
 {
 	ERR_NO_FILE,
 	ERR_EXTENTION,
-	ERR_FOLDER,	
+	ERR_FOLDER,
 	ERR_CHMOD,
 	ERR_PATH,
 };

@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:05:25 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 21:39:25 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/06 18:15:42 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	c3d_check_player(t_parser *parser, t_c3d *env)
 	return (0);
 }
 
-int	c3d_check_surrounding_cells(char **map, int x, int y)
+int	c3d_check_surrounding_cells(char **map, int x, int y, int max_y)
 {
-	if (x == 0 || y == 0)
+	if (x == 0 || y == 0 || y == max_y - 1)
 		return (-1);
 	if ((map[y][x + 1] == '\0' || map[y][x + 1] == ' ')
 	|| (map[y][x - 1] == '\0' || map[y][x - 1] == ' ')
@@ -82,7 +82,7 @@ int	c3d_check_if_open_map(t_parser *parser, t_c3d *env)
 		while (map[y][++x])
 		{
 			if (c3d_strchr_b("0SEWN", map[y][x]) == FOUND
-			&& c3d_check_surrounding_cells(map, x, y))
+			&& c3d_check_surrounding_cells(map, x, y, parser->map_max_y))
 				return (c3d_update_err_flag(parser, ERR_MP_BORDERS));
 		}
 	}

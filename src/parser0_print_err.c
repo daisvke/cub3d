@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:11:18 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 23:13:48 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/06 18:39:46 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	c3d_print_file_err_exit(int err)
 	exit(err);
 }
 
-void	c3d_print_parse_err_exit(t_parser *parse, t_c3d *env)
+void	c3d_print_parse_err_exit(t_parser *pars, t_c3d *env)
 {
 	int			i;
 	const char	*tab[] = {
@@ -73,16 +73,15 @@ void	c3d_print_parse_err_exit(t_parser *parse, t_c3d *env)
 	};
 
 	i = -1;
-	if (parse->err_buf[0][0])
-		while (++i < parse->err_buf_index)
-			c3d_putstr_err_line(parse->err_buf[i][0], \
-				tab[parse->err_buf[i][1]]);
+	if (pars->err_buf[0][0])
+		while (++i < pars->err_buf_index)
+			c3d_putstr_err_line(pars->err_buf[i][0], tab[pars->err_buf[i][1]]);
 	i = -1;
 	while (++i < ERR_GIBBER)
-		if ((parse->blocking_err_flag >> i) & 1)
+		if ((pars->blocking_err_flag >> i) & 1)
 			c3d_putstr_err(MS_BLK_ERR, tab[i]);
 	i = -1;
 	while (++i <= ERR_GIBBER)
-		if ((parse->blocking_err_flag >> i) & 1)
-			c3d_add_to_env_exit(parse, env);
+		if ((pars->blocking_err_flag >> i) & 1)
+			c3d_add_to_env_exit(pars, env);
 }

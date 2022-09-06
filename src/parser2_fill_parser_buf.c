@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:48:39 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 21:10:35 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/06 18:31:28 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	c3d_add_in_err_buf(t_parser *parser, int error_type)
 	}
 	if (error_type < ERR_GIBBER)
 		parser->blocking_err_flag |= (1 << error_type);
-	if (parser->line)
+	if (parser->line && parser->type != TYPE_MAP)
 	{
 		free(parser->line);
 		parser->line = NULL;

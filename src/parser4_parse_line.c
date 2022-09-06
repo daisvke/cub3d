@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/05 21:14:03 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/06 18:29:17 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	c3d_parse_map(t_parser *parser, char *line, int type)
 		if (line_len > parser->map_max_x)
 			parser->map_max_x = line_len;
 		parser->map_max_y++;
+		if (line_len >= MAP_MAX_LENGH || parser->map_max_y >= MAP_MAX_HEIGHT)
+			c3d_add_in_err_buf(parser, ERR_MP_TOO_BIG);
 	}
 	else
 		c3d_add_in_err_buf(parser, ERR_MP_TOO_BIG);
