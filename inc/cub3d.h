@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 03:43:48 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/06 05:58:27 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/06 06:08:28 by mint             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 # define _TEX_NBR	4
 # define _TEX_SIZE	64
-# define _SPEED		0.015
+# define _SPEED		0.008
 
 # define _XSIDE		0
 # define _YSIDE		1
