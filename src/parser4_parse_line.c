@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/06 18:29:17 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/07 18:48:48 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ char	*c3d_skip_useless_char(char *line, int type, int opt)
 		while (*line == ' ')
 			line++;
 		while (*line == '0')
+		{
 			line++;
-		if (!(*line >= '0' && *line <= '9'))
-			line--;
+			if (!(*line >= '0' && *line <= '9') && line--)
+				break ;
+		}
 	}
 	return (line);
 }
@@ -47,7 +49,7 @@ void	c3d_parse_texture(t_parser *parser, char *line, int type)
 		while (line[++i] && c3d_strchr_b(" \n", line[i]) == -1)
 		{
 			parser->info_buf[type][i] = line[i];
-			if (i == PATH_MAX
+			if (i == MAX_P
 				&& c3d_add_in_err_buf(parser, ERR_TX_PATH_LENGH))
 				break ;
 		}
@@ -73,9 +75,11 @@ void	c3d_parse_color(t_parser *parser, char *line, int type)
 				parser->info_buf[type][i++] = *(line++);
 			if (*line == ',')
 				parser->info_buf[type][i++] = *(line++);
-			else if ((*line != '\n' && *line != ' ')
-				&& c3d_add_in_err_buf(parser, ERR_FC_FORM))
+			if ((*line != '\n' && *line != ' '))
+			{
+				c3d_add_in_err_buf(parser, ERR_FC_FORM);
 				break ;
+			}
 		}
 		parser->info_buf[type][i] = '\0';
 		parser->info_buf_flag |= (1 << type);

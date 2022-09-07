@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/06 18:41:33 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/07 18:34:33 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define CAM_PLANE 0.66
 # define X_ADJUST 0.5
 # define Y_ADJUST 0.5
+# define MAX_P 800
 
 # define MS_MLX_INIT "1: mlx_init failed!\n"
 # define MS_MLX_RESOLUTION "2: the screen resolution is too low!\n"
@@ -42,9 +43,9 @@
 # define MS_TX_KEY_MISS "	: one or more texture path missing\n"
 # define MS_TX_PATH "	: texture path seems incorrect\n"
 # define MS_TX_PATH_LENGH "	: path too long\n"
-# define MS_FC_OVERFLOW "	: colors value cannot exceed 255\n"
+# define MS_FC_OVERFLOW "	: colors value cannot exceed 255 or wrong format\n"
 # define MS_FC_KEY_MISS "	: one or more color missing\n"
-# define MS_FC_FORM "	: expected color format : F/C 255.255.255\n"
+# define MS_FC_FORM "	: expected color format : F/C 255, 255, 255\n"
 # define MS_MP_MISPLACED "	: map misplaced\n"
 # define MS_MP_TOO_SMALL "	: no map / map is too small\n"
 # define MS_MP_NO_PLAYER "	: a player is needed in the map\n"
@@ -117,7 +118,7 @@ typedef struct s_parser
 	int		map_max_x;
 	int		map_max_y;
 	int		type;
-	char	info_buf[6][PATH_MAX + 2];
+	char	info_buf[6][MAX_P + 2];
 	int		info_buf_line[6];
 	char	*map_buf[PARSER_BUFFER_SIZE];
 	int		map_line_buf[PARSER_BUFFER_SIZE];
