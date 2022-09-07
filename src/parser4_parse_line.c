@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:15:55 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/07 18:48:48 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/07 19:06:55 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,11 @@ void	c3d_parse_color(t_parser *parser, char *line, int type)
 		i = 0;
 		while (*line && *line != '\n')
 		{
-			line = c3d_skip_useless_char(line, type, 1);
 			while (*line >= '0' && *line <= '9')
 				parser->info_buf[type][i++] = *(line++);
 			if (*line == ',')
 				parser->info_buf[type][i++] = *(line++);
-			if ((*line != '\n' && *line != ' '))
+			if (!c3d_isdigit(*line) && *line != '\n')
 			{
 				c3d_add_in_err_buf(parser, ERR_FC_FORM);
 				break ;

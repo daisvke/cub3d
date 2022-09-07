@@ -6,7 +6,7 @@
 /*   By: lchan <lchan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:10:51 by lchan             #+#    #+#             */
-/*   Updated: 2022/09/07 18:34:33 by lchan            ###   ########.fr       */
+/*   Updated: 2022/09/07 19:03:45 by lchan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define MS_TX_PATH_LENGH "	: path too long\n"
 # define MS_FC_OVERFLOW "	: colors value cannot exceed 255 or wrong format\n"
 # define MS_FC_KEY_MISS "	: one or more color missing\n"
-# define MS_FC_FORM "	: expected color format : F/C 255, 255, 255\n"
+# define MS_FC_FORM "	: expected color format : F/C 255,255,255\n"
 # define MS_MP_MISPLACED "	: map misplaced\n"
 # define MS_MP_TOO_SMALL "	: no map / map is too small\n"
 # define MS_MP_NO_PLAYER "	: a player is needed in the map\n"
