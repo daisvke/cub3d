@@ -6,13 +6,13 @@
 #    By: lchan <lchan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/29 03:43:40 by dtanigaw          #+#    #+#              #
-#    Updated: 2022/09/05 21:35:04 by lchan            ###   ########.fr        #
+#    Updated: 2022/09/08 19:17:02 by dtanigaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #	E X E C U T A B L E  N A M E
 
-NAME				=	cub3d
+NAME				=	cub3D
 
 #	CC flags
 CC	 				=	clang
