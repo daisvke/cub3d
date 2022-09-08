@@ -6,7 +6,7 @@
 /*   By: dtanigaw <dtanigaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 00:21:21 by dtanigaw          #+#    #+#             */
-/*   Updated: 2022/09/04 05:37:47 by mint             ###   ########.fr       */
+/*   Updated: 2022/09/08 19:14:15 by dtanigaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	c3d_get_texture_xpos(t_coord p1_pos, t_ray ray)
 static void	c3d_get_wall_orientation(t_line *tex_line, t_ray ray)
 {
 	if (ray.side == 0 && ray.dirx < 0)
-		tex_line->orientation = TYPE_NO;
-	if (ray.side == 0 && ray.dirx >= 0)
-		tex_line->orientation = TYPE_SO;
-	if (ray.side == 1 && ray.diry < 0)
-		tex_line->orientation = TYPE_EA;
-	if (ray.side == 1 && ray.diry >= 0)
 		tex_line->orientation = TYPE_WE;
+	if (ray.side == 0 && ray.dirx >= 0)
+		tex_line->orientation = TYPE_EA;
+	if (ray.side == 1 && ray.diry < 0)
+		tex_line->orientation = TYPE_NO;
+	if (ray.side == 1 && ray.diry >= 0)
+		tex_line->orientation = TYPE_SO;
 }
 
 void	c3d_draw_wall_texture_on_line(\
