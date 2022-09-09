@@ -23,7 +23,7 @@ Left = Q<br />
 Right = D<br />
 
 * Quit = ESC
-* 
+
 ## Map
 * The program takes as a first argument a map description file with the .cub extension.
 * The map can be composed of only 7 possible characters:<br />
