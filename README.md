@@ -41,7 +41,8 @@ This is a simple valid map:
 1111111111111
 ```
 
-* The map must be closed/surrounded by walls, if not the program must returns an error.
+* The map must be closed/surrounded by walls.
+
 ## Screenshots
 <p align="center">
   <img src="/screenshots/labyrinth.png" width="80%" />
